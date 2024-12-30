@@ -16,6 +16,17 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.page-background {
+  background-image: url("./assets/images/wallpaper.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  padding: -2px;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -74,8 +85,6 @@
   }
 }
 
-/* criar uma variavel para definir a cor padrão de fonte color: #383333 e aplicar ela aqui ao invés de text-foreground */
-
 @layer base {
   * {
     @apply border-border;
@@ -85,11 +94,40 @@
   }
 }
 
+/* shadows */
+.card-shadow-lg {
+  -webkit-box-shadow: inset 7px 7px 45px -30px rgba(0, 0, 0, 0.2),
+    inset -7px -7px 45px -30px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: inset 7px 7px 45px -30px rgba(0, 0, 0, 0.2),
+    inset -7px -7px 45px -30px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 7px 7px 45px -30px rgba(0, 0, 0, 0.2),
+    inset -7px -7px 45px -30px rgba(0, 0, 0, 0.2);
+}
+
+.card-shadow-md {
+  -webkit-box-shadow: inset 4px 4px 30px -25px rgba(0, 0, 0, 0.2),
+    inset -4px -4px 30px -25px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: inset 4px 4px 30px -25px rgba(0, 0, 0, 0.2),
+    inset -4px -4px 30px -25px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 4px 4px 30px -25px rgba(0, 0, 0, 0.2),
+    inset -4px -4px 30px -25px rgba(0, 0, 0, 0.2);
+}
+
+.card-shadow-sm {
+  -webkit-box-shadow: inset 1px 1px 20px -15px rgba(0, 0, 0, 0.2),
+    inset -1px -1px 20px -15px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: inset 1px 1px 20px -15px rgba(0, 0, 0, 0.2),
+    inset -1px -1px 20px -15px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 1px 1px 20px -15px rgba(0, 0, 0, 0.2),
+    inset -1px -1px 20px -15px rgba(0, 0, 0, 0.2);
+}
+
+/* audio player */
 .rhap_container {
   box-shadow: none !important;
   display: flex !important;
   align-items: center !important;
-  padding-right: 0px !important;
+  /* padding-right: 0px !important; */
   background-color: transparent !important;
 }
 
@@ -103,4 +141,10 @@
 
 .rhap_horizontal-reverse .rhap_controls-section {
   margin-right: 0px !important;
+}
+
+.rhap_button-clear {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

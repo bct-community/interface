@@ -10,13 +10,13 @@ import {
 
 const News = () => {
   return (
-    <div className="flex justify-center items-center h-full w-full flex-col gap-4">
+    <div className="p-2 flex justify-center items-center h-full w-full flex-col gap-4">
       <div className="flex justify-evenly items-center gap-4 w-full">
         <PrettyDate />
 
         <Heading />
 
-        <Card className="w-[20%]">
+        <Card className="w-[20%] card-shadow-sm">
           <CardHeader>
             <CardTitle className="select-none">News</CardTitle>
           </CardHeader>
@@ -28,7 +28,9 @@ const News = () => {
 
         <Raid />
 
-        <Player />
+        <div className="w-[20%] flex items-center justify-center">
+          <Player />
+        </div>
       </div>
     </div>
   );

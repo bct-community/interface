@@ -3,64 +3,92 @@ import classNames from "classnames";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import { SkipBack, Pause, Play, SkipForward } from "lucide-react";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
+import { Card, CardFooter, CardHeader } from "@/components/ui/card";
+import Marquee from "react-fast-marquee";
 
-import vinyl from "@/assets/lp.png";
-import fogos from "@/assets/rojao-super-estourado.mp3";
-import pou from "@/assets/pou-estourado_zIWCpMy.mp3";
-import pix from "@/assets/e-o-pix-nada-ainda.mp3";
+import { vinylImg } from "@/assets/images";
+import { pixSong, pouSong, rojaoSong } from "@/assets/songs";
 
 const Player = () => {
   const [isPlaying, setIsPlaying] = useState(false);
-
-  const currentSong = {
-    title: "xyz",
-    author: "abcd",
-    audio: fogos,
-  };
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isHoveringMarquee, setIsHoveringMarquee] = useState(false);
 
   const songs = [
     {
-      title: "xyz",
-      author: "abcd",
-      audio: fogos,
+      title: "The Song Remains the Same",
+      author: "Led Zeppelin",
+      audio: rojaoSong,
+      authorPost: "https://youtube.com/?query=ledzeppelin",
     },
     {
       title: "pou estourado",
       author: "mojang",
-      audio: pou,
+      audio: pouSong,
+      authorPost: "https://youtube.com/?query=slashsnakepit",
     },
     {
       title: "e o pix nada",
       author: "nubank",
-      audio: pix,
+      audio: pixSong,
+      authorPost: "https://youtube.com/?query=gunsnroses",
     },
   ];
 
+  const currentSong = songs[currentIndex];
+
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % songs.length);
+  };
+
+  const handlePrevious = () => {
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + songs.length) % songs.length
+    );
+  };
+
+  const toggleIsHoveringMarquee = () =>
+    setIsHoveringMarquee((prevValue) => {
+      return prevValue === true ? false : true;
+    });
+
   return (
-    <Card className="w-[20%]">
-      <CardHeader>
-        <div className="relative flex justify-center items-center">
-          <div className="w-24 h-24 rounded-full flex items-center justify-center">
-            <img
-              src={vinyl}
-              className={classNames({
-                "animate-spin duration-1000": isPlaying,
-              })}
-            />
-          </div>
+    <Card className="w-[200px] card-shadow-lg">
+      <CardHeader className="flex flex-col items-center justify-between p-4 m-2 border rounded-[8px] h-[150px]">
+        <img
+          src={vinylImg}
+          className={classNames({
+            "select-none w-20 h-20": true,
+            "animate-spin duration-1000": isPlaying,
+          })}
+          draggable={false}
+        />
+
+        <div
+          className="max-w-full text-sm text-gray-400 select-none"
+          onMouseEnter={toggleIsHoveringMarquee}
+          onMouseLeave={toggleIsHoveringMarquee}
+        >
+          <Marquee
+            play={isPlaying || isHoveringMarquee}
+            pauseOnHover={isPlaying}
+          >
+            <span className="mr-1">{currentSong.title} -</span>
+            <span className="mr-1">
+              <a
+                href={currentSong.authorPost}
+                target="_blank"
+                className="hover:text-[hsl(var(--primary))] hover:underline"
+              >
+                {currentSong.author}
+              </a>{" "}
+              -
+            </span>
+          </Marquee>
         </div>
       </CardHeader>
-      <CardContent className="text-center">
-        <h2 className="text-xl font-bold ">{currentSong.title}</h2>
-        <p className="text-sm text-gray-400">{currentSong.author}</p>
-      </CardContent>
-      <CardFooter className="flex justify-center items-center">
+
+      <CardFooter className="flex justify-center items-center pb-0">
         <AudioPlayer
           src={currentSong.audio}
           onPlay={() => setIsPlaying(true)}
@@ -69,8 +97,8 @@ const Player = () => {
           loop={false}
           muted={false}
           volume={0.5}
-          // onClickNext={}
-          // onClickPrevious={}
+          onClickNext={handleNext}
+          onClickPrevious={handlePrevious}
           showFilledProgress={false}
           showJumpControls={false}
           showSkipControls={true}

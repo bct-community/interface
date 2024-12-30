@@ -1,5 +1,14 @@
 import { useTheme } from "@/providers/theme";
-import { House, Newspaper, Link, Sun, Bot } from "lucide-react";
+import classNames from "classnames";
+import {
+  House,
+  Newspaper,
+  Link,
+  Sun,
+  Bot,
+  ChartNoAxesCombined,
+  Moon,
+} from "lucide-react";
 import { ReactNode } from "react";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 
@@ -21,8 +30,9 @@ const Navigator = () => {
     { icon: <Newspaper size="18" />, path: "/news" },
     { icon: <Link size="18" />, path: "/links" },
     { icon: <Bot size="18" />, path: "/chat" },
+    { icon: <ChartNoAxesCombined size="18" />, path: "/metrics" },
     {
-      icon: <Sun size="18" />,
+      icon: theme === "dark" ? <Sun size="18" /> : <Moon size="18" />,
       action: toggleTheme,
     },
   ];
@@ -32,7 +42,7 @@ const Navigator = () => {
 
   return (
     <nav
-      className="fixed bottom-4 left-1/2 transform -translate-x-1/2 flex w-[180px] h-[30px] justify-between shadow-lg shadow-[rgba(0, 0, 0, 0.2)] rounded-md border shadow-inner w-[140px] duration-100 overflow-hidden"
+      className="bg-[hsl(var(--background))] fixed bottom-4 left-1/2 transform -translate-x-1/2 flex w-[190px] h-[30px] justify-evenly shadow-lg shadow-[rgba(0, 0, 0, 0.2)] rounded-md border shadow-inner duration-100 overflow-hidden"
       style={{ zIndex: 1000 }}
     >
       {items.map((item, index) => (
@@ -53,33 +63,22 @@ interface ButtonProps {
   action?: () => void;
 }
 
-const Button = ({ icon, path, action }: ButtonProps) => {
+const Button = (props: ButtonProps) => {
   const location = useLocation();
 
   return (
-    <>
-      {path ? (
-        <RouterLink
-          draggable="false"
-          to={path}
-          className={`hover:bg-[#fff1] w-full h-full transition-all duration-200 ease-in-out flex items-center justify-center dark:text-white text-black dark:hover:text-[#A6A6A6] hover:text-[#A6A6A6] ${
-            location.pathname === path
-              ? "text-[#ff708d] dark:text-[#ff708d]"
-              : ""
-          }`}
-        >
-          {icon}
-        </RouterLink>
-      ) : (
-        <button
-          draggable="false"
-          className="hover:bg-[#fff1] w-full h-full transition-all duration-200 ease-in-out flex items-center justify-center dark:text-white text-black dark:hover:text-[#A6A6A6] hover:text-[#A6A6A6]"
-          onClick={action}
-        >
-          {icon}
-        </button>
-      )}
-    </>
+    <RouterLink
+      draggable="false"
+      to={props.path ?? "#"}
+      onClick={props.action}
+      className={classNames({
+        "hover:bg-[#fff1] w-full h-full transition-all duration-200 ease-in-out flex items-center justify-center dark:hover:text-[#A6A6A6] hover:text-[#A6A6A6]":
+          true,
+        "text-[#ff708d] dark:text-[#ff708d]": location.pathname === props.path,
+      })}
+    >
+      {props.icon}
+    </RouterLink>
   );
 };
 
