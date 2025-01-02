@@ -1,5 +1,6 @@
 import { coinImg } from "@/assets/images";
 import { Player } from "../news/components";
+import Chart from "./components/Chart";
 
 const Home = () => {
   return (
@@ -14,10 +15,15 @@ const Home = () => {
           />
         </div>
       </div>
+
       <div className="flex justify-between w-[75%] py-8">
         <Player />
         <Player />
         <Player />
+      </div>
+
+      <div className="px-4 w-full h-[500px]">
+        <Chart />
       </div>
     </div>
   );

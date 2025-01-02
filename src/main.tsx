@@ -6,7 +6,12 @@ import WebFont from "webfontloader";
 
 WebFont.load({
   google: {
-    families: ["Inter:300,400,600,700", "sans-serif"],
+    families: [
+      "Inter:300,400,600,700",
+      "Rubik Puddles:300,400,600,700,900",
+      "Chathura:100,200,300,400,600,700",
+      "sans-serif",
+    ],
   },
 });
 

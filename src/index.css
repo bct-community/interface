@@ -14,6 +14,10 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --coin-purple: #40292c;
+  --coin-font: #ffbfca;
+  --coin-pink: #fc748b;
 }
 
 .page-background {
@@ -25,6 +29,34 @@
   inset: 0;
   z-index: -1;
   padding: -2px;
+}
+
+.coin-ticker-font {
+  font-family: Rubik Puddles, Inter, system-ui, Avenir, Helvetica, Arial,
+    sans-serif;
+  background: var(--coin-purple);
+  font-weight: 900;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.dark .coin-ticker-font {
+  font-family: Rubik Puddles, Inter, system-ui, Avenir, Helvetica, Arial,
+    sans-serif;
+  background: linear-gradient(90deg, var(--coin-pink) 0%, var(--coin-font) 50%);
+  font-weight: 900;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.marquee-font {
+  font-weight: 700;
+  font-size: 24px;
+  font-family: Chathura, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
 @layer base {
