@@ -32,25 +32,21 @@
 }
 
 .coin-ticker-font {
-  font-family: Rubik Puddles, Inter, system-ui, Avenir, Helvetica, Arial,
+  font-family: Roboto Slab, Inter, system-ui, Avenir, Helvetica, Arial,
     sans-serif;
   background: var(--coin-purple);
   font-weight: 900;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
 }
 
 .dark .coin-ticker-font {
-  font-family: Rubik Puddles, Inter, system-ui, Avenir, Helvetica, Arial,
+  font-family: Roboto Slab, Inter, system-ui, Avenir, Helvetica, Arial,
     sans-serif;
   background: linear-gradient(90deg, var(--coin-pink) 0%, var(--coin-font) 50%);
   font-weight: 900;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
 }
 
 .marquee-font {

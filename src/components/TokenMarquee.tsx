@@ -26,7 +26,7 @@ const Item = ({ name, content, positive, negative }: ItemProps) => {
 
 const TokenMarquee = () => {
   return (
-    <div className="h-[30px] flex items-center fixed top-0 left-0 w-full bg-[hsl(var(--background))] z-[1000] overflow-hidden">
+    <div className="h-[30px] flex items-center fixed top-0 left-0 w-full bg-[hsl(var(--background))] z-[1000] overflow-hidden select-none border-b">
       <Marquee pauseOnHover={true} className="h-[30px] overflow-hidden">
         <div className="w-full flex items-center justify-evenly mr-3 h-fit">
           <span className="mx-12 coin-ticker-font">$XYZ</span>

@@ -42,7 +42,7 @@ const Navigator = () => {
 
   return (
     <nav
-      className="bg-[hsl(var(--background))] fixed bottom-4 left-1/2 transform -translate-x-1/2 flex w-[190px] h-[30px] justify-evenly shadow-lg shadow-[rgba(0, 0, 0, 0.2)] rounded-md border shadow-inner duration-100 overflow-hidden"
+      className="bg-[hsl(var(--background))] px-1 fixed bottom-5 left-1/2 transform -translate-x-1/2 flex w-[190px] h-[30px] justify-evenly shadow-lg shadow-[rgba(0, 0, 0, 0.2)] rounded-md border shadow-inner duration-100 overflow-hidden"
       style={{ zIndex: 1000 }}
     >
       {items.map((item, index) => (

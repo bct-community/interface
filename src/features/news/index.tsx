@@ -10,7 +10,7 @@ import {
 
 const News = () => {
   return (
-    <div className="p-2 flex justify-center items-center h-full w-full flex-col gap-4">
+    <div className="mt-[30px] p-2 flex justify-center items-center h-full w-full flex-col gap-4">
       <div className="flex justify-evenly items-center gap-4 w-full">
         <PrettyDate />
 
