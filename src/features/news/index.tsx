@@ -7,8 +7,17 @@ import {
   Raid,
   RaidTargetLogo,
 } from "./components";
+import { useEffect } from "react";
 
 const News = () => {
+  useEffect(() => {
+    document.title = "XYZ Community – News";
+
+    return () => {
+      document.title = "XYZ Community";
+    };
+  }, []);
+
   return (
     <div className="mt-[30px] p-2 flex justify-center items-center h-full w-full flex-col gap-4">
       <div className="flex justify-evenly items-center gap-4 w-full">

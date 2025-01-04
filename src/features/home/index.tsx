@@ -1,8 +1,17 @@
 import { coinImg } from "@/assets/images";
 import { Player } from "../news/components";
 import Chart from "./components/Chart";
+import { useEffect } from "react";
 
 const Home = () => {
+  useEffect(() => {
+    document.title = "XYZ Community";
+    
+    return () => {
+      document.title = "XYZ Community";
+    };
+  }, []);
+
   return (
     <div className="flex flex-col items-center">
       <div className="relative min-h-screen w-full">
