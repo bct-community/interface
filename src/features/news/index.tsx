@@ -25,7 +25,7 @@ const News = () => {
 
         <Heading />
 
-        <Card className="w-[20%] card-shadow-sm">
+        <Card className="w-[20%]">
           <CardHeader>
             <CardTitle className="select-none">News</CardTitle>
           </CardHeader>
