@@ -61,7 +61,7 @@ const Raid = () => {
                 </TwitterShareButton>
               </TooltipTrigger>
               <TooltipContent>
-                <p>Share on X</p>
+                <p className="select-none">Share on X</p>
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
