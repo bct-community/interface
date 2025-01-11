@@ -1,13 +1,14 @@
 import { Outlet } from "react-router-dom";
 
+import Footer from "@/components/Footer";
+
 import Navigator from "./Navigator";
-import Footer from "./Footer";
 import TokenMarquee from "./TokenMarquee";
 
 const Layout = () => {
   return (
-    <div className="w-full min-h-screen flex flex-col relative">
-      <div className="absolute inset-0 w-[2px] bg-red-500 mx-auto z-[1001] min-h-full"></div>
+    <div className="relative flex min-h-screen w-full flex-col">
+      <div className="absolute inset-0 z-[1001] mx-auto min-h-full w-[2px] bg-red-500"></div>
       <TokenMarquee />
       <div className="flex-1">
         <Outlet />
@@ -19,4 +20,3 @@ const Layout = () => {
 };
 
 export default Layout;
-

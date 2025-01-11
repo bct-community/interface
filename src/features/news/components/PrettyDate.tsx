@@ -12,12 +12,12 @@ const PrettyDate = () => {
   return (
     <Card className="w-[20%]">
       <CardHeader className="p-0">
-        <CardTitle className="select-none flex h-16 items-center text-sm w-full">
-          <div className="h-full w-[100px] flex items-center justify-center">
+        <CardTitle className="flex h-16 w-full select-none items-center text-sm">
+          <div className="flex h-full w-[100px] items-center justify-center">
             <span className="text-[32px]">{formattedDay}</span>
           </div>
           <Separator orientation="vertical" />
-          <div className="flex flex-col justify-between items-center w-full">
+          <div className="flex w-full flex-col items-center justify-between">
             <span>{capitalizedMonth}</span>
             <span>{year}</span>
           </div>

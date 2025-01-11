@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
 import {
@@ -7,7 +9,6 @@ import {
   Raid,
   RaidTargetLogo,
 } from "./components";
-import { useEffect } from "react";
 
 const News = () => {
   useEffect(() => {
@@ -19,8 +20,8 @@ const News = () => {
   }, []);
 
   return (
-    <div className="mt-[30px] p-2 flex justify-center items-center h-full w-full flex-col gap-4">
-      <div className="flex justify-evenly items-center gap-4 w-full">
+    <div className="mt-[30px] flex h-full w-full flex-col items-center justify-center gap-4 p-2">
+      <div className="flex w-full items-center justify-evenly gap-4">
         <PrettyDate />
 
         <Heading />
@@ -32,12 +33,12 @@ const News = () => {
         </Card>
       </div>
 
-      <div className="flex justify-evenly items-center gap-4 w-full">
+      <div className="flex w-full items-center justify-evenly gap-4">
         <RaidTargetLogo />
 
         <Raid />
 
-        <div className="w-[20%] flex items-center justify-center">
+        <div className="flex w-[20%] items-center justify-center">
           <Player />
         </div>
       </div>

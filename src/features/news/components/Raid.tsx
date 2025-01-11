@@ -1,21 +1,22 @@
+import { Bot, Target } from "lucide-react";
+import { useEffect, useState } from "react";
+import { TwitterShareButton, XIcon } from "react-share";
+
 import { Button } from "@/components/ui/button";
 import {
   Card,
-  CardHeader,
-  CardTitle,
   CardContent,
   CardFooter,
+  CardHeader,
+  CardTitle,
 } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Progress } from "@/components/ui/progress";
-import { Target, Bot } from "lucide-react";
-import { useState, useEffect } from "react";
-import { TwitterShareButton, XIcon } from "react-share";
 
 const Raid = () => {
   const [progress, setProgress] = useState(20);
@@ -42,10 +43,10 @@ const Raid = () => {
   }, []);
 
   return (
-    <Card className="w-[40%] card-shadow-sm">
+    <Card className="card-shadow-sm w-[40%]">
       <CardHeader>
-        <div className="flex justify-between items-center">
-          <CardTitle className="text-[32px] select-none w-fit">
+        <div className="flex items-center justify-between">
+          <CardTitle className="w-fit select-none text-[32px]">
             Daily raid
           </CardTitle>
 
@@ -68,20 +69,20 @@ const Raid = () => {
         </div>
       </CardHeader>
       <CardContent>
-        <p className="leading-relaxed select-none text-sm text-pretty text-justify break-words align-middle">
+        <p className="select-none text-pretty break-words text-justify align-middle text-sm leading-relaxed">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
           quasi voluptate veniam vel possimus voluptatem, ipsum architecto aut
           minima blanditiis similique officiis aliquam laudantium adipisci,
           atque culpa, eveniet delectus explicabo?
         </p>
 
-        <div className="w-full mt-8 mb-2">
+        <div className="mb-2 mt-8 w-full">
           <Progress value={progress} max={100} />
         </div>
       </CardContent>
       <CardFooter>
-        <div className="flex justify-between items-center w-full">
-          <Button className="select-none animate-wiggle hover:animate-none">
+        <div className="flex w-full items-center justify-between">
+          <Button className="animate-wiggle select-none hover:animate-none">
             <Target />
             Raid
           </Button>

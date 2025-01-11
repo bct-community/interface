@@ -2,12 +2,10 @@ import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
 const Heading = () => {
   return (
-    <Card className="w-[40%] card-shadow-sm">
+    <Card className="card-shadow-sm w-[40%]">
       <CardHeader className="p-0">
-        <CardTitle className="text-[60px] flex items-center justify-center select-none w-full h-full">
-          <span className="h-fit">
-            News
-          </span>
+        <CardTitle className="flex h-full w-full select-none items-center justify-center text-[60px]">
+          <span className="h-fit">News</span>
         </CardTitle>
       </CardHeader>
     </Card>

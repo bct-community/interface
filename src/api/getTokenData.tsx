@@ -1,5 +1,6 @@
-import env from "@/config";
 import { useQuery } from "@tanstack/react-query";
+
+import env from "@/config";
 
 type TokenData = {
   tokenPriceInUSD: string;

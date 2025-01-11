@@ -1,16 +1,17 @@
-import { useTheme } from "@/providers/theme";
 import classNames from "classnames";
 import {
-  House,
-  Newspaper,
-  Link,
-  Sun,
   Bot,
   ChartNoAxesCombined,
+  House,
+  Link,
   Moon,
+  Newspaper,
+  Sun,
 } from "lucide-react";
 import { ReactNode } from "react";
 import { Link as RouterLink, useLocation } from "react-router-dom";
+
+import { useTheme } from "@/providers/theme";
 
 interface NavItem {
   icon: ReactNode;
@@ -42,7 +43,7 @@ const Navigator = () => {
 
   return (
     <nav
-      className="bg-[hsl(var(--background))] fixed bottom-5 left-1/2 transform -translate-x-1/2 flex w-[190px] h-[30px] justify-evenly shadow-lg shadow-[rgba(0, 0, 0, 0.2)] rounded-md border shadow-inner duration-100 overflow-hidden"
+      className="shadow-[rgba(0, 0, 0, 0.2)] fixed bottom-5 left-1/2 flex h-[30px] w-[190px] -translate-x-1/2 transform justify-evenly overflow-hidden rounded-md border bg-[hsl(var(--background))] shadow-inner shadow-lg duration-100"
       style={{ zIndex: 1000 }}
     >
       {items.map((item, index) => (
@@ -72,7 +73,7 @@ const Button = (props: ButtonProps) => {
       to={props.path ?? "#"}
       onClick={props.action}
       className={classNames({
-        "hover:bg-[#fff1] w-full h-full transition-all duration-200 ease-in-out flex items-center justify-center dark:hover:text-[#A6A6A6] hover:text-[#A6A6A6]":
+        "flex h-full w-full items-center justify-center transition-all duration-200 ease-in-out hover:bg-[#fff1] hover:text-[#A6A6A6] dark:hover:text-[#A6A6A6]":
           true,
         "text-[#ff708d] dark:text-[#ff708d]": location.pathname === props.path,
       })}

@@ -1,5 +1,6 @@
-import Marquee from "react-fast-marquee";
 import classNames from "classnames";
+import Marquee from "react-fast-marquee";
+
 import { useTokenData } from "@/api/getTokenData";
 
 type ItemProps = {
@@ -11,7 +12,7 @@ type ItemProps = {
 
 const Item = ({ name, content, positive, negative }: ItemProps) => {
   return (
-    <span className="mx-12 marquee-font">
+    <span className="marquee-font mx-12">
       <span>{name}:</span>{" "}
       <span
         className={classNames({
@@ -34,10 +35,10 @@ const TokenMarquee = () => {
   const ageInDays = Math.floor(ageInMilliseconds / (1000 * 60 * 60 * 24));
 
   return (
-    <div className="h-[30px] flex items-center fixed top-0 left-0 w-full bg-[hsl(var(--background))] z-[1000] overflow-hidden select-none border-b">
+    <div className="fixed left-0 top-0 z-[1000] flex h-[30px] w-full select-none items-center overflow-hidden border-b bg-[hsl(var(--background))]">
       <Marquee pauseOnHover={true} className="h-[30px] overflow-hidden">
-        <div className="w-full flex items-center justify-evenly mr-3 h-fit">
-          <span className="mx-12 coin-ticker-font">$XYZ</span>
+        <div className="mr-3 flex h-fit w-full items-center justify-evenly">
+          <span className="coin-ticker-font mx-12">$XYZ</span>
           <Item name={"Price"} content={tokenData?.tokenPriceInUSD || "$0"} />
           <Item
             name={"Price Change (24h)"}

@@ -11,12 +11,11 @@ export default tseslint.config(
     extends: [
       js.configs.recommended,
       ...tseslint.configs.recommended,
-      // utilizei ela aqui:
       importPlugin.flatConfigs.recommended,
     ],
     files: ["**/*.{ts,tsx}"],
     languageOptions: {
-      ecmaVersion: 2020,
+      ecmaVersion: "latest",
       globals: globals.browser,
     },
     plugins: {
@@ -29,9 +28,9 @@ export default tseslint.config(
         "warn",
         { allowConstantExport: true },
       ],
-      "no-unused-vars": "warn",
+      "no-unused-vars": "error",
       "import/no-dynamic-require": "warn",
       "import/no-nodejs-modules": "warn",
     },
-  }
+  },
 );

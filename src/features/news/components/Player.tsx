@@ -1,13 +1,13 @@
-import { useState } from "react";
 import classNames from "classnames";
+import { Pause, Play, SkipBack, SkipForward } from "lucide-react";
+import { useState } from "react";
+import Marquee from "react-fast-marquee";
 import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
-import { SkipBack, Pause, Play, SkipForward } from "lucide-react";
-import { Card, CardFooter, CardHeader } from "@/components/ui/card";
-import Marquee from "react-fast-marquee";
 
 import { vinylImg } from "@/assets/images";
 import { pixSong, pouSong, rojaoSong } from "@/assets/songs";
+import { Card, CardFooter, CardHeader } from "@/components/ui/card";
 
 const Player = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -43,7 +43,7 @@ const Player = () => {
 
   const handlePrevious = () => {
     setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + songs.length) % songs.length
+      (prevIndex) => (prevIndex - 1 + songs.length) % songs.length,
     );
   };
 
@@ -53,19 +53,19 @@ const Player = () => {
     });
 
   return (
-    <Card className="w-[200px] card-shadow-lg">
-      <CardHeader className="flex flex-col items-center justify-between p-4 m-2 border rounded-[8px] h-[150px]">
+    <Card className="card-shadow-lg w-[200px]">
+      <CardHeader className="m-2 flex h-[150px] flex-col items-center justify-between rounded-[8px] border p-4">
         <img
           src={vinylImg}
           className={classNames({
-            "select-none w-20 h-20": true,
+            "h-20 w-20 select-none": true,
             "animate-spin duration-1000": isPlaying,
           })}
           draggable={false}
         />
 
         <div
-          className="max-w-full text-sm text-gray-400 select-none"
+          className="max-w-full select-none text-sm text-gray-400"
           onMouseEnter={toggleIsHoveringMarquee}
           onMouseLeave={toggleIsHoveringMarquee}
         >
@@ -88,7 +88,7 @@ const Player = () => {
         </div>
       </CardHeader>
 
-      <CardFooter className="flex justify-center items-center pb-0">
+      <CardFooter className="flex items-center justify-center pb-0">
         <AudioPlayer
           src={currentSong.audio}
           onPlay={() => setIsPlaying(true)}

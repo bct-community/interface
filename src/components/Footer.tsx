@@ -1,10 +1,8 @@
 const Footer = () => {
   return (
-    <footer className="w-full h-[75px] py-2 px-6 mt-6 text-center flex items-center justify-between select-none">
-      <div className="border rounded-[12px] p-4 w-[40%]">
-        Made by Community
-      </div>
-      <div className="border rounded-[12px] p-4 w-[40%]">
+    <footer className="mt-6 flex h-[75px] w-full select-none items-center justify-between px-6 py-2 text-center">
+      <div className="w-[40%] rounded-[12px] border p-4">Made by Community</div>
+      <div className="w-[40%] rounded-[12px] border p-4">
         2025 All right reserved ©
       </div>
     </footer>
