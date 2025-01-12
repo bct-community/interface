@@ -2,20 +2,14 @@ import { useEffect } from "react";
 
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
-import {
-  Heading,
-  Player,
-  PrettyDate,
-  Raid,
-  RaidTargetLogo,
-} from "./components";
+import { Heading, PrettyDate, Raid } from "./components";
 
 const News = () => {
   useEffect(() => {
-    document.title = "XYZ Community – News";
+    document.title = "Comunidade $BCT – Raid";
 
     return () => {
-      document.title = "XYZ Community";
+      document.title = "Comunidade $BCT";
     };
   }, []);
 
@@ -28,20 +22,20 @@ const News = () => {
 
         <Card className="w-[20%]">
           <CardHeader>
-            <CardTitle className="select-none">News</CardTitle>
+            <CardTitle className="w-full select-none text-center">
+              <span>Make $BCT Great again</span>
+            </CardTitle>
           </CardHeader>
         </Card>
       </div>
 
-      <div className="flex w-full items-center justify-evenly gap-4">
-        <RaidTargetLogo />
+      {/* <RaidTargetLogo /> */}
 
-        <Raid />
+      <Raid />
 
-        <div className="flex w-[20%] items-center justify-center">
+      {/* <div className="flex w-[20%] items-center justify-center">
           <Player />
-        </div>
-      </div>
+        </div> */}
     </div>
   );
 };

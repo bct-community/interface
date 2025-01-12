@@ -1,36 +1,30 @@
 import { useEffect } from "react";
 
-import { coinImg } from "@/assets/images";
+import { morpheusImg } from "@/assets/images";
 
-import { Player } from "../news/components";
-import Chart from "./components/Chart";
+import { Chart } from "./components";
 
 const Home = () => {
   useEffect(() => {
-    document.title = "XYZ Community";
+    document.title = "Comunidade $BCT";
 
     return () => {
-      document.title = "XYZ Community";
+      document.title = "Comunidade $BCT";
     };
   }, []);
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center gap-12">
       <div className="relative min-h-screen w-full">
         <div className="page-background"></div>
-        <div className="relative z-10 flex min-h-screen w-[80%] flex-col items-end justify-center gap-4">
+        <div className="relative z-10 flex min-h-screen w-full items-end justify-center">
           <img
-            src={coinImg}
-            className="w-[100px] animate-bounce select-none"
+            src={morpheusImg}
+            alt=""
+            className="w-[850px] select-none"
             draggable={false}
           />
         </div>
-      </div>
-
-      <div className="flex w-[75%] justify-between py-8">
-        <Player />
-        <Player />
-        <Player />
       </div>
 
       <div className="h-[500px] w-full px-4">

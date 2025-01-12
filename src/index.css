@@ -95,6 +95,7 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
+    --hover-shade: 0 0% 95%;
   }
 
   .dark {
@@ -122,6 +123,7 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+    --hover-shade: 240 3% 7%;
   }
 }
 
@@ -176,7 +178,6 @@
   box-shadow: none !important;
   display: flex !important;
   align-items: center !important;
-  /* padding-right: 0px !important; */
   background-color: transparent !important;
 }
 
@@ -196,4 +197,41 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* morpheus animation */
+
+.tilt-animation {
+  display: inline-block;
+  transform-origin: center;
+  animation: tilt 1s ease-in-out infinite;
+}
+
+@keyframes tilt {
+  0% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(-10deg);
+  }
+  100% {
+    transform: rotateY(0deg);
+  }
+}
+
+/* react-markdown */
+
+.markdown > * {
+  all: revert;
+  user-select: none;
+}
+
+.markdown a {
+  text-decoration: underline;
+  color: inherit; /* Mantém a cor padrão ou herdada */
+}
+
+.markdown a:hover {
+  /* make the color change slightly */
+  color: var(--coin-pink);
 }

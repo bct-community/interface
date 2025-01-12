@@ -2,10 +2,10 @@ import { useEffect } from "react";
 
 const Metrics = () => {
   useEffect(() => {
-    document.title = "XYZ Community – Metrics";
+    document.title = "Comunidade $BCT – Metricas";
 
     return () => {
-      document.title = "XYZ Community";
+      document.title = "Comunidade $BCT";
     };
   }, []);
 

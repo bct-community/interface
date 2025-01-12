@@ -8,7 +8,7 @@ import "./index.css";
 WebFont.load({
   google: {
     families: [
-      "Inter:300,400,600,700",
+      "Inter:300,400italic,600,700",
       "Roboto Slab:300,400,600,700,900",
       "Chathura:100,200,300,400,600,700",
       "sans-serif",

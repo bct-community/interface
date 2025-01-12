@@ -2,10 +2,10 @@ import { useEffect } from "react";
 
 const Chat = () => {
   useEffect(() => {
-    document.title = "XYZ Community – Chat";
+    document.title = "Comunidade $BCT – Chat";
 
     return () => {
-      document.title = "XYZ Community";
+      document.title = "Comunidade $BCT";
     };
   }, []);
 

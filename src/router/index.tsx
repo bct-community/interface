@@ -1,7 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import { Layout } from "../components";
-import { Chat, Home, Links, Metrics, News } from "../features";
+import { Chat, Home, Links, Metrics, News, Whitepaper } from "../features";
 
 export const Router = () => {
   return (
@@ -13,6 +13,7 @@ export const Router = () => {
           <Route path="/links" element={<Links />} />
           <Route path="/chat" element={<Chat />} />
           <Route path="/metrics" element={<Metrics />} />
+          <Route path="/whitepaper" element={<Whitepaper />} />
           <Route path="*" element={<Navigate to="/" replace={true} />} />
         </Route>
       </Routes>

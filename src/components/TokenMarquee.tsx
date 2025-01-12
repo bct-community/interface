@@ -38,7 +38,7 @@ const TokenMarquee = () => {
     <div className="fixed left-0 top-0 z-[1000] flex h-[30px] w-full select-none items-center overflow-hidden border-b bg-[hsl(var(--background))]">
       <Marquee pauseOnHover={true} className="h-[30px] overflow-hidden">
         <div className="mr-3 flex h-fit w-full items-center justify-evenly">
-          <span className="coin-ticker-font mx-12">$XYZ</span>
+          <span className="coin-ticker-font mx-12">$BCT</span>
           <Item name={"Price"} content={tokenData?.tokenPriceInUSD || "$0"} />
           <Item
             name={"Price Change (24h)"}
