@@ -1,8 +1,9 @@
 import { useEffect } from "react";
+import Marquee from "react-fast-marquee";
 
 import { morpheusImg } from "@/assets/images";
 
-import { Chart } from "./components";
+import { Chart, MatrixRainingCode } from "./components";
 
 const Home = () => {
   useEffect(() => {
@@ -15,15 +16,28 @@ const Home = () => {
 
   return (
     <div className="flex flex-col items-center gap-12">
-      <div className="relative min-h-screen w-full">
-        <div className="page-background"></div>
-        <div className="relative z-10 flex min-h-screen w-full items-end justify-center">
+      <MatrixRainingCode />
+
+      <div className="relative w-full min-h-screen">
+        <div className="relative z-10 flex items-end justify-center w-full min-h-screen">
           <img
             src={morpheusImg}
             alt=""
             className="w-[850px] select-none"
             draggable={false}
           />
+        </div>
+
+        <div className="bg-red h-[30px] border-y-2 border-[var(--coin-pink)] backdrop-blur-md backdrop-filter">
+          <Marquee className="bg-red h-[30px]">
+            <p className="text-xl font-bold select-none">
+              This is your last chance. After this, there is no turning back.
+              You take the Bitcoin – the story ends, you wake up in your bed and
+              believe whatever you want to believe. You take the $BCT – you stay
+              in Wonderland, and I show you how deep the rabbit hole goes.
+              Remember, all I'm offering is the truth. Nothing more.
+            </p>
+          </Marquee>
         </div>
       </div>
 
