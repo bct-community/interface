@@ -5,9 +5,9 @@ import {
   House,
   Link,
   Moon,
-  Newspaper,
   Scroll,
   Sun,
+  Target,
 } from "lucide-react";
 import { ReactNode } from "react";
 import { Link as RouterLink, useLocation } from "react-router-dom";
@@ -29,7 +29,7 @@ const Navigator = () => {
 
   const items: NavItem[] = [
     { icon: <House size="18" />, path: "/" },
-    { icon: <Newspaper size="18" />, path: "/news" },
+    { icon: <Target size="18" />, path: "/raid" },
     { icon: <Link size="18" />, path: "/links" },
     { icon: <Bot size="18" />, path: "/chat" },
     { icon: <ChartNoAxesCombined size="18" />, path: "/metrics" },
@@ -45,7 +45,7 @@ const Navigator = () => {
 
   return (
     <nav
-      className="shadow-[rgba(0, 0, 0, 0.2)] fixed bottom-5 left-1/2 flex h-[30px] w-[220px] -translate-x-1/2 transform justify-evenly overflow-hidden rounded-md border bg-[hsl(var(--background))] shadow-inner shadow-lg duration-100"
+      className="shadow-[rgba(0, 0, 0, 0.2)] fixed bottom-5 left-1/2 flex h-[30px] w-[220px] -translate-x-1/2 transform justify-evenly overflow-hidden rounded-md border bg-[hsl(var(--background))] shadow-lg duration-100"
       style={{ zIndex: 1000 }}
     >
       {items.map((item, index) => (

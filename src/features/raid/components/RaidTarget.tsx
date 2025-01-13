@@ -58,7 +58,7 @@ Mostre que a **comunidade BEIÇOLA** é forte e apoia o projeto! Compartilhe est
 **🌍 Juntos, somos mais fortes. Vamos fazer a BCT brilhar! 💪**`,
 };
 
-const Raid = () => {
+const RaidTarget = () => {
   const [progress, setProgress] = useState(20);
 
   useEffect(() => {
@@ -111,14 +111,14 @@ const Raid = () => {
           {content}
         </ReactMarkdown>
 
-        <div className="mb-2 mt-8 w-full">
+        <div className="w-full mt-8 mb-2">
           <Progress value={progress} max={100} />
         </div>
       </CardContent>
       <CardFooter>
-        <div className="flex w-full items-center justify-between">
+        <div className="flex items-center justify-between w-full">
           <Button
-            className="animate-wiggle select-none hover:animate-none"
+            className="select-none animate-wiggle hover:animate-none"
             onClick={() => window.open(url, "_blank")}
           >
             <Target />
@@ -135,4 +135,4 @@ const Raid = () => {
   );
 };
 
-export default Raid;
+export default RaidTarget;

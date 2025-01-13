@@ -2,9 +2,9 @@ import { useEffect } from "react";
 
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
-import { Heading, PrettyDate, Raid } from "./components";
+import { Heading, PrettyDate, RaidTarget } from "./components";
 
-const News = () => {
+const Raid = () => {
   useEffect(() => {
     document.title = "Comunidade $BCT – Raid";
 
@@ -15,14 +15,14 @@ const News = () => {
 
   return (
     <div className="mt-[30px] flex h-full w-full flex-col items-center justify-center gap-4 p-2">
-      <div className="flex w-full items-center justify-evenly gap-4">
+      <div className="flex items-center w-full gap-4 justify-evenly">
         <PrettyDate />
 
         <Heading />
 
         <Card className="w-[20%]">
           <CardHeader>
-            <CardTitle className="w-full select-none text-center">
+            <CardTitle className="w-full text-center select-none">
               <span>Make $BCT Great again</span>
             </CardTitle>
           </CardHeader>
@@ -31,7 +31,7 @@ const News = () => {
 
       {/* <RaidTargetLogo /> */}
 
-      <Raid />
+      <RaidTarget />
 
       {/* <div className="flex w-[20%] items-center justify-center">
           <Player />
@@ -40,4 +40,4 @@ const News = () => {
   );
 };
 
-export default News;
+export default Raid;
