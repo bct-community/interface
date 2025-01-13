@@ -1,3 +1,4 @@
+import { a, useTrail } from "@react-spring/web";
 import { Bot, Target } from "lucide-react";
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
@@ -28,7 +29,7 @@ const data = {
 ## 🚀 Organize-se para o Raid do **BEIÇOLA TOKEN (BCT)** no CoinMarketCap! 🔥
 
 ### 📢 O que está acontecendo?  
-A **BCT/BEIÇOLA TOKEN** ainda **não está verificado** no CoinMarketCap! 😱  
+A **BCT** ainda **não está verificada** no CoinMarketCap! 😱  
 Precisamos da sua ajuda para mudar isso. **Vote agora** para que o token seja verificado e ganhe mais visibilidade na comunidade!  
 
 ---
@@ -84,53 +85,75 @@ const RaidTarget = () => {
 
   const { url, content, share } = data;
 
+  const elements = [
+    <CardHeader className="pb-0" key="header">
+      <div className="flex items-center justify-between">
+        <CardTitle className="w-fit select-none text-[32px]">
+          Daily raid
+        </CardTitle>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <TwitterShareButton url={url} title={share} className="w-fit">
+                <XIcon size={32} round />
+              </TwitterShareButton>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p className="select-none">Compartilhe no X</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      </div>
+    </CardHeader>,
+    <CardContent key="content">
+      <ReactMarkdown remarkPlugins={[remarkGfm]} className="markdown">
+        {content}
+      </ReactMarkdown>
+      <div className="w-full mt-8 mb-2">
+        <Progress value={progress} max={100} />
+      </div>
+    </CardContent>,
+    <CardFooter key="footer">
+      <div className="flex items-center justify-between w-full">
+        <Button
+          className="select-none animate-wiggle hover:animate-none"
+          onClick={() => window.open(url, "_blank")}
+        >
+          <Target />
+          Raid
+        </Button>
+        <Button className="select-none">
+          <Bot />
+          Gerar mensagem IA
+        </Button>
+      </div>
+    </CardFooter>,
+  ];
+
+  const trail = useTrail(elements.length, {
+    config: { mass: 5, tension: 2000, friction: 200 },
+    opacity: 1,
+    y: 0,
+    from: { opacity: 0, y: 20 },
+  });
+
   return (
     <Card className="card-shadow-sm w-[80%]">
-      <CardHeader className="pb-0">
-        <div className="flex items-center justify-between">
-          <CardTitle className="w-fit select-none text-[32px]">
-            Daily raid
-          </CardTitle>
-
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <TwitterShareButton url={url} title={share} className="w-fit">
-                  <XIcon size={32} round />
-                </TwitterShareButton>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p className="select-none">Compartilhe no X</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-        </div>
-      </CardHeader>
-      <CardContent>
-        <ReactMarkdown remarkPlugins={[remarkGfm]} className="markdown">
-          {content}
-        </ReactMarkdown>
-
-        <div className="w-full mt-8 mb-2">
-          <Progress value={progress} max={100} />
-        </div>
-      </CardContent>
-      <CardFooter>
-        <div className="flex items-center justify-between w-full">
-          <Button
-            className="select-none animate-wiggle hover:animate-none"
-            onClick={() => window.open(url, "_blank")}
+      <a.div className="w-full">
+        {trail.map(({ y, ...style }, index) => (
+          <a.div
+            key={index}
+            style={{
+              ...style,
+              transform: y.to(
+                (value) => `translate3d(0, ${value}px, 0) w-full`,
+              ),
+            }}
           >
-            <Target />
-            Raid
-          </Button>
-
-          <Button className="select-none">
-            <Bot />
-            Gerar mensagem IA
-          </Button>
-        </div>
-      </CardFooter>
+            {elements[index]}
+          </a.div>
+        ))}
+      </a.div>
     </Card>
   );
 };

@@ -5,8 +5,10 @@ import {
   SiTelegram,
   SiX,
 } from "@icons-pack/react-simple-icons";
+import { a, useTrail } from "@react-spring/web";
 import { Check, Copy } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
@@ -155,18 +157,45 @@ const Links = () => {
     },
   ];
 
+  const { ref, inView } = useInView({ threshold: 0.1 });
+
+  const trail = useTrail(communityLinks.length + tokenLinks.length, {
+    config: { mass: 5, tension: 2000, friction: 200 },
+    opacity: inView ? 1 : 0,
+    y: inView ? 0 : 20,
+    from: { opacity: 0, y: 20 },
+  });
+
   return (
-    <div className="mx-2 mt-12 flex justify-center">
+    <div ref={ref} className="flex justify-center mx-2 mt-12">
       <div className="w-full max-w-[700px]">
-        <h1 className="select-none text-center text-3xl font-bold">🔗 Links</h1>
-        <h2 className="mt-8 select-none text-xl font-bold">🌐 Comunidade</h2>
-        {communityLinks.map(({ label, url, icon }) => (
-          <ShareButton key={label} platform={label} url={url} icon={icon} />
+        <h1 className="text-3xl font-bold text-center select-none">🔗 Links</h1>
+        <h2 className="mt-8 text-xl font-bold select-none">🌐 Comunidade</h2>
+        {communityLinks.map(({ label, url, icon }, index) => (
+          <a.div
+            key={label}
+            style={{
+              ...trail[index],
+              transform: trail[index].y.to((y) => `translate3d(0, ${y}px, 0)`),
+            }}
+          >
+            <ShareButton platform={label} url={url} icon={icon} />
+          </a.div>
         ))}
 
-        <h2 className="mt-8 select-none text-xl font-bold">💰 Token</h2>
-        {tokenLinks.map(({ label, url, icon }) => (
-          <ShareButton key={label} platform={label} url={url} icon={icon} />
+        <h2 className="mt-8 text-xl font-bold select-none">💰 Token</h2>
+        {tokenLinks.map(({ label, url, icon }, index) => (
+          <a.div
+            key={label}
+            style={{
+              ...trail[communityLinks.length + index],
+              transform: trail[communityLinks.length + index].y.to(
+                (y) => `translate3d(0, ${y}px, 0)`,
+              ),
+            }}
+          >
+            <ShareButton platform={label} url={url} icon={icon} />
+          </a.div>
         ))}
       </div>
     </div>
