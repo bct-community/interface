@@ -1,3 +1,4 @@
+// source: https://github.com/Mif2006/MatrixWebsite
 import { useEffect, useRef } from "react";
 
 import { useTheme } from "@/providers/theme";
@@ -5,7 +6,7 @@ import { useTheme } from "@/providers/theme";
 const MatrixRainingCode: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const { theme } = useTheme();
-  const animationFrameRef = useRef<number | null>(null); // Store the animation frame ID
+  const animationFrameRef = useRef<number | null>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -28,17 +29,14 @@ const MatrixRainingCode: React.FC = () => {
     const draw = () => {
       const isDark = theme === "dark";
 
-      // Define background and text colors based on the theme
       const backgroundColor = isDark
-        ? "rgba(0, 0, 0, 0.04)"
+        ? "rgba(0, 0, 0, 0.1)"
         : "rgba(255, 255, 255, 0.1)";
       const textColor = isDark ? "#fc748b" : "#1a1a1a";
 
-      // Draw the background
       ctx.fillStyle = backgroundColor;
       ctx.fillRect(0, 0, width, height);
 
-      // Set text color and font
       ctx.fillStyle = textColor;
       ctx.font = "15px monospace";
 
@@ -67,11 +65,10 @@ const MatrixRainingCode: React.FC = () => {
     };
 
     const resetCanvas = () => {
-      ctx.clearRect(0, 0, width, height); // Clear the canvas
-      drops = Array(columns).fill(1); // Reset drops
+      ctx.clearRect(0, 0, width, height);
+      drops = Array(columns).fill(1);
     };
 
-    // Start or restart the animation
     resetCanvas();
     animate();
 
@@ -88,7 +85,6 @@ const MatrixRainingCode: React.FC = () => {
     }
 
     return () => {
-      // Cancel the animation frame and clean up
       if (animationFrameRef.current !== null) {
         cancelAnimationFrame(animationFrameRef.current);
       }
@@ -96,7 +92,7 @@ const MatrixRainingCode: React.FC = () => {
         window.removeEventListener("resize", handleResize);
       }
     };
-  }, [theme]); // Re-run the effect when the theme changes
+  }, [theme]);
 
   return (
     <canvas
