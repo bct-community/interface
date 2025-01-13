@@ -12,7 +12,7 @@ type ItemProps = {
 
 const Item = ({ name, content, positive, negative }: ItemProps) => {
   return (
-    <span className="marquee-font mx-12">
+    <span className="mx-12 marquee-font">
       <span>{name}:</span>{" "}
       <span
         className={classNames({
@@ -35,10 +35,10 @@ const TokenMarquee = () => {
   const ageInDays = Math.floor(ageInMilliseconds / (1000 * 60 * 60 * 24));
 
   return (
-    <div className="fixed left-0 top-0 z-[1000] flex h-[30px] w-full select-none items-center overflow-hidden border-b bg-[hsl(var(--background))]">
+    <div className="fixed left-0 top-0 z-[1000] flex h-[30px] w-full select-none items-center overflow-hidden border-b bg-transparent backdrop-blur-md backdrop-filter">
       <Marquee pauseOnHover={true} className="h-[30px] overflow-hidden">
-        <div className="mr-3 flex h-fit w-full items-center justify-evenly">
-          <span className="coin-ticker-font mx-12">$BCT</span>
+        <div className="flex items-center w-full mr-3 h-fit justify-evenly">
+          <span className="mx-12 coin-ticker-font">$BCT</span>
           <Item name={"Price"} content={tokenData?.tokenPriceInUSD || "$0"} />
           <Item
             name={"Price Change (24h)"}

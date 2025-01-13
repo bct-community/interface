@@ -8,6 +8,7 @@ import {
 import { a, useTrail } from "@react-spring/web";
 import { Check, Copy } from "lucide-react";
 import { useEffect, useState } from "react";
+import ReactDOM from "react-dom";
 import { useInView } from "react-intersection-observer";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
@@ -21,15 +22,19 @@ type ShareButtonProps = {
 const AlertMessage = ({ message }: { message: string }) => {
   if (!message) return null;
 
-  return (
-    <div className="fixed bottom-1 left-1 transform rounded-md p-4 text-white transition-colors hover:bg-[var(hsl(--muted))]">
-      <Alert>
+  return ReactDOM.createPortal(
+    <div
+      className="fixed z-50 text-white transition-opacity duration-300 transform rounded-md shadow-lg bottom-4 right-4"
+      style={{ pointerEvents: "none" }}
+    >
+      <Alert className="bg-transparent backdrop-blur-md backdrop-filter">
         <AlertTitle className="flex items-center gap-2">
           <Check size={16} /> Link copiado!
         </AlertTitle>
         <AlertDescription>{message}</AlertDescription>
       </Alert>
-    </div>
+    </div>,
+    document.body,
   );
 };
 
