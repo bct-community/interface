@@ -3,6 +3,7 @@ import {
   Bot,
   ChartNoAxesCombined,
   House,
+  Images,
   Link,
   Moon,
   Scroll,
@@ -34,6 +35,7 @@ const Navigator = () => {
     { icon: <Bot size="18" />, path: "/chat" },
     { icon: <ChartNoAxesCombined size="18" />, path: "/metrics" },
     { icon: <Scroll size="18" />, path: "/whitepaper" },
+    { icon: <Images size="18" />, path: "/arts" },
     {
       icon: theme === "dark" ? <Sun size="18" /> : <Moon size="18" />,
       action: toggleTheme,
@@ -45,7 +47,7 @@ const Navigator = () => {
 
   return (
     <nav
-      className="shadow-[rgba(0, 0, 0, 0.2)] fixed bottom-5 left-1/2 flex h-[30px] w-[220px] -translate-x-1/2 transform justify-evenly overflow-hidden rounded-md border bg-[hsl(var(--background))] shadow-lg duration-100"
+      className="shadow-[rgba(0, 0, 0, 0.2)] fixed bottom-5 left-1/2 flex h-[30px] w-[230px] -translate-x-1/2 transform justify-evenly overflow-hidden rounded-md border bg-[hsl(var(--background))] shadow-lg duration-100"
       style={{ zIndex: 1000 }}
     >
       {items.map((item, index) => (
