@@ -18,8 +18,8 @@ const Home = () => {
     <div className="flex flex-col items-center gap-12">
       <MatrixRainingCode />
 
-      <div className="relative w-full min-h-screen">
-        <div className="relative z-10 flex items-end justify-center w-full min-h-screen">
+      <div className="relative min-h-screen w-full">
+        <div className="z-1 relative flex min-h-screen w-full items-end justify-center">
           <img
             src={morpheusImg}
             alt=""
@@ -30,7 +30,7 @@ const Home = () => {
 
         <div className="bg-red h-[30px] border-y-2 border-[var(--coin-pink)] backdrop-blur-md backdrop-filter">
           <Marquee className="bg-red h-[30px]">
-            <p className="text-xl font-bold select-none">
+            <p className="select-none text-xl font-bold">
               This is your last chance. After this, there is no turning back.
               You take the Bitcoin – the story ends, you wake up in your bed and
               believe whatever you want to believe. You take the $BCT – you stay

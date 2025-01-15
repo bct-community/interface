@@ -46,10 +46,7 @@ const Navigator = () => {
   // const isMobile = screenWidth < 768;
 
   return (
-    <nav
-      className="shadow-[rgba(0, 0, 0, 0.2)] fixed bottom-5 left-1/2 flex h-[30px] w-[230px] -translate-x-1/2 transform justify-evenly overflow-hidden rounded-md border bg-[hsl(var(--background))] shadow-lg duration-100"
-      style={{ zIndex: 1000 }}
-    >
+    <nav className="shadow-[rgba(0, 0, 0, 0.2)] z-2 fixed bottom-5 left-1/2 flex h-[30px] w-[230px] -translate-x-1/2 transform justify-evenly overflow-hidden rounded-md border bg-[hsl(var(--background))] shadow-lg duration-100">
       {items.map((item, index) => (
         <Button
           key={index}

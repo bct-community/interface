@@ -8,34 +8,14 @@ import {
 import { a, useTrail } from "@react-spring/web";
 import { Check, Copy } from "lucide-react";
 import { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
 import { useInView } from "react-intersection-observer";
 
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Alert } from "@/components";
 
 type ShareButtonProps = {
   icon: JSX.Element;
   platform: string;
   url: string;
-};
-
-const AlertMessage = ({ message }: { message: string }) => {
-  if (!message) return null;
-
-  return ReactDOM.createPortal(
-    <div
-      className="fixed z-50 text-white transition-opacity duration-300 transform rounded-md shadow-lg bottom-4 right-4"
-      style={{ pointerEvents: "none" }}
-    >
-      <Alert className="bg-transparent backdrop-blur-md backdrop-filter">
-        <AlertTitle className="flex items-center gap-2">
-          <Check size={16} /> Link copiado!
-        </AlertTitle>
-        <AlertDescription>{message}</AlertDescription>
-      </Alert>
-    </div>,
-    document.body,
-  );
 };
 
 const ShareButton = ({ icon, platform, url }: ShareButtonProps) => {
@@ -87,7 +67,7 @@ const ShareButton = ({ icon, platform, url }: ShareButtonProps) => {
         </button>
       </div>
 
-      <AlertMessage message={alertMessage} />
+      <Alert message={alertMessage} />
     </div>
   );
 };
@@ -172,10 +152,10 @@ const Links = () => {
   });
 
   return (
-    <div ref={ref} className="flex justify-center mx-2 mt-12">
+    <div ref={ref} className="mx-2 mt-12 flex justify-center">
       <div className="w-full max-w-[700px]">
-        <h1 className="text-3xl font-bold text-center select-none">🔗 Links</h1>
-        <h2 className="mt-8 text-xl font-bold select-none">🌐 Comunidade</h2>
+        <h1 className="select-none text-center text-3xl font-bold">🔗 Links</h1>
+        <h2 className="mt-8 select-none text-xl font-bold">🌐 Comunidade</h2>
         {communityLinks.map(({ label, url, icon }, index) => (
           <a.div
             key={label}
@@ -188,7 +168,7 @@ const Links = () => {
           </a.div>
         ))}
 
-        <h2 className="mt-8 text-xl font-bold select-none">💰 Token</h2>
+        <h2 className="mt-8 select-none text-xl font-bold">💰 Token</h2>
         {tokenLinks.map(({ label, url, icon }, index) => (
           <a.div
             key={label}

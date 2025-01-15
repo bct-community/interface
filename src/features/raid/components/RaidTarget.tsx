@@ -1,10 +1,11 @@
 import { a, useTrail } from "@react-spring/web";
-import { Bot, Target } from "lucide-react";
+import { Bot, Check, Copy, Target } from "lucide-react";
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { TwitterShareButton, XIcon } from "react-share";
 import remarkGfm from "remark-gfm";
 
+import { Alert } from "@/components";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -15,6 +16,15 @@ import {
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
   Tooltip,
@@ -28,6 +38,20 @@ import { useRaidData } from "../api/getRaidData";
 const RaidTarget = () => {
   const { data, isFetching } = useRaidData();
   const [progress, setProgress] = useState(20);
+  const [isCopied, setIsCopied] = useState(false);
+  const [botMessage, _setBotMessage] = useState("Participio do raid diário!");
+  const [alertMessage, setAlertMessage] = useState("");
+
+  const copyAiMessage = () => {
+    navigator.clipboard.writeText(botMessage);
+
+    setIsCopied(true);
+    setAlertMessage("A mensagem foi copiada para a área de transferência.");
+    setTimeout(() => {
+      setIsCopied(false);
+      setAlertMessage("");
+    }, 3000);
+  };
 
   useEffect(() => {
     const updateProgress = () => {
@@ -83,23 +107,42 @@ const RaidTarget = () => {
         </ReactMarkdown>
       )}
 
-      <div className="w-full mt-8 mb-2">
+      <div className="mb-2 mt-8 w-full">
         <Progress value={progress} max={100} />
       </div>
     </CardContent>,
     <CardFooter key="footer">
-      <div className="flex items-center justify-between w-full">
+      <div className="flex w-full items-center justify-between">
         <Button
-          className="select-none animate-wiggle hover:animate-none"
+          className="animate-wiggle select-none hover:animate-none"
           onClick={() => window.open(data?.url || "", "_blank")}
         >
           <Target />
           Raid
         </Button>
-        <Button className="select-none">
-          <Bot />
-          Gerar mensagem IA
-        </Button>
+
+        <Sheet>
+          <SheetTrigger>
+            <Button className="select-none">
+              <Bot />
+              Gerar mensagem IA
+            </Button>
+          </SheetTrigger>
+          <SheetContent className="space-between mt-[30px] flex h-full w-[400px] flex-col sm:w-[540px]">
+            <div className="flex h-full w-full flex-col justify-between pb-4">
+              <SheetHeader>
+                <SheetTitle className="select-none">Mensagem gerada</SheetTitle>
+                <SheetDescription>{botMessage}</SheetDescription>
+              </SheetHeader>
+              <SheetFooter>
+                <Button className="w-full select-none" onClick={copyAiMessage}>
+                  {isCopied ? <Check size={16} /> : <Copy size={16} />}
+                  Copiar mensagem
+                </Button>
+              </SheetFooter>
+            </div>
+          </SheetContent>
+        </Sheet>
       </div>
     </CardFooter>,
   ];
@@ -128,6 +171,8 @@ const RaidTarget = () => {
           </a.div>
         ))}
       </a.div>
+
+      <Alert message={alertMessage} />
     </Card>
   );
 };
@@ -140,7 +185,7 @@ interface SkeletonProps {
 
 const SkeletonBullet: React.FC<SkeletonProps> = ({ width }) => {
   return (
-    <div className="flex gap-2 mt-4">
+    <div className="mt-4 flex gap-2">
       <span className="flex h-[10px] items-center">•</span>
       <Skeleton
         className="h-[10px] rounded-full"
