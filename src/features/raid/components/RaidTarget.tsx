@@ -14,6 +14,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import { Separator } from "@/components/ui/separator";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   Tooltip,
   TooltipContent,
@@ -21,45 +23,10 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-const data = {
-  platform: "CoinMarketCap",
-  url: "https://coinmarketcap.com/dexscan/solana/Cwa4wde1oAbiwDZuEykwiebPr3CbayoMfTbATM4MXxgJ/",
-  share: "Participe do Raid da $BCT no CoinMarketCap! 🚀🔥 #BCT",
-  content: `
-## 🚀 Organize-se para o Raid do **BEIÇOLA TOKEN (BCT)** no CoinMarketCap! 🔥
-
-### 📢 O que está acontecendo?  
-A **BCT** ainda **não está verificada** no CoinMarketCap! 😱  
-Precisamos da sua ajuda para mudar isso. **Vote agora** para que o token seja verificado e ganhe mais visibilidade na comunidade!  
-
----
-
-### 🌟 Por que votar na BCT?  
-- 💎 **Projetos promissores merecem destaque!**  
-- 📈 A verificação no CoinMarketCap traz mais confiança e engajamento para o token.  
-- 💬 Vamos unir a comunidade da BCT para mostrar nossa força!  
-
----
-
-### 📲 Como votar?  
-1. Acesse o link do token no CoinMarketCap:  
-   👉 [BCT/BEIÇOLA TOKEN no CMC](https://coinmarketcap.com/dexscan/solana/Cwa4wde1oAbiwDZuEykwiebPr3CbayoMfTbATM4MXxgJ/)  
-2. Clique no **joinha** 👍 e ajude a **BCT** a ser reconhecida! 🗳️  
-
----
-
-### ✊ Vamos juntos!  
-Mostre que a **comunidade BEIÇOLA** é forte e apoia o projeto! Compartilhe esta mensagem e convoque seus amigos para o **Raid da BCT no CMC**! 🌐🔥  
-
----
-
-**🔗 Link direto para votação:**  
-👉 [Vote aqui!](https://coinmarketcap.com/dexscan/solana/Cwa4wde1oAbiwDZuEykwiebPr3CbayoMfTbATM4MXxgJ/)  
-
-**🌍 Juntos, somos mais fortes. Vamos fazer a BCT brilhar! 💪**`,
-};
+import { useRaidData } from "../api/getRaidData";
 
 const RaidTarget = () => {
+  const { data, isFetching } = useRaidData();
   const [progress, setProgress] = useState(20);
 
   useEffect(() => {
@@ -83,8 +50,6 @@ const RaidTarget = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const { url, content, share } = data;
-
   const elements = [
     <CardHeader className="pb-0" key="header">
       <div className="flex items-center justify-between">
@@ -94,7 +59,11 @@ const RaidTarget = () => {
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <TwitterShareButton url={url} title={share} className="w-fit">
+              <TwitterShareButton
+                url={data?.url || ""}
+                title={data?.shareMessage || ""}
+                className="w-fit"
+              >
                 <XIcon size={32} round />
               </TwitterShareButton>
             </TooltipTrigger>
@@ -106,9 +75,14 @@ const RaidTarget = () => {
       </div>
     </CardHeader>,
     <CardContent key="content">
-      <ReactMarkdown remarkPlugins={[remarkGfm]} className="markdown">
-        {content}
-      </ReactMarkdown>
+      {isFetching ? (
+        <RaidSkeleton />
+      ) : (
+        <ReactMarkdown remarkPlugins={[remarkGfm]} className="markdown">
+          {data?.content || ""}
+        </ReactMarkdown>
+      )}
+
       <div className="w-full mt-8 mb-2">
         <Progress value={progress} max={100} />
       </div>
@@ -117,7 +91,7 @@ const RaidTarget = () => {
       <div className="flex items-center justify-between w-full">
         <Button
           className="select-none animate-wiggle hover:animate-none"
-          onClick={() => window.open(url, "_blank")}
+          onClick={() => window.open(data?.url || "", "_blank")}
         >
           <Target />
           Raid
@@ -159,3 +133,68 @@ const RaidTarget = () => {
 };
 
 export default RaidTarget;
+
+interface SkeletonProps {
+  width: number;
+}
+
+const SkeletonBullet: React.FC<SkeletonProps> = ({ width }) => {
+  return (
+    <div className="flex gap-2 mt-4">
+      <span className="flex h-[10px] items-center">•</span>
+      <Skeleton
+        className="h-[10px] rounded-full"
+        style={{ width: `${width}%` }}
+      />
+    </div>
+  );
+};
+
+const SkeletonH2: React.FC<SkeletonProps> = ({ width }) => {
+  return (
+    <Skeleton
+      className="my-6 h-[16px] rounded-full"
+      style={{ width: `${width}%` }}
+    />
+  );
+};
+
+const SkeletonH1: React.FC<SkeletonProps> = ({ width }) => {
+  return (
+    <Skeleton
+      className="mt-4 h-[20px] rounded-full"
+      style={{ width: `${width}%` }}
+    />
+  );
+};
+
+const SkeletonP: React.FC<SkeletonProps> = ({ width }) => {
+  return (
+    <Skeleton
+      className="mt-4 h-[10px] rounded-full"
+      style={{ width: `${width}%` }}
+    />
+  );
+};
+
+const RaidSkeleton = () => {
+  return (
+    <>
+      <SkeletonH1 width={85} />
+      <SkeletonH2 width={30} />
+      <SkeletonP width={100} />
+      <SkeletonP width={100} />
+      <SkeletonP width={100} />
+      <Separator className="my-6 h-[2px] bg-[hsl(var(--primary))]" />
+      <SkeletonH2 width={25} />
+      <SkeletonBullet width={32} />
+      <SkeletonBullet width={23} />
+      <SkeletonBullet width={42} />
+      <SkeletonBullet width={15} />
+      <Separator className="my-6 h-[2px] bg-[hsl(var(--primary))]" />
+      <SkeletonH2 width={42} />
+      <SkeletonP width={100} />
+      <SkeletonP width={100} />
+    </>
+  );
+};

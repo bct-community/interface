@@ -16,13 +16,10 @@ type TokenData = {
 };
 
 const getTokenData = async () => {
-  try {
-    const response = await fetch(`${env.VITE_API_URL}/token`);
-    const data = await response.json();
-    return data as TokenData;
-  } catch {
-    console.error("Failed to fetch token data");
-  }
+  const response = await fetch(`${env.VITE_API_URL}/token`);
+  const data = await response.json();
+
+  return data as TokenData;
 };
 
 export const useTokenData = () =>
