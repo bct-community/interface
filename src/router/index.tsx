@@ -1,5 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
+import { ScrollToTop } from "@/components";
+
 import { Layout } from "../components";
 import {
   Arts,
@@ -14,6 +16,7 @@ import {
 export const Router = () => {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index path="/" element={<Home />} />

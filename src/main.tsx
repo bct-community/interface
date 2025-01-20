@@ -11,6 +11,7 @@ WebFont.load({
       "Inter:300,400italic,600,700",
       "Roboto Slab:300,400,600,700,900",
       "Chathura:100,200,300,400,600,700",
+      "Sour Gummy:700,900",
       "sans-serif",
     ],
   },

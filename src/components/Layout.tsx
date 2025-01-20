@@ -7,7 +7,7 @@ import TokenMarquee from "./TokenMarquee";
 
 const Layout = () => {
   return (
-    <div className="relative flex min-h-screen w-full flex-col">
+    <div className="relative flex flex-col w-full min-h-screen">
       {/* <div className="absolute inset-0 z-[1001] mx-auto min-h-full w-[2px] bg-red-500"></div> */}
       <TokenMarquee />
       <div className="flex-1">

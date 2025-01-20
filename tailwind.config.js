@@ -11,7 +11,7 @@ export default {
         },
       },
       animation: {
-        wiggle: "wiggle 1s ease-in-out infinite", // Define a animação com duração de 1s e repetição infinita
+        wiggle: "wiggle 1s ease-in-out infinite", 
       },
       borderRadius: {
         lg: "var(--radius)",
