@@ -163,8 +163,13 @@ const TokenGoals = ({ celebs }: { celebs?: boolean }) => {
   };
 
   return (
-    <div className={classNames({ "flex flex-col": true, "items-end": celebs })}>
-      <h1 className="font-[Sour Gummy] mb-4 select-none text-xl font-bold">
+    <div
+      className={classNames({
+        "flex flex-col": true,
+        "items-end": celebs,
+      })}
+    >
+      <h1 className="font-[Sour Gummy] mb-6 select-none text-xl font-bold">
         {celebs ? "Celebridades" : "Preço do Token"}
       </h1>
 
