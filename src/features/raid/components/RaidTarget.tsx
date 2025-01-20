@@ -122,9 +122,11 @@ const RaidTarget = () => {
         </Button>
 
         <Sheet>
-          <SheetTrigger>
-            <Bot />
-            Gerar mensagem IA
+          <SheetTrigger asChild>
+            <Button>
+              <Bot />
+              Gerar mensagem IA
+            </Button>
           </SheetTrigger>
           <SheetContent className="space-between mt-[30px] flex h-full w-[400px] flex-col sm:w-[540px]">
             <div className="flex flex-col justify-between w-full h-full pb-4">
