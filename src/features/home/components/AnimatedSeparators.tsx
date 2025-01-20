@@ -36,7 +36,7 @@ const AnimatedSeparators = ({ baseVelocity = 100 }: ParallaxProps) => {
   const x = useTransform(baseX, (v) => `${wrap(-35, -45, v)}%`);
 
   const directionFactor = useRef<number>(1);
-  useAnimationFrame((t, delta) => {
+  useAnimationFrame((_t, delta) => {
     let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
 
     /**
