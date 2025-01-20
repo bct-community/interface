@@ -118,7 +118,7 @@ const Home = () => {
       <AuroraTitle />
 
       {/* why w-[90%] intead of mx - check why mx doesn't work */}
-      <div className="mx-14 mb-12 flex w-[90%] border justify-between overflow-clip rounded-[12px] bg-transparent bg-opacity-20 p-8 backdrop-blur-md backdrop-filter">
+      <div className="mx-14 my-12 flex w-[90%] justify-between overflow-clip rounded-[12px] border bg-transparent bg-opacity-20 p-8 backdrop-blur-md backdrop-filter">
         <TokenGoals />
         <TokenGoals celebs />
       </div>
