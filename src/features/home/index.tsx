@@ -56,56 +56,53 @@ const Home = () => {
       <CoinImageMarquee />
 
       {/* fix animated-title y position */}
-      <TextSection
-        animatedTitle={{ text: "RAAAIDS" }}
-        paragraphs={[
-          "Participe dos nossos RAIDS diários e ajude a fortalecer nossa comunidade!",
-          "Divulgue a $BCT e faça parte do movimento!",
-        ]}
-        link={{ content: "Clique aqui e comece agora!", path: "/raid" }}
-      />
-
-      <TextSection
-        animatedTitle={{ text: "LIIINNKS", reverse: true }}
-        paragraphs={[
-          "Explore links úteis relacionados à $BCT.",
-          "Acesse informações importantes e conecte-se à comunidade!",
-        ]}
-        link={{ content: "Clique aqui e acesse os links!", path: "/links" }}
-      />
-
-      <TextSection
-        animatedTitle={{ text: "CHATBCT" }}
-        paragraphs={["Utilize o ChatBCT", "Gere trocadilhos e piadas ruins!"]}
-        link={{ content: "Entre no chat agora!", path: "/chat" }}
-      />
-
-      <TextSection
-        animatedTitle={{ text: "MEETRICASS", reverse: true }}
-        paragraphs={[
-          "Acompanhe as métricas e resultados das campanhas da $BCT & comunidade.",
-          "Veja o impacto que estamos gerando juntos!",
-        ]}
-        link={{ content: "Veja as métricas aqui!", path: "/metrics" }}
-      />
-
-      <TextSection
-        animatedTitle={{ text: "WHITEPAPER" }}
-        paragraphs={[
-          "Entenda a base técnica e a visão por trás do projeto $BCT.",
-          "Descubra como estamos transformando ideias em realidade!",
-        ]}
-        link={{ content: "Leia o whitepaper completo!", path: "/whitepaper" }}
-      />
-
-      <TextSection
-        animatedTitle={{ text: "MEMES & ARTS", reverse: true }}
-        paragraphs={[
-          "Inspire-se com memes e artes criados pela comunidade!",
-          "Contribua com sua criatividade e ajude a divulgar a $BCT.",
-        ]}
-        link={{ content: "Veja e crie agora!", path: "/arts" }}
-      />
+      <div className="flex flex-col items-center justify-center w-full gap-12 mb-12">
+        <TextSection
+          animatedTitle={{ text: "RAAAIDS" }}
+          paragraphs={[
+            "Participe dos nossos RAIDS diários e ajude a fortalecer nossa comunidade!",
+            "Divulgue a $BCT e faça parte do movimento!",
+          ]}
+          link={{ content: "Clique aqui e comece agora!", path: "/raid" }}
+        />
+        <TextSection
+          animatedTitle={{ text: "LIIINNKS", reverse: true }}
+          paragraphs={[
+            "Explore links úteis relacionados à $BCT.",
+            "Acesse informações importantes e conecte-se à comunidade!",
+          ]}
+          link={{ content: "Clique aqui e acesse os links!", path: "/links" }}
+        />
+        <TextSection
+          animatedTitle={{ text: "CHATBCT" }}
+          paragraphs={["Utilize o ChatBCT", "Gere trocadilhos e piadas ruins!"]}
+          link={{ content: "Entre no chat agora!", path: "/chat" }}
+        />
+        <TextSection
+          animatedTitle={{ text: "MEETRICASS", reverse: true }}
+          paragraphs={[
+            "Acompanhe as métricas e resultados das campanhas da $BCT & comunidade.",
+            "Veja o impacto que estamos gerando juntos!",
+          ]}
+          link={{ content: "Veja as métricas aqui!", path: "/metrics" }}
+        />
+        <TextSection
+          animatedTitle={{ text: "WHITEPAPER" }}
+          paragraphs={[
+            "Entenda a base técnica e a visão por trás do projeto $BCT.",
+            "Descubra como estamos transformando ideias em realidade!",
+          ]}
+          link={{ content: "Leia o whitepaper completo!", path: "/whitepaper" }}
+        />
+        <TextSection
+          animatedTitle={{ text: "MEMES & ARTS", reverse: true }}
+          paragraphs={[
+            "Inspire-se com memes e artes criados pela comunidade!",
+            "Contribua com sua criatividade e ajude a divulgar a $BCT.",
+          ]}
+          link={{ content: "Veja e crie agora!", path: "/arts" }}
+        />
+      </div>
 
       <div className="relative mb-[310px] h-8 w-full bg-black pt-8 dark:bg-[var(--coin-pink)]">
         <CoinImageMarquee upSideDown />
@@ -115,19 +112,20 @@ const Home = () => {
         <RotatingCoinCanvas />
       </div>
 
-      <AuroraTitle />
-
-      {/* why w-[90%] intead of mx - check why mx doesn't work */}
-      <div className="mx-14 my-12 flex w-[90%] justify-between overflow-clip rounded-[12px] border bg-transparent bg-opacity-20 p-8 backdrop-blur-md backdrop-filter">
-        <TokenGoals />
-        <TokenGoals celebs />
+      <div className="flex flex-col items-center w-full gap-12 mb-12">
+        <AuroraTitle />
+        {/* why w-[90%] intead of mx - check why mx doesn't work */}
+        <div className="flex w-[90%] justify-between overflow-clip rounded-[12px] border bg-transparent bg-opacity-20 p-8 backdrop-blur-md backdrop-filter">
+          <TokenGoals />
+          <TokenGoals celebs />
+        </div>
       </div>
 
-      <div className="flex flex-col w-full">
+      <div className="flex flex-col w-full mb-12">
         <AnimatedSeparators baseVelocity={1} />
       </div>
 
-      <div className="mt-12 h-[500px] w-full px-4">
+      <div className="h-[500px] w-full px-4">
         <Chart />
       </div>
     </div>

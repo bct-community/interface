@@ -21,7 +21,7 @@ interface TextSectionProps {
 
 const TextSection = ({ animatedTitle, paragraphs, link }: TextSectionProps) => {
   return (
-    <div className="flex flex-col items-center w-full mb-12">
+    <div className="flex flex-col items-center w-full">
       <AnimatedTitle
         text={animatedTitle.text}
         reverse={animatedTitle.reverse}

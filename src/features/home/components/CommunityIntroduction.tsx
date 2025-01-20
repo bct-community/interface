@@ -87,7 +87,7 @@ const CommunityIntroduction = () => {
   return (
     <div className="flex w-[95%] flex-col items-center justify-center rounded-[12px] bg-transparent bg-opacity-20 px-8 py-16 text-center backdrop-blur-md backdrop-filter">
       <AnimatedTitle>
-        <span className="text-giga mb-12 text-center">
+        <span className="mb-12 text-center text-giga">
           <p>COMUNIDADE</p>
           <p className="text-[var(--coin-pink)]">$BCT</p>
         </span>

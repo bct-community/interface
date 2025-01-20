@@ -152,10 +152,10 @@ const Links = () => {
   });
 
   return (
-    <div ref={ref} className="mx-2 mt-12 flex justify-center">
+    <div ref={ref} className="flex justify-center mt-12">
       <div className="w-full max-w-[700px]">
-        <h1 className="select-none text-center text-3xl font-bold">🔗 Links</h1>
-        <h2 className="mt-8 select-none text-xl font-bold">🌐 Comunidade</h2>
+        <h1 className="text-3xl font-bold text-center select-none">🔗 Links</h1>
+        <h2 className="mt-8 text-xl font-bold select-none">🌐 Comunidade</h2>
         {communityLinks.map(({ label, url, icon }, index) => (
           <a.div
             key={label}
@@ -168,7 +168,7 @@ const Links = () => {
           </a.div>
         ))}
 
-        <h2 className="mt-8 select-none text-xl font-bold">💰 Token</h2>
+        <h2 className="mt-8 text-xl font-bold select-none">💰 Token</h2>
         {tokenLinks.map(({ label, url, icon }, index) => (
           <a.div
             key={label}
