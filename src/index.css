@@ -481,3 +481,33 @@ body {
     border-radius: 37% 29% 27% 27% / 28% 25% 41% 37%;
   }
 }
+
+/* scrollbar */
+
+html,
+body,
+#root {
+  overflow: hidden;
+  height: 100%;
+}
+
+/* Estilos do track do scrollbar */
+.scrollbar-track {
+  background-color: transparent !important;
+}
+
+.scrollbar-track-y {
+  width: 7px; /* Largura da barra */
+  right: 2px;
+}
+
+/* Estilos do thumb (indicador de rolagem) */
+.scrollbar-thumb {
+  background-color: hsl(var(--foreground)) !important;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.scrollbar-thumb:hover {
+  background-color: hsl(var(--accent-foreground)) !important;
+}
