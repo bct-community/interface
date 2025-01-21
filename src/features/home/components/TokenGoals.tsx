@@ -1,5 +1,7 @@
 import classNames from "classnames";
+import { motion } from "framer-motion";
 import { Minus, Moon, Rocket } from "lucide-react";
+import { useInView } from "react-intersection-observer";
 
 import { Separator } from "@/components/ui/separator";
 
@@ -24,8 +26,17 @@ const Goal = ({
 }) => {
   const openLink = () => (xLink ? window.open(xLink, "_blank") : null);
 
+  // Hook para detectar quando o item entra na viewport
+  const { ref, inView } = useInView({
+    threshold: 0.2, // animação dispara quando 20% do elemento estiver visível
+  });
+
   return (
-    <div
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 50 }} // Ponto inicial
+      animate={inView ? { opacity: 1, y: 0 } : {}} // Animação ao entrar na tela
+      transition={{ duration: 0.5, ease: "easeOut" }} // Configuração da transição
       className={classNames({
         "flex gap-4": true,
         "flex-row-reverse": reverse,
@@ -79,11 +90,11 @@ const Goal = ({
         >
           {title}
         </span>
-        <span className="text-xs select-none indent-2 text-muted-foreground">
+        <span className="text-xs select-none text-muted-foreground">
           {text}
         </span>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
@@ -169,9 +180,15 @@ const TokenGoals = ({ celebs }: { celebs?: boolean }) => {
         "items-end": celebs,
       })}
     >
-      <h1 className="font-[Sour Gummy] mb-6 select-none text-xl font-bold">
-        {celebs ? "Celebridades" : "Preço do Token"}
-      </h1>
+      <div className="flex flex-col mb-6">
+        <h1 className="font-[Sour Gummy] select-none text-xl font-bold">
+          {celebs ? "Celebridades" : "Preço"}
+        </h1>
+
+        <p className="text-xs select-none text-muted-foreground">
+          {celebs ? "Que precisam adotar #BCT" : "Alvos de recompensa"}
+        </p>
+      </div>
 
       <Moon
         className={classNames({
