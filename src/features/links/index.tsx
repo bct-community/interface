@@ -5,7 +5,7 @@ import {
   SiTelegram,
   SiX,
 } from "@icons-pack/react-simple-icons";
-import { a, useTrail } from "@react-spring/web";
+import { motion } from "framer-motion";
 import { Check, Copy } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
@@ -144,12 +144,10 @@ const Links = () => {
 
   const { ref, inView } = useInView({ threshold: 0.1 });
 
-  const trail = useTrail(communityLinks.length + tokenLinks.length, {
-    config: { mass: 5, tension: 2000, friction: 200 },
-    opacity: inView ? 1 : 0,
-    y: inView ? 0 : 20,
-    from: { opacity: 0, y: 20 },
-  });
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  };
 
   return (
     <div ref={ref} className="flex justify-center mt-12">
@@ -157,30 +155,31 @@ const Links = () => {
         <h1 className="text-3xl font-bold text-center select-none">🔗 Links</h1>
         <h2 className="mt-8 text-xl font-bold select-none">🌐 Comunidade</h2>
         {communityLinks.map(({ label, url, icon }, index) => (
-          <a.div
+          <motion.div
             key={label}
-            style={{
-              ...trail[index],
-              transform: trail[index].y.to((y) => `translate3d(0, ${y}px, 0)`),
-            }}
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
+            variants={itemVariants}
+            transition={{ delay: index * 0.1, duration: 0.5 }}
           >
             <ShareButton platform={label} url={url} icon={icon} />
-          </a.div>
+          </motion.div>
         ))}
 
         <h2 className="mt-8 text-xl font-bold select-none">💰 Token</h2>
         {tokenLinks.map(({ label, url, icon }, index) => (
-          <a.div
+          <motion.div
             key={label}
-            style={{
-              ...trail[communityLinks.length + index],
-              transform: trail[communityLinks.length + index].y.to(
-                (y) => `translate3d(0, ${y}px, 0)`,
-              ),
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
+            variants={itemVariants}
+            transition={{
+              delay: (communityLinks.length + index) * 0.1,
+              duration: 0.5,
             }}
           >
             <ShareButton platform={label} url={url} icon={icon} />
-          </a.div>
+          </motion.div>
         ))}
       </div>
     </div>

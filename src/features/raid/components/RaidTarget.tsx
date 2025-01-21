@@ -1,6 +1,7 @@
-import { a, useTrail } from "@react-spring/web";
+import { motion } from "framer-motion";
 import { Bot, Check, Copy, Target } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
 import ReactMarkdown from "react-markdown";
 import { TwitterShareButton, XIcon } from "react-share";
 import remarkGfm from "remark-gfm";
@@ -36,6 +37,8 @@ import {
 import { useRaidData } from "../api/getRaidData";
 
 const RaidTarget = () => {
+  const { ref, inView } = useInView({ threshold: 0.1 });
+
   const { data, isFetching } = useRaidData();
   const [progress, setProgress] = useState(20);
   const [isCopied, setIsCopied] = useState(false);
@@ -147,31 +150,35 @@ const RaidTarget = () => {
     </CardFooter>,
   ];
 
-  const trail = useTrail(elements.length, {
-    config: { mass: 5, tension: 2000, friction: 200 },
-    opacity: 1,
-    y: 0,
-    from: { opacity: 0, y: 20 },
-  });
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 },
+  };
 
   return (
-    <Card className="card-shadow-sm w-[80%]">
-      <a.div className="w-full">
-        {trail.map(({ y, ...style }, index) => (
-          <a.div
-            key={index}
-            style={{
-              ...style,
-              transform: y.to(
-                (value) => `translate3d(0, ${value}px, 0) w-full`,
-              ),
-            }}
-          >
-            {elements[index]}
-          </a.div>
+    <Card className="card-shadow-sm w-[80%]" ref={ref}>
+      <motion.div
+        className="w-full"
+        variants={container}
+        initial="hidden"
+        animate={inView ? "show" : "hidden"} 
+      >
+        {elements.map((element, index) => (
+          <motion.div key={index} variants={item}>
+            {element}
+          </motion.div>
         ))}
-      </a.div>
-
+      </motion.div>
       <Alert message={alertMessage} />
     </Card>
   );

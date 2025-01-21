@@ -1,4 +1,4 @@
-import { a, useTrail } from "@react-spring/web";
+import { motion } from "framer-motion";
 import React, { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 
@@ -7,25 +7,20 @@ const Trail: React.FC<{ open: boolean; children: React.ReactNode }> = ({
   children,
 }) => {
   const items = React.Children.toArray(children);
-  const trail = useTrail(items.length, {
-    config: { mass: 5, tension: 2000, friction: 200 },
-    opacity: open ? 1 : 0,
-    x: open ? 0 : -20,
-    from: { opacity: 0, x: -20 },
-  });
-
   return (
     <div className="flex gap-2">
-      {trail.map(({ x, ...style }, index) => (
-        <a.span
+      {items.map((child, index) => (
+        <motion.span
           key={index}
-          style={{
-            ...style,
-            transform: x.to((x) => `translate3d(${x}px, 0, 0)`),
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: open ? 1 : 0, x: open ? 0 : -20 }}
+          transition={{
+            duration: 0.5,
+            delay: index * 0.1,
           }}
         >
-          {items[index]}
-        </a.span>
+          {child}
+        </motion.span>
       ))}
     </div>
   );
@@ -55,38 +50,33 @@ const Whitepaper = () => {
     threshold: 0.1,
   });
 
-  const paragraphTrail = useTrail(paragraphs.length, {
-    config: { mass: 5, tension: 2000, friction: 200 },
-    opacity: inView ? 1 : 0,
-    y: inView ? 0 : 20,
-    from: { opacity: 0, y: 20 },
-  });
-
   return (
-    <div ref={ref} className="mt-12 flex w-full justify-center">
+    <div ref={ref} className="flex justify-center w-full mt-12">
       <div className="flex w-[60%] flex-col gap-6">
         <Trail open={inView}>
           {title.map((word, index) => (
             <span
               key={index}
-              className="select-none text-3xl font-normal italic"
+              className="text-3xl italic font-normal select-none"
             >
               {word}
             </span>
           ))}
         </Trail>
 
-        {paragraphTrail.map(({ y, ...style }, index) => (
-          <a.p
+        {paragraphs.map((paragraph, index) => (
+          <motion.p
             key={index}
-            style={{
-              ...style,
-              transform: y.to((y) => `translate3d(0, ${y}px, 0)`),
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 20 }}
+            transition={{
+              duration: 0.5,
+              delay: index * 0.1,
             }}
-            className="m-0 select-none text-pretty break-words pb-1 text-justify align-middle text-sm"
+            className="pb-1 m-0 text-sm text-justify break-words align-middle select-none text-pretty"
           >
-            {paragraphs[index]}
-          </a.p>
+            {paragraph}
+          </motion.p>
         ))}
       </div>
     </div>
