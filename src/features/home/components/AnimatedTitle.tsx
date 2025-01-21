@@ -20,7 +20,11 @@ const AnimatedTitle = ({
 
   useEffect(() => {
     if (paragraphRef.current) {
-      setOffsetTop(paragraphRef.current.offsetTop - 30);
+      const elementTop = paragraphRef.current.getBoundingClientRect().top;
+      const scrollYValue = window.scrollY;
+      const offsetTopValue = scrollYValue + elementTop - 250;
+
+      setOffsetTop(offsetTopValue);
     }
   }, []);
 
@@ -30,7 +34,7 @@ const AnimatedTitle = ({
 
   const xTransform = useTransform(
     scrollY,
-    [offsetTop - window.innerHeight, offsetTop + window.innerHeight],
+    [offsetTop - 250, offsetTop + window.innerHeight],
     animationDirection,
   );
 
