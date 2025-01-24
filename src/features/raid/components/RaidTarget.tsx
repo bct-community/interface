@@ -35,15 +35,29 @@ import {
 } from "@/components/ui/tooltip";
 
 import { useRaidData } from "../api/getRaidData";
+import { useRegisterChatMessageInRaid } from "../api/registerChatMessageInRaid";
+import { useRegisterRaidAccess } from "../api/registerRaidAccess";
 
 const RaidTarget = () => {
   const { ref, inView } = useInView({ threshold: 0.1 });
+  const { mutate: registerRaidAccess } = useRegisterRaidAccess();
+  const { mutate: registerChatMessageInRaid } = useRegisterChatMessageInRaid();
 
   const { data, isFetching } = useRaidData();
   const [progress, setProgress] = useState(20);
   const [isCopied, setIsCopied] = useState(false);
   const [botMessage, _setBotMessage] = useState("Participio do raid diário!");
   const [alertMessage, setAlertMessage] = useState("");
+
+  const openLink = () => {
+    registerRaidAccess();
+    window.open(data?.url || "", "_blank");
+  };
+
+  const generateAiMessage = () => {
+    // limit: 1 per user in a day
+    registerChatMessageInRaid();
+  };
 
   const copyAiMessage = () => {
     navigator.clipboard.writeText(botMessage);
@@ -118,7 +132,7 @@ const RaidTarget = () => {
       <div className="flex items-center justify-between w-full">
         <Button
           className="select-none animate-wiggle hover:animate-none"
-          onClick={() => window.open(data?.url || "", "_blank")}
+          onClick={openLink}
         >
           <Target />
           Raid
@@ -126,7 +140,7 @@ const RaidTarget = () => {
 
         <Sheet>
           <SheetTrigger asChild>
-            <Button>
+            <Button onClick={generateAiMessage}>
               <Bot />
               Gerar mensagem IA
             </Button>
@@ -171,7 +185,7 @@ const RaidTarget = () => {
         className="w-full"
         variants={container}
         initial="hidden"
-        animate={inView ? "show" : "hidden"} 
+        animate={inView ? "show" : "hidden"}
       >
         {elements.map((element, index) => (
           <motion.div key={index} variants={item}>
