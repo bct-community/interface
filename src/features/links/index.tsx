@@ -11,9 +11,20 @@ import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 
 import { Alert } from "@/components";
+import { Skeleton } from "@/components/ui/skeleton";
+
+import { useLinks } from "./api/getLinks";
+
+const iconMap: Record<string, JSX.Element> = {
+  SiGithub: <SiGithub size={16} />,
+  SiDiscord: <SiDiscord size={16} />,
+  SiX: <SiX size={16} />,
+  SiTelegram: <SiTelegram size={16} />,
+  SiSolana: <SiSolana size={16} />,
+};
 
 type ShareButtonProps = {
-  icon: JSX.Element;
+  icon: string;
   platform: string;
   url: string;
 };
@@ -42,7 +53,7 @@ const ShareButton = ({ icon, platform, url }: ShareButtonProps) => {
           className="rounded border p-1.5 hover:bg-accent hover:text-accent-foreground"
           onClick={openLink}
         >
-          {icon}
+          {iconMap[icon]}
         </button>
         <p
           className="text-sm hover:cursor-pointer hover:underline"
@@ -81,66 +92,13 @@ const Links = () => {
     };
   }, []);
 
-  const communityLinks = [
-    {
-      label: "Twitter",
-      url: "https://x.com/BctCommunity",
-      icon: <SiX size={16} />,
-    },
-    {
-      label: "GitHub",
-      url: "https://github.com/bct-community",
-      icon: <SiGithub size={16} />,
-    },
-    {
-      label: "Discord",
-      url: "https://discord.gg/uZN7g5pqYS",
-      icon: <SiDiscord size={16} />,
-    },
-  ];
+  const { data: links, isFetching } = useLinks();
 
-  const tokenLinks = [
-    {
-      label: "Twitter Oficial",
-      url: "https://x.com/bctbeicolatoken",
-      icon: <SiX size={16} />,
-    },
-    {
-      label: "Telegram Oficial",
-      url: "https://t.me/comunidadeBCT",
-      icon: <SiTelegram size={16} />,
-    },
-    {
-      label: "Solscan",
-      url: "https://solscan.io/token/8SFpQ1kRbfjbmpnhKzzgd6GA9PZwhiAMQywZh75Dpump",
-      icon: <SiSolana size={16} />,
-    },
-    {
-      label: "Rug Check",
-      url: "https://rugcheck.xyz/tokens/8SFpQ1kRbfjbmpnhKzzgd6GA9PZwhiAMQywZh75Dpump",
-      icon: <SiSolana size={16} />,
-    },
-    {
-      label: "GeckoTerminal",
-      url: "https://www.geckoterminal.com/solana/pools/Cwa4wde1oAbiwDZuEykwiebPr3CbayoMfTbATM4MXxgJ",
-      icon: <SiSolana size={16} />,
-    },
-    {
-      label: "Como Comprar via Pix",
-      url: "https://x.com/bctbeicolatoken/status/1877450259896619134",
-      icon: <SiX size={16} />,
-    },
-    {
-      label: "Como Comprar via OKX Wallet",
-      url: "https://x.com/OKXBrasil/status/1870234004617658835",
-      icon: <SiX size={16} />,
-    },
-    {
-      label: "Como Comprar via Phantom Wallet",
-      url: "https://x.com/eunetoleao/status/1869607136898027674",
-      icon: <SiX size={16} />,
-    },
-  ];
+  const communityLinks =
+    links?.filter((link) => link.type === "community-links") || [];
+
+  const tokenLinks =
+    links?.filter((link) => link.type === "official-links") || [];
 
   const { ref, inView } = useInView({ threshold: 0.1 });
 
@@ -154,36 +112,83 @@ const Links = () => {
       <div className="w-full max-w-[700px]">
         <h1 className="text-3xl font-bold text-center select-none">🔗 Links</h1>
         <h2 className="mt-8 text-xl font-bold select-none">🌐 Comunidade</h2>
-        {communityLinks.map(({ label, url, icon }, index) => (
-          <motion.div
-            key={label}
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
-            variants={itemVariants}
-            transition={{ delay: index * 0.1, duration: 0.5 }}
-          >
-            <ShareButton platform={label} url={url} icon={icon} />
-          </motion.div>
-        ))}
+        {isFetching
+          ? Array.from({ length: 3 }).map((_v, i) => <LinkSkeleton key={i} />)
+          : communityLinks.map(({ label, url, icon }, index) => (
+              <motion.div
+                key={label}
+                initial="hidden"
+                animate={inView ? "visible" : "hidden"}
+                variants={itemVariants}
+                transition={{ delay: index * 0.1, duration: 0.5 }}
+              >
+                <ShareButton platform={label} url={url} icon={icon} />
+              </motion.div>
+            ))}
 
         <h2 className="mt-8 text-xl font-bold select-none">💰 Token</h2>
-        {tokenLinks.map(({ label, url, icon }, index) => (
-          <motion.div
-            key={label}
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
-            variants={itemVariants}
-            transition={{
-              delay: (communityLinks.length + index) * 0.1,
-              duration: 0.5,
-            }}
-          >
-            <ShareButton platform={label} url={url} icon={icon} />
-          </motion.div>
-        ))}
+        {isFetching
+          ? Array.from({ length: 5 }).map((_v, i) => <LinkSkeleton key={i} />)
+          : tokenLinks.map(({ label, url, icon }, index) => (
+              <motion.div
+                key={label}
+                initial="hidden"
+                animate={inView ? "visible" : "hidden"}
+                variants={itemVariants}
+                transition={{
+                  delay: (communityLinks.length + index) * 0.1,
+                  duration: 0.5,
+                }}
+              >
+                <ShareButton platform={label} url={url} icon={icon} />
+              </motion.div>
+            ))}
       </div>
     </div>
   );
 };
 
 export default Links;
+
+interface SkeletonProps {
+  width: number;
+  height?: number;
+  borderRadius?: number;
+}
+
+const SkeletonButton = ({ width, borderRadius, height }: SkeletonProps) => {
+  return (
+    <Skeleton
+      className="mt-4 rounded-full"
+      style={{
+        width: `${width}px`,
+        borderRadius: `${borderRadius}px`,
+        height: `${height}px`,
+      }}
+    />
+  );
+};
+
+const SkeletonP: React.FC<SkeletonProps> = ({ width }: SkeletonProps) => {
+  return (
+    <Skeleton
+      className="mt-4 h-[10px] rounded-full"
+      style={{ width: `${width}%` }}
+    />
+  );
+};
+
+const LinkSkeleton = () => {
+  return (
+    <div className="flex items-center justify-between px-4 py-2 mx-2">
+      <div className="flex items-center gap-3 grow">
+        <SkeletonButton height={30} width={30} borderRadius={4} />
+        <SkeletonP width={50} />
+      </div>
+      <div className="flex items-center gap-3">
+        <SkeletonButton height={30} width={30} borderRadius={4} />
+        <SkeletonButton height={34} width={84} borderRadius={4} />
+      </div>
+    </div>
+  );
+};
