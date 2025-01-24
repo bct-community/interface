@@ -14,6 +14,7 @@ import { Alert } from "@/components";
 import { Skeleton } from "@/components/ui/skeleton";
 
 import { useLinks } from "./api/getLinks";
+import { useRegisterLinkAccess } from "./api/registerLinkAccess";
 
 const iconMap: Record<string, JSX.Element> = {
   SiGithub: <SiGithub size={16} />,
@@ -24,18 +25,26 @@ const iconMap: Record<string, JSX.Element> = {
 };
 
 type ShareButtonProps = {
+  linkId: string;
   icon: string;
   platform: string;
   url: string;
 };
 
-const ShareButton = ({ icon, platform, url }: ShareButtonProps) => {
+const ShareButton = ({ linkId, icon, platform, url }: ShareButtonProps) => {
   const [isCopied, setIsCopied] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
 
-  const openLink = () => window.open(url, "_blank");
+  const { mutate } = useRegisterLinkAccess();
+
+  const openLink = () => {
+    mutate(linkId);
+    window.open(url, "_blank");
+  };
 
   const copyLink = () => {
+    mutate(linkId);
+
     navigator.clipboard.writeText(url);
     setIsCopied(true);
     setAlertMessage("O link foi copiado para a área de transferência.");
@@ -114,24 +123,29 @@ const Links = () => {
         <h2 className="mt-8 text-xl font-bold select-none">🌐 Comunidade</h2>
         {isFetching
           ? Array.from({ length: 3 }).map((_v, i) => <LinkSkeleton key={i} />)
-          : communityLinks.map(({ label, url, icon }, index) => (
+          : communityLinks.map(({ _id, label, url, icon }, index) => (
               <motion.div
-                key={label}
+                key={_id}
                 initial="hidden"
                 animate={inView ? "visible" : "hidden"}
                 variants={itemVariants}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
               >
-                <ShareButton platform={label} url={url} icon={icon} />
+                <ShareButton
+                  linkId={_id}
+                  platform={label}
+                  url={url}
+                  icon={icon}
+                />
               </motion.div>
             ))}
 
         <h2 className="mt-8 text-xl font-bold select-none">💰 Token</h2>
         {isFetching
           ? Array.from({ length: 5 }).map((_v, i) => <LinkSkeleton key={i} />)
-          : tokenLinks.map(({ label, url, icon }, index) => (
+          : tokenLinks.map(({ _id, label, url, icon }, index) => (
               <motion.div
-                key={label}
+                key={_id}
                 initial="hidden"
                 animate={inView ? "visible" : "hidden"}
                 variants={itemVariants}
@@ -140,7 +154,12 @@ const Links = () => {
                   duration: 0.5,
                 }}
               >
-                <ShareButton platform={label} url={url} icon={icon} />
+                <ShareButton
+                  linkId={_id}
+                  platform={label}
+                  url={url}
+                  icon={icon}
+                />
               </motion.div>
             ))}
       </div>
