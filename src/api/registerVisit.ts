@@ -4,10 +4,18 @@ import env from "@/config";
 import { getUserCountryByTimeZone } from "@/utils/getUserCountryByTimeZone";
 
 const registerVisit = async () => {
-  const country = getUserCountryByTimeZone();
+  let country: string | null = localStorage.getItem("country");
 
   if (!country) {
-    return;
+    const countryByTimeZone = getUserCountryByTimeZone();
+
+    if (!countryByTimeZone) {
+      return;
+    }
+
+    localStorage.setItem("country", countryByTimeZone);
+
+    country = countryByTimeZone;
   }
 
   const response = await fetch(`${env.VITE_API_URL}/metrics/visits`, {
