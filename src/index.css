@@ -112,6 +112,7 @@ body {
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --hover-shade: 0 0% 95%;
+    --map-lines: 210 4% 90%;
   }
 
   .dark {
@@ -140,6 +141,7 @@ body {
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
     --hover-shade: 240 3% 7%;
+    --map-lines: 240 3.7% 15.9%;
   }
 }
 
