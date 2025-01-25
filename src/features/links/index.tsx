@@ -117,10 +117,10 @@ const Links = () => {
   };
 
   return (
-    <div ref={ref} className="flex justify-center mt-12">
+    <div ref={ref} className="mt-12 flex justify-center">
       <div className="w-full max-w-[700px]">
-        <h1 className="text-3xl font-bold text-center select-none">🔗 Links</h1>
-        <h2 className="mt-8 text-xl font-bold select-none">🌐 Comunidade</h2>
+        <h1 className="select-none text-center text-3xl font-bold">🔗 Links</h1>
+        <h2 className="mt-8 select-none text-xl font-bold">🌐 Comunidade</h2>
         {isFetching
           ? Array.from({ length: 3 }).map((_v, i) => <LinkSkeleton key={i} />)
           : communityLinks.map(({ _id, label, url, icon }, index) => (
@@ -140,7 +140,7 @@ const Links = () => {
               </motion.div>
             ))}
 
-        <h2 className="mt-8 text-xl font-bold select-none">💰 Token</h2>
+        <h2 className="mt-8 select-none text-xl font-bold">💰 Token</h2>
         {isFetching
           ? Array.from({ length: 5 }).map((_v, i) => <LinkSkeleton key={i} />)
           : tokenLinks.map(({ _id, label, url, icon }, index) => (
@@ -199,8 +199,8 @@ const SkeletonP: React.FC<SkeletonProps> = ({ width }: SkeletonProps) => {
 
 const LinkSkeleton = () => {
   return (
-    <div className="flex items-center justify-between px-4 py-2 mx-2">
-      <div className="flex items-center gap-3 grow">
+    <div className="mx-2 flex items-center justify-between px-4 py-2">
+      <div className="flex grow items-center gap-3">
         <SkeletonButton height={30} width={30} borderRadius={4} />
         <SkeletonP width={50} />
       </div>

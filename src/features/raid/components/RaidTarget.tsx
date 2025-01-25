@@ -124,14 +124,14 @@ const RaidTarget = () => {
         </ReactMarkdown>
       )}
 
-      <div className="w-full mt-8 mb-2">
+      <div className="mb-2 mt-8 w-full">
         <Progress value={progress} max={100} />
       </div>
     </CardContent>,
     <CardFooter key="footer">
-      <div className="flex items-center justify-between w-full">
+      <div className="flex w-full items-center justify-between">
         <Button
-          className="select-none animate-wiggle hover:animate-none"
+          className="animate-wiggle select-none hover:animate-none"
           onClick={openLink}
         >
           <Target />
@@ -146,7 +146,7 @@ const RaidTarget = () => {
             </Button>
           </SheetTrigger>
           <SheetContent className="space-between mt-[30px] flex h-full w-[400px] flex-col sm:w-[540px]">
-            <div className="flex flex-col justify-between w-full h-full pb-4">
+            <div className="flex h-full w-full flex-col justify-between pb-4">
               <SheetHeader>
                 <SheetTitle className="select-none">Mensagem gerada</SheetTitle>
                 <SheetDescription>{botMessage}</SheetDescription>
@@ -206,7 +206,7 @@ interface SkeletonProps {
 
 const SkeletonBullet: React.FC<SkeletonProps> = ({ width }) => {
   return (
-    <div className="flex gap-2 mt-4">
+    <div className="mt-4 flex gap-2">
       <span className="flex h-[10px] items-center">•</span>
       <Skeleton
         className="h-[10px] rounded-full"

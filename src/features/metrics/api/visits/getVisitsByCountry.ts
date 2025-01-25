@@ -4,6 +4,7 @@ import { z } from "zod";
 import env from "@/config";
 
 export const VisitsByCountrySchema = z.object({
+  highestCount: z.number(),
   countries: z.array(
     z.object({
       count: z.number(),

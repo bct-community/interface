@@ -10,25 +10,25 @@ import {
 
 import geography from "@/assets/mapGeography/index.json";
 
-import { useVisitsByCountry } from "../api/getVisitsByCountry";
-
-const colorScale = scaleLinear<string>()
-  .domain([0, 10])
-  .range(["#ffd6d7", "#faa5a6"]);
+import { useVisitsByCountry } from "../api/visits/getVisitsByCountry";
 
 const VisitsByCountryMap = ({
   setTooltipContent,
 }: {
   setTooltipContent: (content: string) => void;
 }) => {
-  const { data } = useVisitsByCountry();
+  const { data: visitsByCountry } = useVisitsByCountry();
+
+  const colorScale = scaleLinear<string>()
+    .domain([0, visitsByCountry?.highestCount || 0])
+    .range(["#ffd6d7", "#faa5a6"]);
 
   const countryVisitsMap = useMemo(() => {
-    if (!data) return new Map<string, number>();
+    if (!visitsByCountry) return new Map<string, number>();
     return new Map(
-      data.countries.map(({ country, count }) => [country, count]),
+      visitsByCountry.countries.map(({ country, count }) => [country, count]),
     );
-  }, [data]);
+  }, [visitsByCountry]);
 
   return (
     <div data-tip="" className="max-h-[600px]">

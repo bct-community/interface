@@ -19,7 +19,7 @@ const RotatingCoin = () => {
 const RotatingCoinCanvas = () => {
   return (
     <Canvas
-      className="absolute -translate-x-1/2 -top-3 left-1/2"
+      className="absolute -top-3 left-1/2 -translate-x-1/2"
       style={{ height: "225px", width: "225px" }}
       camera={{ position: [0, 0, 5], fov: 50 }}
     >

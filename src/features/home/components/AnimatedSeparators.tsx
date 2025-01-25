@@ -64,11 +64,11 @@ const AnimatedSeparators = ({ baseVelocity = 100 }: ParallaxProps) => {
   return (
     <div className="animated-separators-parallax">
       <motion.div
-        className="space-x-2 animated-separators-scroller"
+        className="animated-separators-scroller space-x-2"
         style={{ x }}
       >
         {Array.from({ length: 100 }).map((_, i) => (
-          <Separator key={i} className="w-10 h-1 mx-4 bg-gray-300 rounded" />
+          <Separator key={i} className="mx-4 h-1 w-10 rounded bg-gray-300" />
         ))}
       </motion.div>
     </div>
