@@ -43,12 +43,24 @@ const Image = ({
     window.open(xProfile, "_blank");
   };
 
-  const downloadImage = () => {
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = "image.png";
-    link.click();
-    link.remove();
+  const downloadImage = async () => {
+    try {
+      const response = await fetch(url, { mode: "cors" });
+      if (!response.ok) throw new Error("Failed to fetch image");
+
+      const blob = await response.blob();
+      const objectURL = URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+      link.href = objectURL;
+      link.download = "image.png";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(objectURL);
+    } catch (error) {
+      console.error("Error downloading image:", error);
+    }
   };
 
   const openImage = () => {

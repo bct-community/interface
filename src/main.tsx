@@ -4,6 +4,7 @@ import { createRoot } from "react-dom/client";
 import WebFont from "webfontloader";
 
 import App from "./App.tsx";
+import { Toaster } from "./components/ui/toaster.tsx";
 import "./index.css";
 import { ThemeProvider } from "./providers/theme";
 
@@ -25,6 +26,7 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+        <Toaster />
         <App />
       </ThemeProvider>
     </QueryClientProvider>

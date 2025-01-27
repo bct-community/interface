@@ -15,8 +15,11 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/hooks/use-toast";
 
 import { type Arts as ArtsType, useArts } from "./api/getArts";
+import { NewArtData, useRegisterArt } from "./api/registerArt";
 import Image from "./components/Image";
 import "./style/index.css";
 import "./style/lineOne.css";
@@ -28,6 +31,23 @@ const Arts = () => {
   const [imageData, setImageData] = useState<Partial<
     ArtsType["arts"][number]
   > | null>(null);
+  const { toast } = useToast();
+  const [newArt, setNewArt] = useState<NewArtData>({
+    creator: "",
+    xProfile: "",
+    description: "",
+    file: null,
+  });
+
+  const onChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setNewArt((prev) => ({ ...prev, [event.target.id]: event.target.value }));
+  };
+
+  const onFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNewArt((prev) => ({ ...prev, file: event.target.files?.[0] || null }));
+  };
 
   useEffect(() => {
     document.title = "Comunidade $BCT – Artes";
@@ -37,6 +57,27 @@ const Arts = () => {
   }, []);
 
   const { data, isFetching } = useArts();
+  const { mutate, isSuccess, isError } = useRegisterArt();
+
+  const registerArt = () => {
+    mutate(newArt);
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast({
+        title: "Arte registrada com sucesso!",
+        description: "A arte será submetida para aprovação.",
+      });
+    }
+
+    if (isError) {
+      toast({
+        title: "Erro ao registrar arte.",
+        description: "Tente novamente mais tarde.",
+      });
+    }
+  }, [isSuccess, isError]);
 
   const arts = data?.arts || [];
 
@@ -57,53 +98,94 @@ const Arts = () => {
 
         <Sheet>
           <SheetTrigger asChild>
-            <p className="z-[30] mb-4 inline-flex h-10 items-center justify-center whitespace-nowrap rounded-md px-4 py-2 text-2xl font-medium text-slate-50 transition-colors hover:cursor-pointer hover:bg-transparent hover:font-bold hover:text-slate-50 hover:underline focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 dark:hover:text-slate-50">
+            <p className="z-[30] mb-4 inline-flex h-10 select-none items-center justify-center whitespace-nowrap rounded-md px-4 py-2 text-2xl font-medium text-slate-50 transition-colors hover:cursor-pointer hover:bg-transparent hover:font-bold hover:text-slate-50 hover:underline focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 dark:hover:text-slate-50">
               [Criar uma nova arte]
             </p>
           </SheetTrigger>
-          <SheetContent className="space-between mt-[30px] flex h-full w-[400px] flex-col sm:w-[540px]">
+          <SheetContent className="space-between mt-[30px] flex h-full w-[400px] select-none flex-col sm:w-[540px]">
             <SheetHeader>
-              <SheetTitle>Edit profile</SheetTitle>
+              <SheetTitle>Criar nova arte</SheetTitle>
               <SheetDescription>
-                Make changes to your profile here. Click save when you're done.
+                A arte será submetida para aprovação.
               </SheetDescription>
             </SheetHeader>
             <div className="grid gap-4 py-4">
               <div className="flex flex-col w-full gap-2">
-                <Label htmlFor="name" className="text-left">
-                  Name
-                </Label>
-                <Input
-                  id="name"
-                  value="Pedro Duarte"
-                  className="col-span-3"
-                  onChange={() => {}}
-                />
-              </div>
-              <div className="flex flex-col w-full gap-2">
-                <Label htmlFor="username" className="text-left">
-                  Username
+                <Label htmlFor="creator" className="text-left">
+                  Criador
                 </Label>
                 <div className="flex">
                   <Button
                     variant="outline"
                     size="icon"
                     className="border-r-0 rounded-r-none"
+                    disabled
                   >
                     <AtSign />
                   </Button>
                   <Input
-                    id="username"
-                    value="@peduarte"
-                    onChange={() => {}}
+                    id="creator"
+                    value={newArt.creator}
+                    placeholder="Criador"
+                    onChange={onChange}
                     className="col-span-3 rounded-l-none"
                   />
                 </div>
               </div>
+
+              <div className="flex flex-col w-full gap-2">
+                <Label htmlFor="xProfile" className="text-left">
+                  Link do X
+                </Label>
+                <div className="flex">
+                  <Button
+                    variant="outline"
+                    className="border-r-0 rounded-r-none"
+                    disabled
+                  >
+                    https://x.com/
+                  </Button>
+                  <Input
+                    id="xProfile"
+                    value={newArt.xProfile}
+                    placeholder="Perfil do X"
+                    onChange={onChange}
+                    className="col-span-3 rounded-l-none"
+                  />
+                </div>
+              </div>
+
+              <div className="flex flex-col w-full gap-2">
+                <Label htmlFor="description" className="text-left">
+                  Descrição
+                </Label>
+                <Textarea
+                  placeholder="Escreva a descrição aqui"
+                  value={newArt.description}
+                  id="description"
+                  maxLength={200}
+                  onChange={onChange}
+                  className="max-h-[100px]"
+                />
+              </div>
+
+              <div className="flex flex-col w-full gap-2">
+                <Label htmlFor="image" className="text-left">
+                  Imagem
+                </Label>
+                <Input
+                  id="image"
+                  type="file"
+                  className="col-span-3"
+                  onChange={onFileChange}
+                />
+              </div>
             </div>
             <SheetFooter className="pb-4 mt-auto">
               <SheetClose asChild>
-                <Button type="submit">Save changes</Button>
+                <Button type="submit" onClick={registerArt}>
+                  Save changes
+                </Button>
               </SheetClose>
             </SheetFooter>
           </SheetContent>
