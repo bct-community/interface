@@ -75,7 +75,8 @@ const Image = ({
         className={classNames({
           "group relative flex max-h-[600px] max-w-[600px] cursor-pointer select-none items-center justify-center overflow-hidden rounded-2xl":
             true,
-          "h-[500px] rounded-l-2xl rounded-r-none bg-background": isFullscreen,
+          "h-[500px] rounded-l-2xl bg-background md:rounded-r-none":
+            isFullscreen,
         })}
         onClick={openImage}
       >
@@ -106,7 +107,7 @@ const Image = ({
       </div>
 
       {isFullscreen && closeFullscreen && (
-        <div className="flex h-[500px] max-h-[500px] flex-col gap-4 overflow-hidden rounded-r-2xl border-l bg-background p-4">
+        <div className="hidden h-[500px] max-h-[500px] flex-col gap-4 overflow-hidden rounded-r-2xl border-l bg-background p-4 md:flex">
           <div className="flex items-center justify-between w-full">
             <p
               className="arts-text max-w-[125px] truncate text-[var(--coin-pink)] hover:cursor-pointer hover:underline"

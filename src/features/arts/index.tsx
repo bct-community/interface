@@ -184,7 +184,7 @@ const Arts = () => {
             <SheetFooter className="pb-4 mt-auto">
               <SheetClose asChild>
                 <Button type="submit" onClick={registerArt}>
-                  Save changes
+                  Enviar
                 </Button>
               </SheetClose>
             </SheetFooter>
