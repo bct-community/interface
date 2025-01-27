@@ -1,5 +1,19 @@
+import { AtSign } from "lucide-react";
 import { useEffect, useState } from "react";
 
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { Skeleton } from "@/components/ui/skeleton";
 
 import { type Arts, useArts } from "./api/getArts";
@@ -41,9 +55,59 @@ const Arts = () => {
           </div>
         </div>
 
-        <p className="z-[100] mb-4 inline-flex h-10 items-center justify-center whitespace-nowrap rounded-md px-4 py-2 text-2xl font-medium text-slate-50 transition-colors hover:cursor-pointer hover:bg-transparent hover:font-bold hover:text-slate-50 hover:underline focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 dark:hover:text-slate-50">
-          [Criar uma nova arte]
-        </p>
+        <Sheet>
+          <SheetTrigger asChild>
+            <p className="z-[30] mb-4 inline-flex h-10 items-center justify-center whitespace-nowrap rounded-md px-4 py-2 text-2xl font-medium text-slate-50 transition-colors hover:cursor-pointer hover:bg-transparent hover:font-bold hover:text-slate-50 hover:underline focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 dark:hover:text-slate-50">
+              [Criar uma nova arte]
+            </p>
+          </SheetTrigger>
+          <SheetContent className="space-between mt-[30px] flex h-full w-[400px] flex-col sm:w-[540px]">
+            <SheetHeader>
+              <SheetTitle>Edit profile</SheetTitle>
+              <SheetDescription>
+                Make changes to your profile here. Click save when you're done.
+              </SheetDescription>
+            </SheetHeader>
+            <div className="grid gap-4 py-4">
+              <div className="flex flex-col w-full gap-2">
+                <Label htmlFor="name" className="text-left">
+                  Name
+                </Label>
+                <Input
+                  id="name"
+                  value="Pedro Duarte"
+                  className="col-span-3"
+                  onChange={() => {}}
+                />
+              </div>
+              <div className="flex flex-col w-full gap-2">
+                <Label htmlFor="username" className="text-left">
+                  Username
+                </Label>
+                <div className="flex">
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="border-r-0 rounded-r-none"
+                  >
+                    <AtSign />
+                  </Button>
+                  <Input
+                    id="username"
+                    value="@peduarte"
+                    onChange={() => {}}
+                    className="col-span-3 rounded-l-none"
+                  />
+                </div>
+              </div>
+            </div>
+            <SheetFooter className="pb-4 mt-auto">
+              <SheetClose asChild>
+                <Button type="submit">Save changes</Button>
+              </SheetClose>
+            </SheetFooter>
+          </SheetContent>
+        </Sheet>
 
         <div className="grid grid-cols-1 gap-8 px-8 pt-8 sm:grid-cols-2 lg:grid-cols-3">
           {[...Array(3)].map((_, colIndex) => (
