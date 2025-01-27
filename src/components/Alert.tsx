@@ -3,7 +3,13 @@ import ReactDOM from "react-dom";
 
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
-const AlertComponent = ({ message }: { message: string }) => {
+const AlertComponent = ({
+  title,
+  message,
+}: {
+  title: string;
+  message: string;
+}) => {
   if (!message) return null;
 
   return ReactDOM.createPortal(
@@ -13,7 +19,7 @@ const AlertComponent = ({ message }: { message: string }) => {
     >
       <Alert className="bg-transparent backdrop-blur-md backdrop-filter">
         <AlertTitle className="flex items-center gap-2">
-          <Check size={16} /> Copiado!
+          <Check size={16} /> {title}
         </AlertTitle>
         <AlertDescription>{message}</AlertDescription>
       </Alert>
