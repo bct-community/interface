@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/sheet";
 import { Skeleton } from "@/components/ui/skeleton";
 
-import { type Arts, useArts } from "./api/getArts";
+import { type Arts as ArtsType, useArts } from "./api/getArts";
 import Image from "./components/Image";
 import "./style/index.css";
 import "./style/lineOne.css";
@@ -26,7 +26,7 @@ import "./style/lineTwo.css";
 const Arts = () => {
   const [openImage, setOpenImage] = useState<boolean | null>(false);
   const [imageData, setImageData] = useState<Partial<
-    Arts["arts"][number]
+    ArtsType["arts"][number]
   > | null>(null);
 
   useEffect(() => {
