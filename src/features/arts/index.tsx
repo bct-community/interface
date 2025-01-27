@@ -98,7 +98,7 @@ const Arts = () => {
 
         <Sheet>
           <SheetTrigger asChild>
-            <p className="z-[30] mb-4 inline-flex h-10 select-none items-center justify-center whitespace-nowrap rounded-md px-4 py-2 text-2xl font-medium text-slate-50 transition-colors hover:cursor-pointer hover:bg-transparent hover:font-bold hover:text-slate-50 hover:underline focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 dark:hover:text-slate-50">
+            <p className="z-[30] mb-4 inline-flex h-10 select-none items-center justify-center whitespace-nowrap rounded-md px-4 py-2 text-2xl font-medium transition-colors hover:cursor-pointer hover:bg-transparent hover:font-bold hover:underline focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 dark:hover:text-slate-50">
               [Criar uma nova arte]
             </p>
           </SheetTrigger>

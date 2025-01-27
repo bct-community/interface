@@ -82,12 +82,13 @@ const Image = ({
       >
         <img
           className={classNames({
-            "object-cover transition-all duration-1000": true,
+            "select-none object-cover transition-all duration-1000": true,
             "group-hover:scale-110": !isFullscreen,
             "group-hover:opacity-75": isFullscreen,
           })}
           style={{ color: "transparent" }}
           src={url}
+          draggable={false}
         />
 
         {!isFullscreen && (
