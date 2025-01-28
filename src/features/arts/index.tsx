@@ -1,5 +1,6 @@
 import { AtSign } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -51,12 +52,12 @@ const Arts = () => {
 
   useEffect(() => {
     document.title = "Comunidade $BCT – Artes";
+    window.scrollTo(0, 0);
     return () => {
       document.title = "Comunidade $BCT";
     };
   }, []);
 
-  const { data, isFetching } = useArts();
   const { mutate, isSuccess, isError } = useRegisterArt();
 
   const registerArt = () => {
@@ -79,7 +80,15 @@ const Arts = () => {
     }
   }, [isSuccess, isError]);
 
-  const arts = data?.arts || [];
+  const { data, fetchNextPage, isFetching, hasNextPage, isFetchingNextPage } =
+    useArts();
+  const { ref, inView } = useInView({ threshold: 1 });
+
+  useEffect(() => {
+    if (inView && hasNextPage) fetchNextPage();
+  }, [inView, hasNextPage]);
+
+  const arts = data?.pages.flatMap((page) => page.arts) || [];
 
   return (
     <>
@@ -194,23 +203,24 @@ const Arts = () => {
         <div className="grid grid-cols-1 gap-8 px-8 pt-8 sm:grid-cols-2 lg:grid-cols-3">
           {[...Array(3)].map((_, colIndex) => (
             <div key={colIndex} className="flex min-w-[250px] flex-col gap-8">
-              {isFetching
-                ? Array.from({ length: 3 }).map((_, index) => (
-                    <ImageSkeleton height={350} key={index} />
-                  ))
-                : arts
-                    .filter((_, index) => index % 3 === colIndex) // Distribui as imagens entre as colunas
-                    .map((art, index) => (
-                      <Image
-                        key={index}
-                        url={art.url}
-                        creator={art.creator}
-                        xProfile={art.xProfile}
-                        description={art.description}
-                        openFullscreen={() => setOpenImage(true)}
-                        setImageData={setImageData}
-                      />
-                    ))}
+              {arts
+                .filter((_, index) => index % 3 === colIndex) // Distribui as imagens entre as colunas
+                .map((art, index) => (
+                  <Image
+                    key={index}
+                    url={art.url}
+                    creator={art.creator}
+                    xProfile={art.xProfile}
+                    description={art.description}
+                    openFullscreen={() => setOpenImage(true)}
+                    setImageData={setImageData}
+                  />
+                ))}
+
+              {(isFetching || isFetchingNextPage) &&
+                Array.from({ length: 12 }).map((_, index) => (
+                  <ImageSkeleton height={350} key={index} />
+                ))}
             </div>
           ))}
         </div>
@@ -225,6 +235,8 @@ const Arts = () => {
           closeFullscreen={() => setOpenImage(false)}
         />
       )}
+
+      <div ref={ref} className="w-full h-1" />
     </>
   );
 };

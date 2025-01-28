@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { z } from "zod";
 
 import env from "@/config";
@@ -19,20 +19,24 @@ const ArtsSchema = z.object({
 
 export type Arts = z.infer<typeof ArtsSchema>;
 
-const getArts = async () => {
-  const response = await fetch(`${env.VITE_API_URL}/arts?page=1`);
+const getArts = async ({ pageParam = 1 }) => {
+  const response = await fetch(`${env.VITE_API_URL}/arts?page=${pageParam}`);
   const data = await response.json();
 
-  return data as Arts;
+  return ArtsSchema.parse(data);
 };
 
 export const useArts = () =>
-  useQuery({
+  useInfiniteQuery({
     queryKey: ["arts"],
     queryFn: getArts,
+    initialPageParam: 1,
+    getNextPageParam: (lastPage) =>
+      lastPage.next ? lastPage.page + 1 : undefined,
     staleTime: Infinity,
     refetchOnMount: false,
     refetchOnWindowFocus: false,
     refetchInterval: false,
     refetchIntervalInBackground: false,
+    retry: false,
   });
