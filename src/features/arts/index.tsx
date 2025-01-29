@@ -47,7 +47,34 @@ const Arts = () => {
   };
 
   const onFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNewArt((prev) => ({ ...prev, file: event.target.files?.[0] || null }));
+    const file = event.target.files?.[0];
+
+    if (file) {
+      const maxSize = 10 * 1024 * 1024;
+      const allowedTypes = /^image\//;
+
+      if (!allowedTypes.test(file.type)) {
+        toast({
+          title: "Erro ao enviar imagem.",
+          description: "O arquivo deve ser uma imagem.",
+        });
+
+        event.target.value = "";
+        return;
+      }
+
+      if (file.size > maxSize) {
+        toast({
+          title: "Erro ao enviar imagem.",
+          description: "A imagem deve ter no máximo 10MB.",
+        });
+
+        event.target.value = "";
+        return;
+      }
+
+      setNewArt((prev) => ({ ...prev, file }));
+    }
   };
 
   useEffect(() => {
@@ -187,6 +214,7 @@ const Arts = () => {
                   type="file"
                   className="col-span-3"
                   onChange={onFileChange}
+                  accept="image/*"
                 />
               </div>
             </div>
