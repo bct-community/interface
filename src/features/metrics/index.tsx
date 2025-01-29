@@ -56,12 +56,12 @@ const Metrics = () => {
 
   return (
     <div className="mt-[30px] flex min-h-full w-full flex-col items-center justify-center">
-      <h1 className="mt-2 select-none text-3xl font-normal italic">
+      <h1 className="mt-2 text-3xl italic font-normal select-none">
         Métricas da comunidade
       </h1>
 
-      <div className="h-full w-full px-12 py-8">
-        <h2 className="mt-8 select-none pb-12 text-xl font-normal italic">
+      <div className="w-full h-full px-12 py-8">
+        <h2 className="pb-12 mt-8 text-xl italic font-normal select-none">
           📌 Visitas - Total {visitsMetrics?.total || 0}
         </h2>
 
@@ -71,8 +71,8 @@ const Metrics = () => {
         />
       </div>
 
-      <div className="h-full w-full px-12 py-8">
-        <h2 className="mt-8 select-none text-xl font-normal italic">
+      <div className="w-full h-full px-12 py-8">
+        <h2 className="mt-8 text-xl italic font-normal select-none">
           🌎 Visitas por país
         </h2>
 
@@ -82,15 +82,15 @@ const Metrics = () => {
         </Tooltip>
       </div>
 
-      <div className="h-full w-full px-12 py-8">
-        <h2 className="mt-8 select-none pb-12 text-xl font-normal italic">
+      <div className="w-full h-full px-12 py-8">
+        <h2 className="pb-12 mt-8 text-xl italic font-normal select-none">
           🎯 Raids
         </h2>
 
-        <div className="flex w-full flex-col items-center justify-between gap-8 px-12 md:flex-row">
-          <div className="flex w-full flex-col md:w-1/2">
-            <p className="select-none pb-8 text-lg font-light italic">
-              • Acessos a raids - {sortedRaidsMetrics.total} (7d)
+        <div className="flex flex-col items-center justify-between w-full gap-8 px-12 md:flex-row">
+          <div className="flex flex-col w-full md:w-1/2">
+            <p className="pb-8 text-lg italic font-light select-none">
+              • Acessos aos raids - Total {sortedRaidsMetrics.total} (7d)
             </p>
             <Chart
               data={sortedRaidsMetrics.daily || []}
@@ -98,9 +98,9 @@ const Metrics = () => {
             />
           </div>
 
-          <div className="flex w-full flex-col md:w-1/2">
-            <p className="select-none pb-8 text-xl font-light italic">
-              • Mensagens geradas para raids - Total{" "}
+          <div className="flex flex-col w-full md:w-1/2">
+            <p className="pb-8 text-xl italic font-light select-none">
+              • Mensagens geradas IA - Total{" "}
               {sortedChatRaidMessagesMetrics.total} (7d)
             </p>
             <Chart
@@ -111,13 +111,13 @@ const Metrics = () => {
         </div>
       </div>
 
-      <div className="w-full pb-2 pt-12">
+      <div className="w-full pt-12 pb-2">
         <TrendingMetricsMarquee raids={raidsTrendingMetrics?.raids || []} />
       </div>
 
-      <div className="h-full w-full px-12 py-8">
-        <h2 className="mt-8 select-none pb-12 text-xl font-normal italic">
-          🔗 Links - {sortedLinksMetrics.total} Links acessados (7d)
+      <div className="w-full h-full px-12 py-8">
+        <h2 className="pb-12 mt-8 text-xl italic font-normal select-none">
+          🔗 Links - Total {sortedLinksMetrics.total} (7d)
         </h2>
 
         <Chart
@@ -126,13 +126,13 @@ const Metrics = () => {
         />
       </div>
 
-      <div className="w-full pb-2 pt-12">
+      <div className="w-full pt-12 pb-2">
         <TrendingMetricsMarquee links={linksTrendingMetrics?.links || []} />
       </div>
 
-      <div className="h-full w-full px-12 py-8">
-        <h2 className="mt-8 select-none pb-12 text-xl font-normal italic">
-          🤖 Chat - {sortedChatMetrics.total} Mensagens enviadas (7d)
+      <div className="w-full h-full px-12 py-8">
+        <h2 className="pb-12 mt-8 text-xl italic font-normal select-none">
+          🤖 Chat - Total {sortedChatMetrics.total} (7d)
         </h2>
 
         <Chart
