@@ -5,16 +5,16 @@ const Chart = ({
   data,
 }: {
   max: number;
-  data: { date: string; count: number }[];
+  data: { date: string; quantidade: number }[];
 }) => {
   const config = {
     height: 350,
     autoFit: true,
     xField: "date",
-    yField: "count",
+    yField: "quantidade",
     smooth: true,
     meta: {
-      count: {
+      quantidade: {
         max,
       },
     },
@@ -22,7 +22,7 @@ const Chart = ({
   };
 
   return (
-    <LineChart color={"#ffbfca"} className="select-none px-16" {...config} />
+    <LineChart color={"#ffbfca"} className="px-16 select-none" {...config} />
   );
 };
 
