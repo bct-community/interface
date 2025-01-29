@@ -28,14 +28,14 @@ const TextSection = ({ animatedTitle, paragraphs, link }: TextSectionProps) => {
         tilted={animatedTitle.tilted}
       />
 
-      <div className="text-big flex max-w-[1000px] flex-col items-center justify-center text-center">
+      <div className="gummy-big flex max-w-[1000px] flex-col items-center justify-center text-center">
         {paragraphs.map((p, index) => (
           <AnimatedP key={index} phrase={p} />
         ))}
       </div>
 
       {link.content && link.path && (
-        <p className="text-big">
+        <p className="gummy-big">
           <Link
             to={link.path}
             className="text-[var(--coin-purple)] transition-all hover:underline dark:text-[var(--coin-font)]"

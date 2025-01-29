@@ -114,9 +114,17 @@ const logoMap: Record<string, JSX.Element> = {
 const TrendingMetricsMarquee = ({
   links,
   raids,
+  producers, // not implemented yet
 }: {
   links?: { count: number; label: string; icon: string }[];
   raids?: { count: number; date: string; platform: string }[];
+  // not implemented yet:
+  producers?: {
+    creator: string;
+    xProfile: string;
+    count: number;
+    approvedCount: number;
+  }[];
 }) => {
   return (
     <div className="h-[80px] w-full overflow-hidden">
@@ -145,6 +153,22 @@ const TrendingMetricsMarquee = ({
             >
               <div>{iconMap[link.icon] || iconMap["SiSolana"]}</div>
               <span className="text-xs">{link.count} acessos</span>
+            </div>
+          ))}
+
+        {producers &&
+          producers.map((producer, index) => (
+            <div
+              key={`producer-${index}`}
+              className="flex h-[60px] w-[120px] flex-col items-center justify-between gap-1 p-2"
+            >
+              <p
+                className="max-w-[120px] truncate hover:cursor-pointer hover:underline"
+                onClick={() => window.open(producer.xProfile, "_blank")}
+              >
+                {producer.creator}
+              </p>
+              <span className="text-xs">{producer.count} posts</span>
             </div>
           ))}
       </Marquee>

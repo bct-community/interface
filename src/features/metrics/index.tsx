@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Tooltip } from "react-tooltip";
 
 import { sortByDate } from "@/utils/sortByDate";
 
+import { useArtsMetrics } from "./api/arts/getArtsMetrics";
+import { useArtsProducersNumber } from "./api/arts/getArtsProducers.Number";
+import { useArtsProducersTrending } from "./api/arts/getArtsProducersTrending";
 import { useChatMetrics } from "./api/chat/getChatMetrics";
 import { useChatRaidMessagesMetrics } from "./api/chat/getChatRaidMessagesMetrics";
 import { useLinksMetrics } from "./api/links/getLinksMetrics";
@@ -51,6 +55,15 @@ const Metrics = () => {
   const sortedChatMetrics = sortByDate(
     chatMetrics || { total: 0, highestCount: 0, daily: [] },
   );
+
+  const { data: artsMetrics } = useArtsMetrics();
+  const sortedArtsMetrics = sortByDate(
+    artsMetrics || { total: 0, highestCount: 0, daily: [] },
+  );
+
+  const { data: artsProducersNumber } = useArtsProducersNumber();
+
+  const { data: artsProducersTrending } = useArtsProducersTrending();
 
   const [mapTooltipContent, setMapTooltipContent] = useState("");
 
@@ -138,6 +151,41 @@ const Metrics = () => {
         <Chart
           data={sortedChatMetrics.daily || []}
           max={sortedChatMetrics.highestCount || 0}
+        />
+      </div>
+
+      <div className="w-full h-full px-12 py-8">
+        <h2 className="pb-12 mt-8 text-xl italic font-normal select-none">
+          🎨 Artes & memes - Total {sortedArtsMetrics.total} (7d)
+        </h2>
+
+        <Chart
+          data={sortedArtsMetrics.daily || []}
+          max={sortedArtsMetrics.highestCount || 0}
+        />
+      </div>
+
+      <div className="w-full pt-12 pb-2 text-center gummy-md">
+        <p>
+          {(artsProducersNumber?.count || 0) + " "}
+          <span className="animate-pulse text-[var(--coin-purple)] dark:text-[var(--coin-font)]">
+            degens
+          </span>{" "}
+          já postaram sua arte aqui na comunidade!
+        </p>
+        <p>
+          <Link
+            to="/arts"
+            className="text-[var(--coin-purple)] transition-all hover:underline dark:text-[var(--coin-font)]"
+          >
+            Clique aqui e faça parte!
+          </Link>
+        </p>
+      </div>
+
+      <div className="w-full pt-12 pb-2">
+        <TrendingMetricsMarquee
+          producers={artsProducersTrending?.producers || []}
         />
       </div>
     </div>

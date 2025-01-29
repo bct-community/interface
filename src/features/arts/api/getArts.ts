@@ -6,6 +6,7 @@ import env from "@/config";
 const ArtsSchema = z.object({
   arts: z.array(
     z.object({
+      _id: z.string(),
       creator: z.string(),
       description: z.string(),
       name: z.string(),

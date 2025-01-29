@@ -256,7 +256,7 @@ body {
 
 /* home fonts */
 
-.text-giga {
+.gummy-giga {
   user-select: none;
   font-family: "Sour Gummy";
   font-size: 8rem;
@@ -264,10 +264,18 @@ body {
   line-height: 0.8;
 }
 
-.text-big {
+.gummy-big {
   user-select: none;
   font-family: "Sour Gummy";
   font-size: 4rem;
+  font-weight: 700;
+  line-height: 0.85;
+}
+
+.gummy-md {
+  user-select: none;
+  font-family: "Sour Gummy";
+  font-size: 2rem;
   font-weight: 700;
   line-height: 0.85;
 }
