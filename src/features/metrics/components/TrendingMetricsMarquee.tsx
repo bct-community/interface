@@ -114,11 +114,10 @@ const logoMap: Record<string, JSX.Element> = {
 const TrendingMetricsMarquee = ({
   links,
   raids,
-  producers, // not implemented yet
+  producers,
 }: {
   links?: { count: number; label: string; icon: string }[];
   raids?: { count: number; date: string; platform: string }[];
-  // not implemented yet:
   producers?: {
     creator: string;
     xProfile: string;
@@ -168,7 +167,9 @@ const TrendingMetricsMarquee = ({
               >
                 {producer.creator}
               </p>
-              <span className="text-xs">{producer.count} posts</span>
+              <span className="text-xs">
+                {producer.count} {producer.count === 1 ? "post" : "posts"}
+              </span>
             </div>
           ))}
       </Marquee>
