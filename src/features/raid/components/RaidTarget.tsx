@@ -16,7 +16,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { Separator } from "@/components/ui/separator";
 import {
   Sheet,
   SheetContent,
@@ -26,7 +25,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Skeleton } from "@/components/ui/skeleton";
 import {
   Tooltip,
   TooltipContent,
@@ -37,6 +35,7 @@ import {
 import { useRaidData } from "../api/getRaidData";
 import { useRegisterChatMessageInRaid } from "../api/registerChatMessageInRaid";
 import { useRegisterRaidAccess } from "../api/registerRaidAccess";
+import RaidSkeleton from "./RaidSkeleton";
 
 const RaidTarget = () => {
   const { ref, inView } = useInView({ threshold: 0.1 });
@@ -199,68 +198,3 @@ const RaidTarget = () => {
 };
 
 export default RaidTarget;
-
-interface SkeletonProps {
-  width: number;
-}
-
-const SkeletonBullet: React.FC<SkeletonProps> = ({ width }) => {
-  return (
-    <div className="flex gap-2 mt-4">
-      <span className="flex h-[10px] items-center">•</span>
-      <Skeleton
-        className="h-[10px] rounded-full"
-        style={{ width: `${width}%` }}
-      />
-    </div>
-  );
-};
-
-const SkeletonH2: React.FC<SkeletonProps> = ({ width }) => {
-  return (
-    <Skeleton
-      className="my-6 h-[16px] rounded-full"
-      style={{ width: `${width}%` }}
-    />
-  );
-};
-
-const SkeletonH1: React.FC<SkeletonProps> = ({ width }) => {
-  return (
-    <Skeleton
-      className="mt-4 h-[20px] rounded-full"
-      style={{ width: `${width}%` }}
-    />
-  );
-};
-
-const SkeletonP: React.FC<SkeletonProps> = ({ width }) => {
-  return (
-    <Skeleton
-      className="mt-4 h-[10px] rounded-full"
-      style={{ width: `${width}%` }}
-    />
-  );
-};
-
-const RaidSkeleton = () => {
-  return (
-    <>
-      <SkeletonH1 width={85} />
-      <SkeletonH2 width={30} />
-      <SkeletonP width={100} />
-      <SkeletonP width={100} />
-      <SkeletonP width={100} />
-      <Separator className="my-6 h-[2px] bg-[hsl(var(--primary))]" />
-      <SkeletonH2 width={25} />
-      <SkeletonBullet width={32} />
-      <SkeletonBullet width={23} />
-      <SkeletonBullet width={42} />
-      <SkeletonBullet width={15} />
-      <Separator className="my-6 h-[2px] bg-[hsl(var(--primary))]" />
-      <SkeletonH2 width={42} />
-      <SkeletonP width={100} />
-      <SkeletonP width={100} />
-    </>
-  );
-};
