@@ -36,7 +36,7 @@ const Header: React.FC = () => {
         ),
         width: "w-[20%]",
       },
-      { component: <Heading key="heading" />, width: "w-[40%]" },
+      { component: <Heading key="heading" />, width: "w-full lg:w-[40%]" },
       { component: <CommunityLore key="lore" />, width: "w-[20%]" },
     ],
     [formattedDay, capitalizedMonth, year],
@@ -45,7 +45,7 @@ const Header: React.FC = () => {
   return (
     <div
       ref={ref}
-      className="mt-2 flex w-full items-center justify-evenly gap-4"
+      className="flex items-center w-full gap-4 mt-2 justify-evenly"
     >
       {elements.map((element, index) => (
         <motion.div
@@ -66,14 +66,14 @@ const PrettyDate: React.FC<{
   capitalizedMonth: string;
   year: number;
 }> = ({ formattedDay, capitalizedMonth, year }) => (
-  <Card className="w-full">
+  <Card className="hidden w-full lg:block">
     <CardHeader className="p-0">
-      <CardTitle className="flex h-16 w-full select-none items-center text-sm">
+      <CardTitle className="flex items-center w-full h-16 text-sm select-none">
         <div className="flex h-full w-[100px] items-center justify-center">
           <span className="text-[32px]">{formattedDay}</span>
         </div>
         <Separator orientation="vertical" />
-        <div className="flex w-full flex-col items-center justify-between">
+        <div className="flex flex-col items-center justify-between w-full">
           <span>{capitalizedMonth}</span>
           <span>{year}</span>
         </div>
@@ -93,9 +93,9 @@ const Heading: React.FC = () => (
 );
 
 const CommunityLore: React.FC = () => (
-  <Card className="w-full">
+  <Card className="hidden w-full lg:block">
     <CardHeader>
-      <CardTitle className="w-full select-none text-center">
+      <CardTitle className="w-full text-center select-none">
         <span>Make $BCT Great again</span>
       </CardTitle>
     </CardHeader>
