@@ -51,13 +51,13 @@ const Whitepaper = () => {
   });
 
   return (
-    <div ref={ref} className="mt-12 flex w-full justify-center">
-      <div className="flex w-[60%] flex-col gap-6">
+    <div ref={ref} className="flex justify-center w-full mt-12">
+      <div className="flex w-[90%] flex-col gap-6 lg:w-[60%]">
         <Trail open={inView}>
           {title.map((word, index) => (
             <span
               key={index}
-              className="select-none text-3xl font-normal italic"
+              className="text-3xl italic font-normal select-none"
             >
               {word}
             </span>
@@ -73,7 +73,7 @@ const Whitepaper = () => {
               duration: 0.5,
               delay: index * 0.1,
             }}
-            className="m-0 select-none text-pretty break-words pb-1 text-justify align-middle text-sm"
+            className="pb-1 m-0 text-sm text-justify break-words align-middle select-none text-pretty"
           >
             {paragraph}
           </motion.p>
