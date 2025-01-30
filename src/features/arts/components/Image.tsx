@@ -51,7 +51,8 @@ const Image = ({
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    if (isLast && inView && isLoaded && hasNextPage && !isFetchingNextPage) {
+    // if (isLast && inView && isLoaded && hasNextPage && !isFetchingNextPage) {
+    if (isLast && inView && hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
     }
   }, [
@@ -60,7 +61,7 @@ const Image = ({
     isFetchingNextPage,
     fetchNextPage,
     isLast,
-    isLoaded,
+    // isLoaded,
   ]);
 
   const openLink = () => {
@@ -101,6 +102,7 @@ const Image = ({
             true,
           "h-[500px] rounded-l-2xl bg-background md:rounded-r-none":
             isFullscreen,
+          "min-h-[350px] min-w-[330px]": !isLoaded,
         })}
         ref={isLast ? ref : null}
         onClick={openImage}
