@@ -1,82 +1,9 @@
 import { motion } from "framer-motion";
-import { Check, Copy } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 
-import { Alert } from "@/components";
-import { Skeleton } from "@/components/ui/skeleton";
-import { iconMap } from "@/utils/iconMap";
-
 import { useLinks } from "./api/getLinks";
-import { useRegisterLinkAccess } from "./api/registerLinkAccess";
-
-type ShareButtonProps = {
-  linkId: string;
-  icon: string;
-  platform: string;
-  url: string;
-};
-
-const ShareButton = ({ linkId, icon, platform, url }: ShareButtonProps) => {
-  const [isCopied, setIsCopied] = useState(false);
-  const [alertMessage, setAlertMessage] = useState("");
-
-  const { mutate } = useRegisterLinkAccess();
-
-  const openLink = () => {
-    mutate(linkId);
-    window.open(url, "_blank");
-  };
-
-  const copyLink = () => {
-    mutate(linkId);
-
-    navigator.clipboard.writeText(url);
-    setIsCopied(true);
-    setAlertMessage("O link foi copiado para a área de transferência.");
-
-    setTimeout(() => {
-      setAlertMessage("");
-      setIsCopied(false);
-    }, 3000);
-  };
-
-  return (
-    <div className="m-2 flex select-none items-center justify-between rounded px-4 py-2 transition-colors hover:bg-[hsl(var(--hover-shade))]">
-      <div className="flex items-center gap-3">
-        <button
-          className="rounded border p-1.5 hover:bg-accent hover:text-accent-foreground"
-          onClick={openLink}
-        >
-          {iconMap[icon](16)}
-        </button>
-        <p
-          className="text-sm hover:cursor-pointer hover:underline"
-          onClick={openLink}
-        >
-          {platform}
-        </p>
-      </div>
-
-      <div className="flex items-center gap-2">
-        <button
-          className="rounded border p-1.5 hover:bg-accent hover:text-accent-foreground"
-          onClick={copyLink}
-        >
-          {isCopied ? <Check size={16} /> : <Copy size={16} />}
-        </button>
-        <button
-          className="rounded border p-1.5 px-3 text-sm hover:bg-accent hover:text-accent-foreground"
-          onClick={openLink}
-        >
-          Abrir link
-        </button>
-      </div>
-
-      <Alert message={alertMessage} title={"Copiado!"} />
-    </div>
-  );
-};
+import { LinkSkeleton, ShareButton } from "./components";
 
 const Links = () => {
   useEffect(() => {
@@ -154,46 +81,3 @@ const Links = () => {
 };
 
 export default Links;
-
-interface SkeletonProps {
-  width: number;
-  height?: number;
-  borderRadius?: number;
-}
-
-const SkeletonButton = ({ width, borderRadius, height }: SkeletonProps) => {
-  return (
-    <Skeleton
-      className="mt-4 rounded-full"
-      style={{
-        width: `${width}px`,
-        borderRadius: `${borderRadius}px`,
-        height: `${height}px`,
-      }}
-    />
-  );
-};
-
-const SkeletonP: React.FC<SkeletonProps> = ({ width }: SkeletonProps) => {
-  return (
-    <Skeleton
-      className="mt-4 h-[10px] rounded-full"
-      style={{ width: `${width}%` }}
-    />
-  );
-};
-
-const LinkSkeleton = () => {
-  return (
-    <div className="flex items-center justify-between px-4 py-2 mx-2">
-      <div className="flex items-center gap-3 grow">
-        <SkeletonButton height={30} width={30} borderRadius={4} />
-        <SkeletonP width={50} />
-      </div>
-      <div className="flex items-center gap-3">
-        <SkeletonButton height={30} width={30} borderRadius={4} />
-        <SkeletonButton height={34} width={84} borderRadius={4} />
-      </div>
-    </div>
-  );
-};
