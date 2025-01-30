@@ -68,13 +68,13 @@ const Metrics = () => {
   const [mapTooltipContent, setMapTooltipContent] = useState("");
 
   return (
-    <div className="mt-[30px] flex min-h-full w-full flex-col items-center justify-center gap-8">
+    <div className="mt-[30px] flex min-h-full w-full flex-col items-center justify-center gap-12">
       <h1 className="mt-2 text-3xl italic font-normal select-none">
         Métricas da comunidade
       </h1>
 
-      <div className="w-full h-full px-4 lg:px-12">
-        <h2 className="pb-12 mt-8 text-xl italic font-normal select-none">
+      <div className="w-full h-full px-4 space-y-12 lg:px-12">
+        <h2 className="text-xl italic font-normal select-none">
           📌 Visitas - Total {visitsMetrics?.total || 0}
         </h2>
 
@@ -84,8 +84,8 @@ const Metrics = () => {
         />
       </div>
 
-      <div className="w-full h-full px-4 lg:px-12">
-        <h2 className="mt-8 text-xl italic font-normal select-none">
+      <div className="w-full h-full px-4 space-y-12 lg:px-12">
+        <h2 className="text-xl italic font-normal select-none">
           🌎 Visitas por país
         </h2>
 
@@ -95,10 +95,8 @@ const Metrics = () => {
         </Tooltip>
       </div>
 
-      <div className="w-full h-full px-4 lg:px-12">
-        <h2 className="pb-12 mt-8 text-xl italic font-normal select-none">
-          🎯 Raids
-        </h2>
+      <div className="w-full h-full px-4 space-y-12 lg:px-12">
+        <h2 className="text-xl italic font-normal select-none">🎯 Raids</h2>
 
         <div className="flex flex-col items-center justify-between w-full gap-8 md:flex-row lg:px-12">
           <div className="flex flex-col w-full md:w-1/2">
@@ -124,12 +122,12 @@ const Metrics = () => {
         </div>
       </div>
 
-      <div className="w-full pt-12 pb-2">
+      <div className="w-full">
         <TrendingMetricsMarquee raids={raidsTrendingMetrics?.raids || []} />
       </div>
 
-      <div className="w-full h-full px-4 lg:px-12">
-        <h2 className="pb-12 mt-8 text-xl italic font-normal select-none">
+      <div className="w-full h-full px-4 space-y-12 lg:px-12">
+        <h2 className="text-xl italic font-normal select-none">
           🔗 Links - Total {sortedLinksMetrics.total} (7d)
         </h2>
 
@@ -139,12 +137,12 @@ const Metrics = () => {
         />
       </div>
 
-      <div className="w-full pt-12 pb-2">
+      <div className="w-full">
         <TrendingMetricsMarquee links={linksTrendingMetrics?.links || []} />
       </div>
 
-      <div className="w-full h-full px-4 lg:px-12">
-        <h2 className="pb-12 mt-8 text-xl italic font-normal select-none">
+      <div className="w-full h-full px-4 space-y-12 lg:px-12">
+        <h2 className="text-xl italic font-normal select-none">
           🤖 Chat - Total {sortedChatMetrics.total} (7d)
         </h2>
 
@@ -154,8 +152,8 @@ const Metrics = () => {
         />
       </div>
 
-      <div className="w-full h-full px-4 lg:px-12">
-        <h2 className="pb-12 mt-8 text-xl italic font-normal select-none">
+      <div className="w-full h-full px-4 space-y-12 lg:px-12">
+        <h2 className="text-xl italic font-normal select-none">
           🎨 Artes & memes - Total {sortedArtsMetrics.total} (7d)
         </h2>
 
@@ -165,7 +163,7 @@ const Metrics = () => {
         />
       </div>
 
-      <div className="w-full px-4 pt-12 pb-2 text-center gummy-md">
+      <div className="w-full px-4 text-center gummy-md">
         <p>
           {(artsProducersNumber?.count || 0) + " "}
           <span className="animate-pulse text-[var(--coin-purple)] dark:text-[var(--coin-font)]">
@@ -183,7 +181,7 @@ const Metrics = () => {
         </p>
       </div>
 
-      <div className="w-full pt-12 pb-2">
+      <div className="w-full">
         <TrendingMetricsMarquee
           producers={artsProducersTrending?.producers || []}
         />
