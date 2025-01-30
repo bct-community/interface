@@ -163,7 +163,7 @@ const Metrics = () => {
         />
       </div>
 
-      <div className="w-full px-4 text-center gummy-md">
+      <div className="w-full px-4 text-2xl text-center text-gummy lg:text-4xl">
         <p>
           {(artsProducersNumber?.count || 0) + " "}
           <span className="animate-pulse text-[var(--coin-purple)] dark:text-[var(--coin-font)]">
