@@ -34,10 +34,10 @@ const Header: React.FC = () => {
             year={year}
           />
         ),
-        width: "w-[20%]",
+        width: "w-0 lg:w-[20%]",
       },
       { component: <Heading key="heading" />, width: "w-full lg:w-[40%]" },
-      { component: <CommunityLore key="lore" />, width: "w-[20%]" },
+      { component: <CommunityLore key="lore" />, width: "w-0 lg:w-[20%]" },
     ],
     [formattedDay, capitalizedMonth, year],
   );
@@ -45,7 +45,7 @@ const Header: React.FC = () => {
   return (
     <div
       ref={ref}
-      className="flex items-center w-full gap-4 mt-2 justify-evenly"
+      className="flex items-center w-full mt-2 justify-evenly lg:gap-4"
     >
       {elements.map((element, index) => (
         <motion.div

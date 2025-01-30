@@ -180,7 +180,7 @@ const RaidTarget = () => {
   };
 
   return (
-    <Card className="card-shadow-sm w-[80%]" ref={ref}>
+    <Card className="card-shadow-sm w-full lg:w-[80%]" ref={ref}>
       <motion.div
         className="w-full"
         variants={container}
