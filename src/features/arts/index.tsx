@@ -32,6 +32,7 @@ const Arts = () => {
   const { mutate: registerArtMutate, isSuccess, isError } = useRegisterArt();
   const { mutate: registerArtMetricsMutate } = useRegisterArtMetrics();
 
+  const [colNumber, setColNumber] = useState(3);
   const [openImage, setOpenImage] = useState<boolean | null>(false);
   const [imageData, setImageData] = useState<Partial<
     ArtsType["arts"][number]
@@ -46,6 +47,36 @@ const Arts = () => {
   const arts = data?.pages.flatMap((page) => page.arts) || [];
 
   const lastArtId = arts[arts.length - 1]?._id;
+
+  const calculateColNumber = () => {
+    const mobile = window.innerWidth < 768;
+    const tablet = window.innerWidth < 1024;
+
+    const getColNumber = (): number => {
+      if (mobile) return 1;
+      if (tablet) return 2;
+      return 3;
+    };
+
+    setColNumber(getColNumber());
+  };
+
+  useEffect(() => {
+    calculateColNumber();
+
+    const handleResize = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(calculateColNumber, 150);
+    };
+
+    let timeoutId: ReturnType<typeof setTimeout>;
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     document.title = "Comunidade $BCT – Artes";
@@ -225,10 +256,10 @@ const Arts = () => {
         </Sheet>
 
         <div className="grid grid-cols-1 gap-8 px-8 pt-8 sm:grid-cols-2 lg:grid-cols-3">
-          {[...Array(3)].map((_, colIndex) => (
+          {[...Array(colNumber)].map((_, colIndex) => (
             <div key={colIndex} className="flex min-w-[250px] flex-col gap-8">
               {arts
-                .filter((_, index) => index % 3 === colIndex) // Distribui as imagens entre as colunas
+                .filter((_, index) => index % colNumber === colIndex) // Distribui as imagens entre as colunas
                 .map((art, index) => (
                   <Image
                     key={index}

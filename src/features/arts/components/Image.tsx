@@ -112,6 +112,7 @@ const Image = ({
             "select-none object-cover transition-all duration-1000": true,
             "group-hover:scale-110": !isFullscreen,
             "rounded-2xl group-hover:opacity-75": isFullscreen,
+            "h-full w-full": isFullscreen,
           })}
           style={{ color: "transparent" }}
           src={imgSrc}
