@@ -21,14 +21,14 @@ interface TextSectionProps {
 
 const TextSection = ({ animatedTitle, paragraphs, link }: TextSectionProps) => {
   return (
-    <div className="flex w-full flex-col items-center">
+    <div className="flex flex-col items-center w-full">
       <AnimatedTitle
         text={animatedTitle.text}
         reverse={animatedTitle.reverse}
         tilted={animatedTitle.tilted}
       />
 
-      <div className="gummy-big flex max-w-[1000px] flex-col items-center justify-center text-center">
+      <div className="gummy-big flex max-w-[1000px] flex-col items-center justify-center gap-2 text-center lg:gap-4">
         {paragraphs.map((p, index) => (
           <AnimatedP key={index} phrase={p} />
         ))}

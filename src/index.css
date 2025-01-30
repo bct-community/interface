@@ -255,11 +255,10 @@ body {
 }
 
 /* home fonts */
-
 .gummy-giga {
   user-select: none;
   font-family: "Sour Gummy";
-  font-size: 8rem;
+  font-size: 8rem; /* Default for larger screens */
   font-weight: 900;
   line-height: 0.8;
 }
@@ -267,7 +266,7 @@ body {
 .gummy-big {
   user-select: none;
   font-family: "Sour Gummy";
-  font-size: 4rem;
+  font-size: 4rem; /* Default for larger screens */
   font-weight: 700;
   line-height: 0.85;
 }
@@ -275,9 +274,24 @@ body {
 .gummy-md {
   user-select: none;
   font-family: "Sour Gummy";
-  font-size: 2rem;
+  font-size: 2rem; /* Default for larger screens */
   font-weight: 700;
   line-height: 0.85;
+}
+
+/* Media query for screens smaller than 1024px */
+@media (max-width: 1024px) {
+  .gummy-giga {
+    font-size: 4rem; /* Adjusted size for mobile/tablet */
+  }
+
+  .gummy-big {
+    font-size: 2rem; /* Adjusted size for mobile/tablet */
+  }
+
+  .gummy-md {
+    font-size: 1rem; /* Adjusted size for mobile/tablet */
+  }
 }
 
 /* animated separators */

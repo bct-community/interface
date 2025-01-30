@@ -25,11 +25,11 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center overflow-x-hidden pt-12">
+    <div className="flex flex-col items-center pt-12 overflow-x-hidden">
       <MatrixRainingCode />
 
-      <div className="relative mb-12 min-h-screen w-full">
-        <div className="z-1 relative flex min-h-screen w-full items-end justify-center">
+      <div className="relative w-full min-h-screen mb-12">
+        <div className="relative flex items-end justify-center w-full min-h-screen z-1">
           <img
             src={morpheusImg}
             alt=""
@@ -40,7 +40,7 @@ const Home = () => {
 
         <div className="bg-red h-[30px] border-y-2 border-[var(--coin-pink)] backdrop-blur-md backdrop-filter">
           <Marquee className="bg-red h-[30px] overflow-hidden">
-            <p className="select-none text-xl font-bold">
+            <p className="text-xl font-bold select-none">
               This is your last chance. After this, there is no turning back.
               You take the Bitcoin – the story ends, you wake up in your bed and
               believe whatever you want to believe. You take the $BCT – you stay
@@ -51,12 +51,14 @@ const Home = () => {
         </div>
       </div>
 
-      <CommunityIntroduction />
+      <div className="w-full px-4 lg:px-12">
+        <CommunityIntroduction />
+      </div>
 
       <CoinImageMarquee />
 
       {/* fix animated-title y position */}
-      <div className="mb-12 flex w-full flex-col items-center justify-center gap-12">
+      <div className="flex flex-col items-center justify-center w-full gap-6 mb-12 lg:gap-12">
         <TextSection
           animatedTitle={{ text: "RAAAIDS" }}
           paragraphs={[
@@ -112,7 +114,7 @@ const Home = () => {
         <RotatingCoinCanvas />
       </div>
 
-      <div className="mb-12 flex w-full flex-col items-center gap-12">
+      <div className="flex flex-col items-center w-full gap-12 mb-12">
         <AuroraTitle />
         {/* why w-[90%] intead of mx - check why mx doesn't work */}
         <div className="flex w-[90%] justify-between overflow-clip rounded-[12px] bg-transparent bg-opacity-20 p-8 backdrop-blur-md backdrop-filter">
@@ -121,7 +123,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="mb-12 flex w-full flex-col">
+      <div className="flex flex-col w-full mb-12">
         <AnimatedSeparators baseVelocity={1} />
       </div>
 

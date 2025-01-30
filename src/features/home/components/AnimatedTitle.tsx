@@ -49,7 +49,7 @@ const AnimatedTitle = ({
         ref={ref}
         style={{ x: xTransform, rotate }}
         transition={{ type: "spring", stiffness: 50, damping: 20 }}
-        className="gummy-giga mb-12 w-screen bg-black text-center text-[hsl(var(--background))] mix-blend-darken dark:bg-[var(--coin-pink)] dark:mix-blend-lighten"
+        className="gummy-giga mb-6 w-screen bg-black text-center text-[hsl(var(--background))] mix-blend-darken dark:bg-[var(--coin-pink)] dark:mix-blend-lighten lg:mb-12"
       >
         {text}
       </motion.p>

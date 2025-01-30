@@ -85,15 +85,15 @@ const CommunityIntroduction = () => {
   ];
 
   return (
-    <div className="flex w-[95%] flex-col items-center justify-center rounded-[12px] bg-transparent bg-opacity-20 px-8 py-16 text-center backdrop-blur-md backdrop-filter">
+    <div className="flex w-full flex-col items-center justify-center gap-6 rounded-[12px] border bg-transparent bg-opacity-20 py-16 text-center backdrop-blur-md backdrop-filter lg:gap-12 lg:px-8">
       <AnimatedTitle>
-        <span className="gummy-giga mb-12 text-center">
+        <span className="text-center gummy-giga">
           <p>COMUNIDADE</p>
           <p className="text-[var(--coin-pink)]">$BCT</p>
         </span>
       </AnimatedTitle>
 
-      <div className="gummy-big flex max-w-[1000px] flex-col items-center justify-center">
+      <div className="gummy-big flex max-w-[1000px] flex-col items-center justify-center gap-2 lg:gap-4">
         {paragraphs.map((content, index) => (
           <AnimatedP key={index}>{content}</AnimatedP>
         ))}
