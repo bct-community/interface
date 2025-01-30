@@ -20,6 +20,7 @@ import { useToast } from "@/hooks/use-toast";
 
 import { type Arts as ArtsType, useArts } from "./api/getArts";
 import { NewArtData, useRegisterArt } from "./api/registerArt";
+import { useRegisterArtMetrics } from "./api/registerArtMetric";
 import Image from "./components/Image";
 import "./style/index.css";
 import "./style/lineOne.css";
@@ -29,7 +30,8 @@ import "./style/lineTwo.css";
 const Arts = () => {
   const { toast } = useToast();
   const { data, isFetching, isFetchingNextPage } = useArts();
-  const { mutate, isSuccess, isError } = useRegisterArt();
+  const { mutate: registerArtMutate, isSuccess, isError } = useRegisterArt();
+  const { mutate: registerArtMetricsMutate } = useRegisterArtMetrics();
 
   const [openImage, setOpenImage] = useState<boolean | null>(false);
   const [imageData, setImageData] = useState<Partial<
@@ -108,7 +110,8 @@ const Arts = () => {
   };
 
   const registerArt = () => {
-    mutate(newArt);
+    registerArtMutate(newArt);
+    registerArtMetricsMutate({ xProfile: newArt.xProfile });
   };
 
   return (
