@@ -85,7 +85,7 @@ const CommunityIntroduction = () => {
   ];
 
   return (
-    <div className="flex w-full flex-col items-center justify-center gap-6 rounded-[12px] border bg-transparent bg-opacity-20 py-16 text-center backdrop-blur-md backdrop-filter lg:gap-12 lg:px-8">
+    <div className="flex w-full flex-col items-center justify-center gap-6 rounded-[12px] border bg-transparent bg-opacity-20 py-8 text-center backdrop-blur-md backdrop-filter lg:gap-12 lg:px-8 lg:py-16">
       <AnimatedTitle>
         <span className="text-center gummy-giga">
           <p>COMUNIDADE</p>
