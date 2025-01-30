@@ -37,7 +37,7 @@ const VisitsByCountryMap = ({
           rotate: [-10, 0, 0],
           scale: 147,
         }}
-        className="px-16"
+        className="lg:px-16"
         height={450}
       >
         <Sphere

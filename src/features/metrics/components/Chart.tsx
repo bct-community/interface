@@ -22,7 +22,7 @@ const Chart = ({
   };
 
   return (
-    <LineChart color={"#ffbfca"} className="px-16 select-none" {...config} />
+    <LineChart color={"#ffbfca"} className="select-none lg:px-16" {...config} />
   );
 };
 
