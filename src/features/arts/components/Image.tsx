@@ -48,12 +48,20 @@ const Image = ({
   const { fetchNextPage, hasNextPage, isFetchingNextPage } = useArts();
 
   const [imgSrc, setImgSrc] = useState(url);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    if (isLast && inView && hasNextPage && !isFetchingNextPage) {
+    if (isLast && inView && isLoaded && hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
     }
-  }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage, isLast]);
+  }, [
+    inView,
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+    isLast,
+    isLoaded,
+  ]);
 
   const openLink = () => {
     window.open(xProfile, "_blank");
@@ -106,7 +114,9 @@ const Image = ({
           style={{ color: "transparent" }}
           src={imgSrc}
           draggable={false}
+          loading="lazy"
           onError={() => setImgSrc(tokenImg)}
+          onLoad={() => setIsLoaded(true)}
         />
 
         {!isFullscreen && (
