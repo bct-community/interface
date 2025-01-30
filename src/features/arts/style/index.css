@@ -2,8 +2,14 @@
 
 :root {
   --font-color: #edeee9;
-  --font-size: 5vw;
   --line-height: 0.17;
+  --font-size: 2em;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --font-size: 1.9em;
+  }
 }
 
 #text-container {
