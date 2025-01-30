@@ -1,7 +1,7 @@
 import Marquee from "react-fast-marquee";
 
-import { iconMap } from "../utils/iconMap";
-import { logoMap } from "../utils/logoMap";
+import { iconMap } from "@/utils/iconMap";
+import { logoMap } from "@/utils/logoMap";
 
 const TrendingMetricsMarquee = ({
   links,
@@ -42,7 +42,7 @@ const TrendingMetricsMarquee = ({
               key={`link-${index}`}
               className="flex h-[80px] w-[120px] flex-col items-center justify-between gap-2 p-2"
             >
-              <div>{iconMap[link.icon] || iconMap["SiSolana"]}</div>
+              <div>{iconMap[link.icon](32) || iconMap["SiSolana"](32)}</div>
               <span className="text-xs">{link.count} acessos</span>
             </div>
           ))}

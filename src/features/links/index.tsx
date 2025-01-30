@@ -1,10 +1,3 @@
-import {
-  SiDiscord,
-  SiGithub,
-  SiSolana,
-  SiTelegram,
-  SiX,
-} from "@icons-pack/react-simple-icons";
 import { motion } from "framer-motion";
 import { Check, Copy } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -12,17 +5,10 @@ import { useInView } from "react-intersection-observer";
 
 import { Alert } from "@/components";
 import { Skeleton } from "@/components/ui/skeleton";
+import { iconMap } from "@/utils/iconMap";
 
 import { useLinks } from "./api/getLinks";
 import { useRegisterLinkAccess } from "./api/registerLinkAccess";
-
-const iconMap: Record<string, JSX.Element> = {
-  SiGithub: <SiGithub size={16} />,
-  SiDiscord: <SiDiscord size={16} />,
-  SiX: <SiX size={16} />,
-  SiTelegram: <SiTelegram size={16} />,
-  SiSolana: <SiSolana size={16} />,
-};
 
 type ShareButtonProps = {
   linkId: string;
@@ -62,7 +48,7 @@ const ShareButton = ({ linkId, icon, platform, url }: ShareButtonProps) => {
           className="rounded border p-1.5 hover:bg-accent hover:text-accent-foreground"
           onClick={openLink}
         >
-          {iconMap[icon]}
+          {iconMap[icon](16)}
         </button>
         <p
           className="text-sm hover:cursor-pointer hover:underline"
