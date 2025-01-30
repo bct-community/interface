@@ -22,7 +22,7 @@ export type Arts = z.infer<typeof ArtsSchema>;
 
 const getArts = async ({ pageParam = 1 }) => {
   const response = await fetch(`${env.VITE_API_URL}/arts?page=${pageParam}`);
-  const data = await response.json();
+  const data = (await response.json()) as Arts;
 
   return ArtsSchema.parse(data);
 };

@@ -1,6 +1,5 @@
 import { AtSign } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useInView } from "react-intersection-observer";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -28,17 +27,48 @@ import "./style/lineThree.css";
 import "./style/lineTwo.css";
 
 const Arts = () => {
+  const { toast } = useToast();
+  const { data, isFetching, isFetchingNextPage } = useArts();
+  const { mutate, isSuccess, isError } = useRegisterArt();
+
   const [openImage, setOpenImage] = useState<boolean | null>(false);
   const [imageData, setImageData] = useState<Partial<
     ArtsType["arts"][number]
   > | null>(null);
-  const { toast } = useToast();
   const [newArt, setNewArt] = useState<NewArtData>({
     creator: "",
     xProfile: "",
     description: "",
     file: null,
   });
+
+  const arts = data?.pages.flatMap((page) => page.arts) || [];
+
+  const lastArtId = arts[arts.length - 1]?._id;
+
+  useEffect(() => {
+    document.title = "Comunidade $BCT – Artes";
+    window.scrollTo(0, 0);
+    return () => {
+      document.title = "Comunidade $BCT";
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast({
+        title: "Arte registrada com sucesso!",
+        description: "A arte será submetida para aprovação.",
+      });
+    }
+
+    if (isError) {
+      toast({
+        title: "Erro ao registrar arte.",
+        description: "Tente novamente mais tarde.",
+      });
+    }
+  }, [isSuccess, isError]);
 
   const onChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -77,45 +107,9 @@ const Arts = () => {
     }
   };
 
-  useEffect(() => {
-    document.title = "Comunidade $BCT – Artes";
-    window.scrollTo(0, 0);
-    return () => {
-      document.title = "Comunidade $BCT";
-    };
-  }, []);
-
-  const { mutate, isSuccess, isError } = useRegisterArt();
-
   const registerArt = () => {
     mutate(newArt);
   };
-
-  useEffect(() => {
-    if (isSuccess) {
-      toast({
-        title: "Arte registrada com sucesso!",
-        description: "A arte será submetida para aprovação.",
-      });
-    }
-
-    if (isError) {
-      toast({
-        title: "Erro ao registrar arte.",
-        description: "Tente novamente mais tarde.",
-      });
-    }
-  }, [isSuccess, isError]);
-
-  const { data, fetchNextPage, isFetching, hasNextPage, isFetchingNextPage } =
-    useArts();
-  const { ref, inView } = useInView({ threshold: 1 });
-
-  useEffect(() => {
-    if (inView && hasNextPage) fetchNextPage();
-  }, [inView, hasNextPage]);
-
-  const arts = data?.pages.flatMap((page) => page.arts) || [];
 
   return (
     <>
@@ -242,6 +236,7 @@ const Arts = () => {
                     description={art.description}
                     openFullscreen={() => setOpenImage(true)}
                     setImageData={setImageData}
+                    isLast={art._id === lastArtId}
                   />
                 ))}
 
@@ -263,8 +258,6 @@ const Arts = () => {
           closeFullscreen={() => setOpenImage(false)}
         />
       )}
-
-      <div ref={ref} className="w-full h-1" />
     </>
   );
 };

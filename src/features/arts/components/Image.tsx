@@ -1,9 +1,12 @@
 import classNames from "classnames";
 import { X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
 
+import { tokenImg } from "@/assets/images";
 import { Button } from "@/components/ui/button";
 
-import { Arts } from "../api/getArts";
+import { Arts, useArts } from "../api/getArts";
 
 const DownloadButton = ({
   downloadImage,
@@ -29,6 +32,7 @@ const Image = ({
   closeFullscreen,
   setImageData,
   isFullscreen,
+  isLast,
 }: {
   url: string;
   creator: string;
@@ -38,7 +42,19 @@ const Image = ({
   closeFullscreen?: () => void;
   setImageData: (data: Partial<Arts["arts"][number]>) => void;
   isFullscreen?: boolean;
+  isLast?: boolean;
 }) => {
+  const { ref, inView } = useInView({ threshold: 1 });
+  const { fetchNextPage, hasNextPage, isFetchingNextPage } = useArts();
+
+  const [imgSrc, setImgSrc] = useState(url);
+
+  useEffect(() => {
+    if (isLast && inView && hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage, isLast]);
+
   const openLink = () => {
     window.open(xProfile, "_blank");
   };
@@ -78,6 +94,7 @@ const Image = ({
           "h-[500px] rounded-l-2xl bg-background md:rounded-r-none":
             isFullscreen,
         })}
+        ref={isLast ? ref : null}
         onClick={openImage}
       >
         <img
@@ -87,8 +104,9 @@ const Image = ({
             "group-hover:opacity-75": isFullscreen,
           })}
           style={{ color: "transparent" }}
-          src={url}
+          src={imgSrc}
           draggable={false}
+          onError={() => setImgSrc(tokenImg)}
         />
 
         {!isFullscreen && (
