@@ -177,7 +177,7 @@ const Metrics = () => {
           <span className="animate-pulse text-[var(--coin-purple)] dark:text-[var(--coin-font)]">
             degens
           </span>{" "}
-          já postaram sua arte aqui na comunidade!
+          já postaram {artsMetrics?.total} memes aqui na comunidade!
         </p>
         <p>
           <Link

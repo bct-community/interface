@@ -39,22 +39,21 @@ const ShareButton = ({ linkId, icon, platform, url }: ShareButtonProps) => {
 
   return (
     <div className="m-2 flex select-none items-center justify-between rounded px-4 py-2 transition-colors hover:bg-[hsl(var(--hover-shade))]">
-      <div className="flex items-center gap-3">
-        <button
-          className="rounded border p-1.5 hover:bg-accent hover:text-accent-foreground"
-          onClick={openLink}
-        >
-          {iconMap[icon](16)}
-        </button>
-        <p
-          className="text-sm hover:cursor-pointer hover:underline"
-          onClick={openLink}
-        >
-          {platform}
-        </p>
-      </div>
+      <button
+        className="rounded border p-1.5 hover:bg-accent hover:text-accent-foreground"
+        onClick={openLink}
+      >
+        {iconMap[icon](16)}
+      </button>
 
-      <div className="flex items-center gap-2">
+      <p
+        className="pl-2 overflow-hidden text-sm truncate shrink grow text-ellipsis whitespace-nowrap hover:cursor-pointer hover:underline"
+        onClick={openLink}
+      >
+        {platform}
+      </p>
+
+      <div className="flex items-center gap-2 shrink-0">
         <button
           className="rounded border p-1.5 hover:bg-accent hover:text-accent-foreground"
           onClick={copyLink}
