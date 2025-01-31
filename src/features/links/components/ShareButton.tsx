@@ -1,5 +1,6 @@
-import { Check, Copy } from "lucide-react";
-import { useState } from "react";
+import classNames from "classnames";
+import { Check, Copy, ExternalLink } from "lucide-react";
+import { useEffect, useState } from "react";
 
 import { Alert } from "@/components";
 import { iconMap } from "@/utils/iconMap";
@@ -14,10 +15,39 @@ type ShareButtonProps = {
 };
 
 const ShareButton = ({ linkId, icon, platform, url }: ShareButtonProps) => {
+  const [isMobile, setIsMobile] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
 
   const { mutate } = useRegisterLinkAccess();
+
+  const calculateIsMobile = () => {
+    const mobile = window.innerWidth < 768;
+
+    const getIsMobile = (): boolean => {
+      if (mobile) return true;
+      return false;
+    };
+
+    setIsMobile(getIsMobile());
+  };
+
+  useEffect(() => {
+    calculateIsMobile();
+
+    const handleResize = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(calculateIsMobile, 150);
+    };
+
+    let timeoutId: ReturnType<typeof setTimeout>;
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const openLink = () => {
     mutate(linkId);
@@ -61,10 +91,14 @@ const ShareButton = ({ linkId, icon, platform, url }: ShareButtonProps) => {
           {isCopied ? <Check size={16} /> : <Copy size={16} />}
         </button>
         <button
-          className="rounded border p-1.5 px-3 text-sm hover:bg-accent hover:text-accent-foreground"
+          className={classNames({
+            "rounded border p-1.5 hover:bg-accent hover:text-accent-foreground":
+              true,
+            "px-3 text-sm": !isMobile,
+          })}
           onClick={openLink}
         >
-          Abrir link
+          {isMobile ? <ExternalLink size={16} /> : "Abrir link"}
         </button>
       </div>
 
