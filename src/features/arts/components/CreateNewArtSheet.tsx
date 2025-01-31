@@ -20,10 +20,16 @@ import { useToast } from "@/hooks/use-toast";
 import { NewArtData, useRegisterArt } from "../api/registerArt";
 import { useRegisterArtMetrics } from "../api/registerArtMetric";
 
+// once the user send the data
+// take the newArt.creator and newArt.xProfile and save to localStorage
+
 const CreateNewArtSheet = () => {
   const { toast } = useToast();
   const { mutate: registerArtMutate, isSuccess, isError } = useRegisterArt();
   const { mutate: registerArtMetricsMutate } = useRegisterArtMetrics();
+  const hasLocalStorage =
+    localStorage.getItem("creator") !== null &&
+    localStorage.getItem("xProfile") !== null;
 
   const [newArt, setNewArt] = useState<NewArtData>({
     creator: "",
@@ -33,11 +39,22 @@ const CreateNewArtSheet = () => {
   });
 
   useEffect(() => {
+    setNewArt((prev) => ({
+      ...prev,
+      creator: localStorage.getItem("creator") || "",
+      xProfile: localStorage.getItem("xProfile") || "",
+    }));
+  }, []);
+
+  useEffect(() => {
     if (isSuccess) {
       toast({
         title: "Arte registrada com sucesso!",
         description: "A arte será submetida para aprovação.",
       });
+
+      localStorage.setItem("creator", newArt.creator);
+      localStorage.setItem("xProfile", newArt.xProfile);
     }
 
     if (isError) {
@@ -86,6 +103,19 @@ const CreateNewArtSheet = () => {
   };
 
   const registerArt = () => {
+    if (
+      !newArt.creator ||
+      !newArt.xProfile ||
+      !newArt.description ||
+      !newArt.file
+    ) {
+      toast({
+        title: "Preencha todos os campos.",
+        description: "Todos os campos são obrigatórios.",
+      });
+      return;
+    }
+
     registerArtMutate(newArt);
     registerArtMetricsMutate({ xProfile: newArt.xProfile });
   };
@@ -124,6 +154,8 @@ const CreateNewArtSheet = () => {
                 placeholder="Criador"
                 onChange={onChange}
                 className="col-span-3 rounded-l-none"
+                readOnly={hasLocalStorage}
+                disabled={hasLocalStorage}
               />
             </div>
           </div>
@@ -146,6 +178,8 @@ const CreateNewArtSheet = () => {
                 placeholder="Perfil do X"
                 onChange={onChange}
                 className="col-span-3 rounded-l-none"
+                readOnly={hasLocalStorage}
+                disabled={hasLocalStorage}
               />
             </div>
           </div>
