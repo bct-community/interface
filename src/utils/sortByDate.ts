@@ -11,12 +11,10 @@ export const sortByDate = (
   return {
     total: data.total,
     highestCount: data.highestCount,
-    daily: data.daily
-      .sort(
-        (a, b) =>
-          parse(a.date, dateFormat, new Date()).getTime() -
-          parse(b.date, dateFormat, new Date()).getTime(),
-      )
-      .map((item) => ({ date: item.date, quantidade: item.count })),
+    daily: data.daily.sort(
+      (a, b) =>
+        parse(a.date, dateFormat, new Date()).getTime() -
+        parse(b.date, dateFormat, new Date()).getTime(),
+    ),
   };
 };

@@ -78,10 +78,12 @@ const Metrics = () => {
           📌 Visitas - Total {visitsMetrics?.total || 0}
         </h2>
 
-        <Chart
-          data={sortedVisitsMetrics.daily || []}
-          max={sortedVisitsMetrics.highestCount || 0}
-        />
+        <div className="w-full lg:px-12">
+          <Chart
+            data={sortedVisitsMetrics.daily || []}
+            max={sortedVisitsMetrics.highestCount || 0}
+          />
+        </div>
       </div>
 
       <div className="w-full h-full px-4 space-y-12 lg:px-12">
@@ -131,10 +133,12 @@ const Metrics = () => {
           🔗 Links - Total {sortedLinksMetrics.total} (7d)
         </h2>
 
-        <Chart
-          data={sortedLinksMetrics.daily || []}
-          max={sortedLinksMetrics.highestCount || 0}
-        />
+        <div className="w-full lg:px-12">
+          <Chart
+            data={sortedLinksMetrics.daily || []}
+            max={sortedLinksMetrics.highestCount || 0}
+          />
+        </div>
       </div>
 
       <div className="w-full">
@@ -146,10 +150,12 @@ const Metrics = () => {
           🤖 Chat - Total {sortedChatMetrics.total} (7d)
         </h2>
 
-        <Chart
-          data={sortedChatMetrics.daily || []}
-          max={sortedChatMetrics.highestCount || 0}
-        />
+        <div className="w-full lg:px-12">
+          <Chart
+            data={sortedChatMetrics.daily || []}
+            max={sortedChatMetrics.highestCount || 0}
+          />
+        </div>
       </div>
 
       <div className="w-full h-full px-4 space-y-12 lg:px-12">
@@ -157,10 +163,12 @@ const Metrics = () => {
           🎨 Artes & memes - Total {sortedArtsMetrics.total} (7d)
         </h2>
 
-        <Chart
-          data={sortedArtsMetrics.daily || []}
-          max={sortedArtsMetrics.highestCount || 0}
-        />
+        <div className="w-full lg:px-12">
+          <Chart
+            data={sortedArtsMetrics.daily || []}
+            max={sortedArtsMetrics.highestCount || 0}
+          />
+        </div>
       </div>
 
       <div className="w-full px-4 text-2xl text-center text-gummy lg:text-4xl">
