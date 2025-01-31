@@ -35,7 +35,7 @@ const TextSection = ({ animatedTitle, paragraphs, link }: TextSectionProps) => {
       </div>
 
       {link.content && link.path && (
-        <p className="gummy-big">
+        <p className="text-center gummy-big">
           <Link
             to={link.path}
             className="text-[var(--coin-purple)] transition-all hover:underline dark:text-[var(--coin-font)]"
