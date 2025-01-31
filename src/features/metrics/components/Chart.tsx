@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
 import {
@@ -21,6 +22,38 @@ const Chart = ({
   max: number;
   data: { date: string; count: number }[];
 }) => {
+  const [yAxisWidth, setYAxisWidth] = useState(40);
+
+  const calculateYAxisWidth = () => {
+    const mobile = window.innerWidth < 768;
+    const tablet = window.innerWidth < 1024;
+
+    const getYAxisWidth = (): number => {
+      if (mobile) return 1;
+      if (tablet) return 30;
+      return 40;
+    };
+
+    setYAxisWidth(getYAxisWidth());
+  };
+
+  useEffect(() => {
+    calculateYAxisWidth();
+
+    const handleResize = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(calculateYAxisWidth, 150);
+    };
+
+    let timeoutId: ReturnType<typeof setTimeout>;
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <ChartContainer
       config={chartConfig}
@@ -30,7 +63,7 @@ const Chart = ({
       <AreaChart accessibilityLayer data={data}>
         <CartesianGrid vertical={false} />
 
-        <YAxis domain={[0, max + max * 0.1]} />
+        <YAxis domain={[0, max + max * 0.1]} width={yAxisWidth} />
 
         <XAxis
           dataKey="date"
