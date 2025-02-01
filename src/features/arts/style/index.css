@@ -12,6 +12,12 @@
   }
 }
 
+@media (max-width: 768px) {
+  :root {
+    --font-size: 1.7em;
+  }
+}
+
 #text-container {
   width: 100%;
   text-shadow: var(--font-color) 1px 1px 0;
