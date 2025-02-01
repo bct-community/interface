@@ -51,18 +51,8 @@ const Image = ({
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    // if (isLast && inView && isLoaded && hasNextPage && !isFetchingNextPage) {
-    if (isLast && inView && hasNextPage && !isFetchingNextPage) {
-      fetchNextPage();
-    }
-  }, [
-    inView,
-    hasNextPage,
-    isFetchingNextPage,
-    fetchNextPage,
-    isLast,
-    // isLoaded,
-  ]);
+    if (isLast && inView && hasNextPage && !isFetchingNextPage) fetchNextPage();
+  }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage, isLast]);
 
   const openLink = () => {
     window.open(xProfile, "_blank");
