@@ -33,13 +33,10 @@ const TrendingMetricsMarquee = ({
       >
         {raids &&
           raids.map((raid, index) => (
-            <TooltipProvider>
+            <TooltipProvider key={`raid-${index}`}>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <div
-                    key={`raid-${index}`}
-                    className="group flex h-[80px] w-[120px] flex-col items-center justify-between gap-2 p-2 hover:cursor-pointer"
-                  >
+                  <div className="group flex h-[80px] w-[120px] flex-col items-center justify-between gap-2 p-2 hover:cursor-pointer">
                     <div>{logoMap[raid.platform] || logoMap["Solana"]}</div>
                     <span className="text-xs group-hover:underline">
                       {raid.count} acessos
@@ -55,13 +52,10 @@ const TrendingMetricsMarquee = ({
 
         {links &&
           links.map((link, index) => (
-            <TooltipProvider>
+            <TooltipProvider key={`link-${index}`}>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <div
-                    key={`link-${index}`}
-                    className="group flex h-[80px] w-[120px] flex-col items-center justify-between gap-2 p-2 hover:cursor-pointer"
-                  >
+                  <div className="group flex h-[80px] w-[120px] flex-col items-center justify-between gap-2 p-2 hover:cursor-pointer">
                     <div>
                       {iconMap[link.icon](32) || iconMap["SiSolana"](32)}
                     </div>
