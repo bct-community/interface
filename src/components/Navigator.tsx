@@ -23,6 +23,9 @@ interface NavItem {
 
 const Navigator = () => {
   const { setTheme, theme } = useTheme();
+  const location = useLocation();
+
+  const isChat = location.pathname === "/chat";
 
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark");
@@ -46,7 +49,14 @@ const Navigator = () => {
   // const isMobile = screenWidth < 768;
 
   return (
-    <nav className="shadow-[rgba(0, 0, 0, 0.2)] z-2 fixed bottom-5 left-1/2 flex h-[30px] w-[230px] -translate-x-1/2 transform justify-evenly overflow-hidden rounded-md border bg-[hsl(var(--background))] shadow-lg duration-100">
+    <nav
+      className={classNames({
+        "shadow-[rgba(0, 0, 0, 0.2)] z-2 fixed left-1/2 flex h-[30px] w-[230px] -translate-x-1/2 transform justify-evenly overflow-hidden rounded-md border bg-[hsl(var(--background))] shadow-lg duration-100":
+          true,
+        "bottom-5": !isChat,
+        "top-14": isChat,
+      })}
+    >
       {items.map((item, index) => (
         <Button
           key={index}
