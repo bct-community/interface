@@ -109,7 +109,7 @@ export default function ChatBot({
 
             <div ref={scrollRef} />
 
-            {isLoading &&
+            {true &&
               (!chatMessages.length ||
                 chatMessages[chatMessages.length - 1].role !== "assistant") && (
                 <TypingAnimation />

@@ -13,7 +13,7 @@ const TypingAnimation = () => {
           <EllipsisAnimation />
         </div>
       </div>
-      <div className="mt-1 mb-4 text-xs text-left ml-11 text-muted-foreground">
+      <div className="text-xs text-left select-none ml-11 text-muted-foreground">
         ChatBCT · pensando...
       </div>
     </div>
@@ -21,7 +21,7 @@ const TypingAnimation = () => {
 };
 
 const EllipsisAnimation = () => (
-  <div className="flex p-4 mr-8 space-x-1 whitespace-pre-wrap rounded-md max-w-auto bg-border/60">
+  <div className="max-w-auto mr-8 flex space-x-1 whitespace-pre-wrap rounded-md rounded-bl-none bg-border/60 px-2 py-1.5">
     <div className="h-1.5 w-1.5 animate-bounce rounded-full bg-muted-foreground [animation-delay:-0.3s]" />
     <div className="h-1.5 w-1.5 animate-bounce rounded-full bg-muted-foreground [animation-delay:-0.15s]" />
     <div className="h-1.5 w-1.5 animate-bounce rounded-full bg-muted-foreground" />

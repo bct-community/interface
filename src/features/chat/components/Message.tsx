@@ -8,7 +8,7 @@ const Message = ({ message }: { message: ChatMessage }) => {
   return (
     <div
       className={classNames({
-        "flex flex-col": true,
+        "flex select-none flex-col": true,
         "items-end": message.role === "user",
         "items-start": message.role !== "user",
       })}
@@ -29,7 +29,8 @@ const Message = ({ message }: { message: ChatMessage }) => {
         <div className="relative group">
           <div
             className={classNames({
-              "max-w-auto whitespace-pre-wrap rounded-md px-2 py-1.5": true,
+              "max-w-auto whitespace-pre-wrap rounded-md px-2 py-1.5 text-sm":
+                true,
               "ml-8 rounded-br-none bg-primary text-primary-foreground":
                 message.role === "user",
               "font-inter text-md mr-8 rounded-bl-none bg-border/70 font-light":
