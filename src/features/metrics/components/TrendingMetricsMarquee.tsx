@@ -1,5 +1,11 @@
 import Marquee from "react-fast-marquee";
 
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { iconMap } from "@/utils/iconMap";
 import { logoMap } from "@/utils/logoMap";
 
@@ -27,24 +33,48 @@ const TrendingMetricsMarquee = ({
       >
         {raids &&
           raids.map((raid, index) => (
-            <div
-              key={`raid-${index}`}
-              className="flex h-[80px] w-[120px] flex-col items-center justify-between gap-2 p-2"
-            >
-              <div>{logoMap[raid.platform] || logoMap["Solana"]}</div>
-              <span className="text-xs">{raid.count} acessos</span>
-            </div>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <div
+                    key={`raid-${index}`}
+                    className="group flex h-[80px] w-[120px] flex-col items-center justify-between gap-2 p-2 hover:cursor-pointer"
+                  >
+                    <div>{logoMap[raid.platform] || logoMap["Solana"]}</div>
+                    <span className="text-xs group-hover:underline">
+                      {raid.count} acessos
+                    </span>
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>{raid.platform}</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           ))}
 
         {links &&
           links.map((link, index) => (
-            <div
-              key={`link-${index}`}
-              className="flex h-[80px] w-[120px] flex-col items-center justify-between gap-2 p-2"
-            >
-              <div>{iconMap[link.icon](32) || iconMap["SiSolana"](32)}</div>
-              <span className="text-xs">{link.count} acessos</span>
-            </div>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <div
+                    key={`link-${index}`}
+                    className="group flex h-[80px] w-[120px] flex-col items-center justify-between gap-2 p-2 hover:cursor-pointer"
+                  >
+                    <div>
+                      {iconMap[link.icon](32) || iconMap["SiSolana"](32)}
+                    </div>
+                    <span className="text-xs group-hover:underline">
+                      {link.count} acessos
+                    </span>
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>{link.label}</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           ))}
 
         {producers &&
