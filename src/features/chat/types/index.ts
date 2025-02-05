@@ -1,3 +1,11 @@
+export type BlockedMessagePayload = {
+  message: string;
+  unblockDate: string;
+  unblockDateFormatted: string;
+};
+
+export type BotMessage = string;
+
 export type ChatMessage = {
   id: string;
   role: "assistant" | "user";
@@ -6,7 +14,7 @@ export type ChatMessage = {
   isTyping?: boolean;
 };
 
-export type ChatBotProps = {
-  onSendMessage?: (message: string) => void;
-  onReceiveMessage?: (message: string) => void;
+export type HandleSubmitType = {
+  (options: { promptRecommendation: string }): void;
+  (): void;
 };

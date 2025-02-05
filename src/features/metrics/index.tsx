@@ -69,12 +69,12 @@ const Metrics = () => {
 
   return (
     <div className="mt-[30px] flex min-h-full w-full flex-col items-center justify-center gap-12">
-      <h1 className="mt-2 text-3xl italic font-normal select-none">
+      <h1 className="mt-2 select-none text-3xl font-normal italic">
         Métricas da comunidade
       </h1>
 
-      <div className="w-full h-full px-4 space-y-12 lg:px-12">
-        <h2 className="text-xl italic font-normal select-none">
+      <div className="h-full w-full space-y-12 px-4 lg:px-12">
+        <h2 className="select-none text-xl font-normal italic">
           📌 Visitas - Total {visitsMetrics?.total || 0}
         </h2>
 
@@ -86,23 +86,28 @@ const Metrics = () => {
         </div>
       </div>
 
-      <div className="w-full h-full px-4 space-y-12 lg:px-12">
-        <h2 className="text-xl italic font-normal select-none">
+      <div className="h-full w-full space-y-12 px-4 lg:px-12">
+        <h2 className="select-none text-xl font-normal italic">
           🌎 Visitas por país
         </h2>
 
         <VisitsByCountryMap setTooltipContent={setMapTooltipContent} />
-        <Tooltip id="my-tooltip" float className="select-none">
+        <Tooltip
+          id="my-tooltip"
+          float
+          style={{ marginTop: "-4px" }}
+          className="top-0 select-none"
+        >
           {mapTooltipContent}
         </Tooltip>
       </div>
 
-      <div className="w-full h-full px-4 space-y-12 lg:px-12">
-        <h2 className="text-xl italic font-normal select-none">🎯 Raids</h2>
+      <div className="h-full w-full space-y-12 px-4 lg:px-12">
+        <h2 className="select-none text-xl font-normal italic">🎯 Raids</h2>
 
-        <div className="flex flex-col items-center justify-between w-full gap-8 md:flex-row lg:px-12">
-          <div className="flex flex-col w-full md:w-1/2">
-            <p className="pb-8 text-lg italic font-light select-none">
+        <div className="flex w-full flex-col items-center justify-between gap-8 md:flex-row lg:px-12">
+          <div className="flex w-full flex-col md:w-1/2">
+            <p className="select-none pb-8 text-lg font-light italic">
               • Acessos aos raids - Total {sortedRaidsMetrics.total} (7d)
             </p>
             <Chart
@@ -111,8 +116,8 @@ const Metrics = () => {
             />
           </div>
 
-          <div className="flex flex-col w-full md:w-1/2">
-            <p className="pb-8 text-xl italic font-light select-none">
+          <div className="flex w-full flex-col md:w-1/2">
+            <p className="select-none pb-8 text-xl font-light italic">
               • Mensagens geradas IA - Total{" "}
               {sortedChatRaidMessagesMetrics.total} (7d)
             </p>
@@ -128,8 +133,8 @@ const Metrics = () => {
         <TrendingMetricsMarquee raids={raidsTrendingMetrics?.raids || []} />
       </div>
 
-      <div className="w-full h-full px-4 space-y-12 lg:px-12">
-        <h2 className="text-xl italic font-normal select-none">
+      <div className="h-full w-full space-y-12 px-4 lg:px-12">
+        <h2 className="select-none text-xl font-normal italic">
           🔗 Links - Total {sortedLinksMetrics.total} (7d)
         </h2>
 
@@ -145,8 +150,8 @@ const Metrics = () => {
         <TrendingMetricsMarquee links={linksTrendingMetrics?.links || []} />
       </div>
 
-      <div className="w-full h-full px-4 space-y-12 lg:px-12">
-        <h2 className="text-xl italic font-normal select-none">
+      <div className="h-full w-full space-y-12 px-4 lg:px-12">
+        <h2 className="select-none text-xl font-normal italic">
           🤖 Chat - Total {sortedChatMetrics.total} (7d)
         </h2>
 
@@ -158,8 +163,8 @@ const Metrics = () => {
         </div>
       </div>
 
-      <div className="w-full h-full px-4 space-y-12 lg:px-12">
-        <h2 className="text-xl italic font-normal select-none">
+      <div className="h-full w-full space-y-12 px-4 lg:px-12">
+        <h2 className="select-none text-xl font-normal italic">
           🎨 Artes & memes - Total {sortedArtsMetrics.total} (7d)
         </h2>
 
@@ -171,7 +176,7 @@ const Metrics = () => {
         </div>
       </div>
 
-      <div className="w-full px-4 text-2xl text-center text-gummy lg:text-4xl">
+      <div className="text-gummy w-full px-4 text-center text-2xl lg:text-4xl">
         <p>
           {(artsProducersNumber?.count || 0) + " "}
           <span className="animate-pulse text-[var(--coin-purple)] dark:text-[var(--coin-font)]">
