@@ -3,7 +3,10 @@ import { z } from "zod";
 
 import env from "@/config";
 
-const ArtsProducersNumberSchema = z.object({ count: z.number() });
+const ArtsProducersNumberSchema = z.object({
+  producers: z.number(),
+  arts: z.number(),
+});
 
 export type ArtsProducersNumber = z.infer<typeof ArtsProducersNumberSchema>;
 

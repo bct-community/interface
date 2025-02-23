@@ -178,11 +178,11 @@ const Metrics = () => {
 
       <div className="text-gummy w-full px-4 text-center text-2xl lg:text-4xl">
         <p>
-          {(artsProducersNumber?.count || 0) + " "}
+          {(artsProducersNumber?.producers || 0) + " "}
           <span className="animate-pulse text-[var(--coin-purple)] dark:text-[var(--coin-font)]">
             degens
           </span>{" "}
-          já postaram {artsMetrics?.total} memes aqui na comunidade!
+          já postaram {artsProducersNumber?.arts || 0} memes aqui na comunidade!
         </p>
         <p>
           <Link
