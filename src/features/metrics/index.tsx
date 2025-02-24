@@ -15,6 +15,7 @@ import { useRaidsMetrics } from "./api/raids/getRaidsMetrics";
 import { useRaidsTrendingMetrics } from "./api/raids/getRaidsTrendingMetrics";
 import { useVisitsMetrics } from "./api/visits/getVisitsMetrics";
 import Chart from "./components/Chart";
+import MarqueeSkeleton from "./components/MarqueeSkeleton";
 import TrendingMetricsMarquee from "./components/TrendingMetricsMarquee";
 import VisitsByCountryMap from "./components/VisitsByCountryMap";
 
@@ -42,14 +43,22 @@ const Metrics = () => {
     chatRaidMessagesMetrics || { total: 0, highestCount: 0, daily: [] },
   );
 
-  const { data: raidsTrendingMetrics } = useRaidsTrendingMetrics();
+  const {
+    data: raidsTrendingMetrics,
+    isError: raidsTrendingMetricsIsError,
+    isPending: raidsTrendingMetricsIsPending,
+  } = useRaidsTrendingMetrics();
 
   const { data: linksMetrics } = useLinksMetrics();
   const sortedLinksMetrics = sortByDate(
     linksMetrics || { total: 0, highestCount: 0, daily: [] },
   );
 
-  const { data: linksTrendingMetrics } = useLinksTrendingMetrics();
+  const {
+    data: linksTrendingMetrics,
+    isError: linksTrendingMetricsIsError,
+    isPending: linksTrendingMetricsIsPending,
+  } = useLinksTrendingMetrics();
 
   const { data: chatMetrics } = useChatMetrics();
   const sortedChatMetrics = sortByDate(
@@ -63,7 +72,11 @@ const Metrics = () => {
 
   const { data: artsProducersNumber } = useArtsProducersNumber();
 
-  const { data: artsProducersTrending } = useArtsProducersTrending();
+  const {
+    data: artsProducersTrending,
+    isError: artsProducersTrendingIsError,
+    isPending: artsProducersTrendingIsPending,
+  } = useArtsProducersTrending();
 
   const [mapTooltipContent, setMapTooltipContent] = useState("");
 
@@ -130,7 +143,14 @@ const Metrics = () => {
       </div>
 
       <div className="w-full">
-        <TrendingMetricsMarquee raids={raidsTrendingMetrics?.raids || []} />
+        {raidsTrendingMetricsIsError ||
+        raidsTrendingMetricsIsPending ||
+        !raidsTrendingMetrics?.raids ||
+        raidsTrendingMetrics.raids.length === 0 ? (
+          <MarqueeSkeleton />
+        ) : (
+          <TrendingMetricsMarquee raids={raidsTrendingMetrics?.raids || []} />
+        )}
       </div>
 
       <div className="h-full w-full space-y-12 px-4 lg:px-12">
@@ -147,7 +167,14 @@ const Metrics = () => {
       </div>
 
       <div className="w-full">
-        <TrendingMetricsMarquee links={linksTrendingMetrics?.links || []} />
+        {linksTrendingMetricsIsError ||
+        linksTrendingMetricsIsPending ||
+        !linksTrendingMetrics?.links ||
+        linksTrendingMetrics.links.length === 0 ? (
+          <MarqueeSkeleton />
+        ) : (
+          <TrendingMetricsMarquee links={linksTrendingMetrics?.links || []} />
+        )}
       </div>
 
       <div className="h-full w-full space-y-12 px-4 lg:px-12">
@@ -195,9 +222,16 @@ const Metrics = () => {
       </div>
 
       <div className="w-full">
-        <TrendingMetricsMarquee
-          producers={artsProducersTrending?.producers || []}
-        />
+        {artsProducersTrendingIsError ||
+        artsProducersTrendingIsPending ||
+        !artsProducersTrending?.producers ||
+        artsProducersTrending.producers.length === 0 ? (
+          <MarqueeSkeleton />
+        ) : (
+          <TrendingMetricsMarquee
+            producers={artsProducersTrending?.producers || []}
+          />
+        )}
       </div>
     </div>
   );
