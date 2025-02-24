@@ -113,8 +113,8 @@ const Image = ({
         />
 
         {!isFullscreen && (
-          <div className="absolute inset-0 hidden flex-col-reverse justify-between bg-[#0001] p-4 transition-colors duration-500 group-hover:flex dark:bg-[#0004]">
-            <div className="flex flex-row items-center justify-between w-full">
+          <div className="absolute inset-0 flex flex-col-reverse justify-between p-4 transition-colors duration-500 sm:hidden sm:bg-[#0001] sm:group-hover:flex sm:dark:bg-[#0004]">
+            <div className="flex w-full flex-row items-center justify-between">
               <p
                 className="arts-text max-w-[125px] truncate text-[var(--coin-pink)] transition-all hover:underline dark:text-white dark:hover:text-[var(--coin-pink)]"
                 onClick={openLink}
@@ -130,7 +130,7 @@ const Image = ({
 
       {isFullscreen && closeFullscreen && (
         <div className="hidden h-[500px] max-h-[500px] flex-col gap-4 overflow-hidden rounded-r-2xl border-l bg-background p-4 md:flex">
-          <div className="flex items-center justify-between w-full">
+          <div className="flex w-full items-center justify-between">
             <p
               className="arts-text max-w-[125px] truncate text-[var(--coin-pink)] hover:cursor-pointer hover:underline"
               onClick={openLink}
