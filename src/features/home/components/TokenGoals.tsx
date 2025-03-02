@@ -101,7 +101,6 @@ const Goal = ({
 const TokenGoals = ({ celebs }: { celebs?: boolean }) => {
   const priceGoals = [
     { price: "$0.34", text: "Prêmio secreto", reached: false },
-    { price: "$0.0001", text: "Live da sala", reached: false },
     { price: "$0.16", text: "Reality Show & Token #2", reached: false },
     { price: "$0.08", text: "Live POV tatuagem", reached: false },
     { price: "$0.016", text: "Live da banheira", reached: false },
@@ -114,6 +113,7 @@ const TokenGoals = ({ celebs }: { celebs?: boolean }) => {
     { price: "$0.001", text: "Live do quarto", reached: true },
     { price: "$0.0005", text: "Live da cozinha", reached: true },
     { price: "$0.00025", text: "Live da garagem", reached: true },
+    { price: "$0.0001", text: "Live da sala", reached: true },
   ];
 
   const celebsGoals = [
