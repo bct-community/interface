@@ -81,7 +81,7 @@ const Arts = () => {
         <CreateNewArtSheet />
 
         {arts.length === 0 && !isFetching && (
-          <p className="w-full select-none text-center text-sm">
+          <p className="z-50 w-full select-none text-center text-sm">
             Nenhuma arte encontrada.
           </p>
         )}
