@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 
 import { type Arts as ArtsType, useArts } from "./api/getArts";
-
-import { FullscreenCarrousel, Image, ImageSkeleton, CreateNewArtSheet } from "./components";
+import {
+  CreateNewArtSheet,
+  FullscreenCarrousel,
+  Image,
+  ImageSkeleton,
+} from "./components";
 import "./style/index.css";
 import "./style/lineOne.css";
 import "./style/lineThree.css";
@@ -16,7 +20,6 @@ const Arts = () => {
   const [imageData, setImageData] = useState<Partial<
     ArtsType["arts"][number]
   > | null>(null);
-
 
   const arts = data?.pages.flatMap((page) => page.arts) || [];
 
@@ -76,6 +79,12 @@ const Arts = () => {
         </div>
 
         <CreateNewArtSheet />
+
+        {arts.length === 0 && !isFetching && (
+          <p className="w-full select-none text-center text-sm">
+            Nenhuma arte encontrada.
+          </p>
+        )}
 
         <div className="grid grid-cols-1 gap-8 px-8 pt-8 sm:grid-cols-2 lg:grid-cols-3">
           {[...Array(colNumber)].map((_, colIndex) => (
