@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import { ArrowUp } from "lucide-react";
+import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -29,12 +30,30 @@ const InputForm = ({
 }: InputFormProps) => {
   const unblockDateFormatted = localStorage.getItem("unblockDateFormatted");
 
+  const [shuffledRecommendations, setShuffledRecommendations] = useState<
+    {
+      title: string;
+      content: string;
+    }[]
+  >([]);
+
+  const shuffleArray = (
+    array: {
+      title: string;
+      content: string;
+    }[],
+  ) => [...array].sort(() => Math.random() - 0.5);
+
+  useEffect(() => {
+    setShuffledRecommendations(shuffleArray(recommendations).slice(0, 4));
+  }, [recommendations]);
+
   return (
     <div className="px-4 pb-4 select-none bg-background">
       {shouldShowRecommendations && (
         <div className="flex flex-col flex-1 w-full min-w-0 px-4 mb-2 md:flex-row md:space-x-4">
           <div className="flex-1 w-full min-w-0 space-y-2">
-            {recommendations.slice(0, 2).map((rec, index) => (
+            {shuffledRecommendations.slice(0, 2).map((rec, index) => (
               <PromptRecommendation
                 key={index}
                 title={rec.title}
@@ -49,7 +68,7 @@ const InputForm = ({
           </div>
 
           <div className="hidden md:flex md:w-full md:min-w-0 md:flex-1 md:flex-col md:space-y-2">
-            {recommendations.slice(2).map((rec, index) => (
+            {shuffledRecommendations.slice(2).map((rec, index) => (
               <PromptRecommendation
                 key={index}
                 title={rec.title}
@@ -89,7 +108,7 @@ const InputForm = ({
 
         <div
           className={classNames("absolute right-2 flex items-center", {
-            "cursor-not-allowed": !input.trim() || isLoading || isBlocked, // ✅ Agora a div controla o cursor
+            "cursor-not-allowed": !input.trim() || isLoading || isBlocked,
           })}
         >
           <Button
