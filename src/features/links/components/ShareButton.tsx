@@ -3,7 +3,7 @@ import { Check, Copy, ExternalLink } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { Alert } from "@/components";
-import { iconMap } from "@/utils/iconMap";
+import IconMap from "@/components/IconMap";
 
 import { useRegisterLinkAccess } from "../api/registerLinkAccess";
 
@@ -73,17 +73,17 @@ const ShareButton = ({ linkId, icon, platform, url }: ShareButtonProps) => {
         className="rounded border p-1.5 hover:bg-accent hover:text-accent-foreground"
         onClick={openLink}
       >
-        {iconMap[icon](16)}
+        <IconMap icon={icon} size={16} />
       </button>
 
       <p
-        className="pl-2 overflow-hidden text-sm truncate shrink grow text-ellipsis whitespace-nowrap hover:cursor-pointer hover:underline"
+        className="shrink grow overflow-hidden truncate text-ellipsis whitespace-nowrap pl-2 text-sm hover:cursor-pointer hover:underline"
         onClick={openLink}
       >
         {platform}
       </p>
 
-      <div className="flex items-center gap-2 shrink-0">
+      <div className="flex shrink-0 items-center gap-2">
         <button
           className="rounded border p-1.5 hover:bg-accent hover:text-accent-foreground"
           onClick={copyLink}

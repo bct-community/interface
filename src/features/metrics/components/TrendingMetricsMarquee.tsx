@@ -1,12 +1,12 @@
 import Marquee from "react-fast-marquee";
 
+import IconMap from "@/components/IconMap";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { iconMap } from "@/utils/iconMap";
 import { logoMap } from "@/utils/logoMap";
 
 const TrendingMetricsMarquee = ({
@@ -57,7 +57,7 @@ const TrendingMetricsMarquee = ({
                 <TooltipTrigger asChild>
                   <div className="group flex h-[80px] w-[120px] flex-col items-center justify-between gap-2 p-2 hover:cursor-pointer">
                     <div>
-                      {iconMap[link.icon](32) || iconMap["SiSolana"](32)}
+                      <IconMap icon={link.icon} size={32} />
                     </div>
                     <span className="text-xs group-hover:underline">
                       {link.count} acessos
