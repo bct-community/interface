@@ -57,7 +57,6 @@ const Home = () => {
 
       <CoinImageMarquee />
 
-      {/* fix animated-title y position */}
       <div className="flex flex-col items-center justify-center w-full gap-6 mb-12 lg:gap-12">
         <TextSection
           animatedTitle={{ text: "RAAAIDS" }}
@@ -116,7 +115,6 @@ const Home = () => {
 
       <div className="flex flex-col items-center w-full gap-12 mb-12">
         <AuroraTitle />
-        {/* why w-[90%] intead of mx - check why mx doesn't work */}
         <div className="flex w-[90%] justify-between overflow-clip rounded-[12px] bg-transparent bg-opacity-20 p-8 backdrop-blur-md backdrop-filter">
           <TokenGoals />
           <TokenGoals celebs />
