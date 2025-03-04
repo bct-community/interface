@@ -90,7 +90,7 @@ const Arts = () => {
           {[...Array(colNumber)].map((_, colIndex) => (
             <div key={colIndex} className="flex min-w-[250px] flex-col gap-8">
               {arts
-                .filter((_, index) => index % colNumber === colIndex) // Distribui as imagens entre as colunas
+                .filter((_, index) => index % colNumber === colIndex)
                 .map((art, index) => (
                   <Image
                     key={index}

@@ -113,7 +113,7 @@ const Chat = () => {
     addMessage("user", messageToSend);
 
     setIsLoading(true);
-    setInput(""); // Limpa o input apenas se a mensagem veio dele
+    setInput("");
 
     registerChatMessage();
     socket.emit("message", messageToSend);

@@ -45,9 +45,6 @@ const Navigator = () => {
     },
   ];
 
-  // const screenWidth = window.screen.availWidth;
-  // const isMobile = screenWidth < 768;
-
   return (
     <nav
       className={classNames({

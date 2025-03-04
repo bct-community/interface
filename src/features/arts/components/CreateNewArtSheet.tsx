@@ -20,9 +20,6 @@ import { useToast } from "@/hooks/use-toast";
 import { NewArtData, useRegisterArt } from "../api/registerArt";
 import { useRegisterArtMetrics } from "../api/registerArtMetric";
 
-// once the user send the data
-// take the newArt.creator and newArt.xProfile and save to localStorage
-
 const CreateNewArtSheet = () => {
   const { toast } = useToast();
   const { mutate: registerArtMutate, isSuccess, isError } = useRegisterArt();
