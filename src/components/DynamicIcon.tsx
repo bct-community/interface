@@ -1,3 +1,4 @@
+import { LoaderCircle } from "lucide-react";
 import { FC, useEffect, useState } from "react";
 
 interface DynamicIconProps {
@@ -5,7 +6,7 @@ interface DynamicIconProps {
   size: number;
 }
 
-const DynamicIcon: FC<DynamicIconProps> = ({ iconName, size }) => {
+const DynamicIcon: FC<DynamicIconProps> = ({ size, iconName }) => {
   const [IconComponent, setIconComponent] = useState<React.ComponentType<{
     size: number;
   }> | null>(null);
@@ -36,7 +37,12 @@ const DynamicIcon: FC<DynamicIconProps> = ({ iconName, size }) => {
     loadIcon();
   }, [iconName]);
 
-  if (!IconComponent) return <span>...</span>;
+  if (!IconComponent)
+    return (
+      <div className="animate animate-spin">
+        <LoaderCircle size={size} />
+      </div>
+    );
 
   return <IconComponent size={size} />;
 };
