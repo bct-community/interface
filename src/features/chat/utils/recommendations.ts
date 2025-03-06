@@ -34,7 +34,7 @@ export const recommendations = [
     content: "Onde vejo memes da galera?",
   },
   {
-    titlte: "Community Performance",
+    title: "Community Performance",
     content: "Como monitorar o desempenho da comunidade?",
   },
   {
