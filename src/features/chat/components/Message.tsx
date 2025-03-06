@@ -1,6 +1,9 @@
 import { Avatar } from "@radix-ui/react-avatar";
 import classNames from "classnames";
 import { Bot } from "lucide-react";
+// import react markdown and gfm
+import ReactMarkdown from "react-markdown";
+import gfm from "remark-gfm";
 
 import { ChatMessage } from "../types";
 
@@ -37,7 +40,13 @@ const Message = ({ message }: { message: ChatMessage }) => {
                 message.role !== "user",
             })}
           >
-            {message.content}
+            {message.role !== "user" ? (
+              <ReactMarkdown remarkPlugins={[gfm]}>
+                {message.content}
+              </ReactMarkdown>
+            ) : (
+              message.content
+            )}
           </div>
         </div>
       </div>
