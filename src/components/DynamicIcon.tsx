@@ -39,7 +39,7 @@ const DynamicIcon: FC<DynamicIconProps> = ({ size, iconName }) => {
 
   if (!IconComponent)
     return (
-      <div className="animate animate-spin">
+      <div className="animate-spin">
         <LoaderCircle size={size} />
       </div>
     );
