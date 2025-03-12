@@ -39,15 +39,15 @@ const TokenMarquee = () => {
       <Marquee pauseOnHover={true} className="h-[30px] overflow-hidden">
         <div className="flex items-center w-full mr-3 h-fit justify-evenly">
           <span className="mx-12 coin-ticker-font">$BCT</span>
-          <Item name={"Preço"} content={tokenData?.tokenPriceInUSD || "$0"} />
+          <Item name={"Valor"} content={tokenData?.tokenPriceInUSD || "$0"} />
           <Item
-            name={"Variação de Preço (24h)"}
+            name={"Diferencial de Valor (24h)"}
             content={tokenData?.changeIn24H || "0%"}
             positive={tokenData?.changeIn24H?.includes("+")}
             negative={tokenData?.changeIn24H?.includes("-")}
           />
           <Item
-            name={"Variação de Preço (1h)"}
+            name={"Diferencial de Valor (1h)"}
             content={tokenData?.changeIn1H || "0%"}
             positive={tokenData?.changeIn1H?.includes("+")}
             negative={tokenData?.changeIn1H?.includes("-")}
@@ -57,11 +57,11 @@ const TokenMarquee = () => {
             content={tokenData?.volumeIn24H || "$0"}
           />
           <Item
-            name={"Capitalização de Mercado"}
+            name={"Valor de Mercado"}
             content={tokenData?.marketCap || "$0"}
           />
           <Item
-            name={"Transações (24h)"}
+            name={"Ordens (24h)"}
             content={tokenData?.transactions24H || 0}
           />
 
