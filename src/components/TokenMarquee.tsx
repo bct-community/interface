@@ -12,7 +12,7 @@ type ItemProps = {
 
 const Item = ({ name, content, positive, negative }: ItemProps) => {
   return (
-    <span className="marquee-font mx-12">
+    <span className="mx-12 marquee-font">
       <span>{name}:</span>{" "}
       <span
         className={classNames({
@@ -37,17 +37,17 @@ const TokenMarquee = () => {
   return (
     <div className="fixed left-0 top-0 z-[1000] flex h-[30px] w-full select-none items-center overflow-hidden border-b bg-transparent backdrop-blur-md backdrop-filter">
       <Marquee pauseOnHover={true} className="h-[30px] overflow-hidden">
-        <div className="mr-3 flex h-fit w-full items-center justify-evenly">
-          <span className="coin-ticker-font mx-12">$BCT</span>
-          <Item name={"Price"} content={tokenData?.tokenPriceInUSD || "$0"} />
+        <div className="flex items-center w-full mr-3 h-fit justify-evenly">
+          <span className="mx-12 coin-ticker-font">$BCT</span>
+          <Item name={"Preço"} content={tokenData?.tokenPriceInUSD || "$0"} />
           <Item
-            name={"Price Change (24h)"}
+            name={"Variação de Preço (24h)"}
             content={tokenData?.changeIn24H || "0%"}
             positive={tokenData?.changeIn24H?.includes("+")}
             negative={tokenData?.changeIn24H?.includes("-")}
           />
           <Item
-            name={"Price Change (1h)"}
+            name={"Variação de Preço (1h)"}
             content={tokenData?.changeIn1H || "0%"}
             positive={tokenData?.changeIn1H?.includes("+")}
             negative={tokenData?.changeIn1H?.includes("-")}
@@ -56,22 +56,29 @@ const TokenMarquee = () => {
             name={"Volume (24h)"}
             content={tokenData?.volumeIn24H || "$0"}
           />
-          <Item name={"Market Cap"} content={tokenData?.marketCap || "$0"} />
           <Item
-            name={"Transactions (24h)"}
+            name={"Capitalização de Mercado"}
+            content={tokenData?.marketCap || "$0"}
+          />
+          <Item
+            name={"Transações (24h)"}
             content={tokenData?.transactions24H || 0}
           />
 
           <Item
-            name={"Sell (24h)"}
+            name={"Vendas (24h)"}
             content={tokenData?.sell24H || 0}
             negative
           />
-          <Item name={"Buy (24h)"} content={tokenData?.buy24H || 0} positive />
-          <Item name={"Total Supply"} content={tokenData?.totalSupply || "0"} />
-          <Item name={"Holders"} content={tokenData?.holders || "10K"} />
+          <Item
+            name={"Compras (24h)"}
+            content={tokenData?.buy24H || 0}
+            positive
+          />
+          <Item name={"Oferta Total"} content={tokenData?.totalSupply || "0"} />
+          <Item name={"Detentores"} content={tokenData?.holders || "7K"} />
 
-          <Item name={"Age"} content={`${ageInDays}d`} />
+          <Item name={"Idade"} content={`${ageInDays}d`} />
         </div>
       </Marquee>
     </div>
